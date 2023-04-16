@@ -1,15 +1,17 @@
 \chapter{Analýza lesního mikroklimatu}
-\label{chap:refs}
+\label{chap:ch1}
 
-\section{Fyzikální pohled na děje při povrchu země}
-Pro rovný a téměř homogenní povrch, který můžeme omezit zeshora a zespoda rovinnou, platí zjednodušenná jednodimenzionální rovnice vyjadřující energetickou bilanci\cite{arya2001}
+V následující části \ref{chap:fyz} popíšeme fyzikální děje odehrávající se poblíž zemského povrchu z pohledu mikrometeorologie a mikroklimatologie. Od jednoduchých ilustračních příkladů se přesuneme k tomu jaký vliv má na mikroklima přítomnost vegetace \ref{chap:veg} a topografie \ref{chap:topo}. V závěřečné části této kapitoly \ref{chap:measure} bude popsáno jakým způsobem jsou meteorologické podmínky měřeny a nakonec v \ref{chap:sumavabavorskyles} se podíváme na klima typické pro Národní park Šumava a Bavorský les.
+
+\section{Fyzikální pohled na děje při povrchu země} \label{chap:fyz}
+Pro rovný a téměř homogenní povrch, který můžeme omezit zeshora a zespoda rovinnou, platí zjednodušenná jednodimenzionální rovnice. Tato rovnice vyjadřuje energetickou bilanci\cite{arya2001}
 
 $$R_N = H + H_L + H_G + \Delta H_S,$$\label{eq:bilance}
 
 kde $R_N$ je celkové záření, $H$ je tok tepla z nebo do atmosféry, $H_L$ je latentní teplo, $H_G$ je tok tepla ze země a $\Delta H_S$ je změna uchovaného tepla za jednotku času na jednotku plochy přes celou hloubku vrstvy. $\Delta H_S$ můžeme také interpretovat jako rozdíl mezi energií dodanou a odevzdanou z vrstvy která nás zajímá. Pak jestliže $\Delta H_S>0$ tak se vrstva ohřívá a pro $\Delta H_S<0$ tak se ochlazuje jelikož $H_{in}<H_{out}$. Většinou ovšem nemůžeme měřit přímo toky tepla, pokud nejde o jednoduchý příklad jako třeba na obrázku (+++), kde vidíme vývoj toku energie na povrchu vyschlého jezera. Přes den se povrch ohřívá díky dopadu slunečního záření $R_N>0$, část tepla uniká pod povrch tedy $H_G<0$ a část ohřívá atmosféru, která sama pouze velmi málo absorbuje záření $H<0$. Naopak v noci vyzařuje povrch dlouhovlnné záření a tím se ochlazuje tedy $R_N<0$, $H$ je téměř nulové a zahřátá půda zpětně ohřívá povrch tedy $H_G>0$. Po celou dobu jde o suchý povrch tedy $H_L=0$\cite{arya2001}.
 
 \subsection{Vliv latentního tepla}
-Latentní teplo, které značíme $H_L$ se je veličina týkající se změny skupenství látek, v našem případě se týká vody. Formálně můžeme latentní teplo zavést jako $H_L = T\Delta s$, kde $T$ je teplota při které dochází ke změně skupenství a $\Delta s$ je rozdíl mezi molárními entropiemi obou fází\cite{callen1985}. Za standartního atmosférického tlaku $\SI{1013}{hPa}$ je měřné latentní teplo tání $H_{lT} = \SI{334}{kJ/kg}$ a latentní teplo vypařování $H_{lv} = \SI{2265}{kJ/kg}$. 
+Latentní teplo, které značíme $H_L$, je veličina týkající se změny skupenství látek, v našem případě se týká vody. Formálně můžeme latentní teplo zavést jako $H_L = T\Delta s$, kde $T$ je teplota při které dochází ke změně skupenství a $\Delta s$ je rozdíl mezi molárními entropiemi obou fází\cite{callen1985}. Za standartního atmosférického tlaku $\SI{1013}{hPa}$ je měřné latentní teplo tání $H_{lT} = \SI{334}{kJ/kg}$ a latentní teplo vypařování $H_{lv} = \SI{2265}{kJ/kg}$. 
 
 Výše jsme analyzovali situaci, kdy šlo o suchý povrch. Pro vlhký povrch se nám situace změní. Část tepla bude absorbována vodou a spotřebována na výpar. Můžeme ovšem mít i opačnou situaci, kdy dochází ke kondenzaci vodní páry a uvolňování latentního tepla. Analogicky můžeme uvažovat situaci v zimě, kdy je přítomná voda v pevném skupenství. V našem zjednodušenném příkladě je tedy přes den $H_L > 0$ a v noci $H_L < 0$. Schématicky to můžeme vidět na \ref{fig:schema}, kde velikost jednotlivých toků tepla je ovlivněna mnoha faktory\cite{arya2001}.
 
@@ -43,7 +45,7 @@ Výše jsme analyzovali situaci, kdy šlo o suchý povrch. Pro vlhký povrch se 
 
 Vliv vlhkosti a deště můžeme ilustrovat na takzvaném "oázovém efektu". V určitých situacích, se může hodnota $H_L$ stát v rovnici \eqref{eq:bilance} i dominantní složkou. Oázovým efektem nazýváme situaci, kdy vítr přináší suchý teplý vzduch přes chladnou a vlhkou oblast. Dochází k silnému výparu, který ochlazuje vlivem latentního tepla povrch země. Následně máme tok tepla $H$ negativní zatímco $H_L$ je větší a pozitivní. Může se stát, že i tok tepla v půdě $H_G$ otočí znaménko, pokud povrch bude chladnější než půda. Vlhkost má také vliv na albedo povrchu, kdy se zvětšuje absorpce krátkovlnného záření.
 
-\subsection{Vliv vegetace}
+\subsection{Vliv vegetace} \label{chap:veg}
 \subsubsection{Albedo}
 Albedo je koeficient udávající poměr mezi odraženým zářením a dopadajícím zářením, nabývá tedy hodnot v intervalu $\langle 0,1\rangle$, kde $0$ znamená, že povrch všechno záření pohlcuje, jde o ideálně černé těleso a $1$ znamená, že vše záření odráží. Už samotný typ povrchu má na albedo významným vliv, kde může dosahovat velmi různých hodnot ať už jde o písek, vodní plochu, odhalenou půdu, vlhkou půdu atd. Růst vegetace a jejího typu má ovšem také významným vliv na albedo s odlišnými hodnotami pro různé typy plodin a různé typy dřevin, ilustrační příklady jsou vidět v tabulce \ref{tab:albedo}. Hodnoty jsou závislé i na úhlu dopadu záření, vliv má i výška porostu nebo roční období\cite{arya2001,alma}.
 
@@ -73,7 +75,7 @@ Listnaté, ale i jehličnaté stromy mají vliv na distribuci deště. Největš
 \subsubsection{Vliv na sníh}
 Množství sněhový srážek, které dopadnou na zem v lesním porostu záleží na několika faktorech. Jestliže jde o mokrý sníh pak snadno zůstává v korunách stromů, takto může být v korunách zachyceno až $\SI{10}{cm}$ sněhu. Suchý sníh má naopak snáze dopadne na zem. Množství zachyceného sněhu závisí také na typu vegatace, jestli jde o listnaté nebo jehličnaté stromy, případně jaký druh. Na jaře taje sníh v lese pomaleji a tedy jeho přítomnost je pro místní klima velmi důležité, jelikož funguje jako zásobník vody\cite{alma}.
 
-\subsection{Vliv topografie}
+\subsection{Vliv topografie} \label{chap:topo}
 V odstavcích výše jsme vysvětlili jakým způsobem může ovlivnit vegetace podnebí. Ilustrovali jsme, že přítomnost flóry má významný vliv na celou řadu meteorologických proměnných, které následně ovlivňují teplotu v lese a život organismů. Nyní se budeme soustředit na vliv topografie na meteorologické proměnné. Pro standardizované meteorologické stanice je typické, že jsou postavené na posekané travnaté ploše, která není zastíněná a terén není nakloněn, v přírodě tohle ovšem neplatí.
 
 \subsubsection{Vliv okraje lesa}
@@ -125,7 +127,7 @@ Jak bylo zmíněno v předchozí části tak na rozdíl mezi teplotou mimo poros
 
 V praktické části práce se budeme zabývat tím jaký vliv mají tyto proměnné na rozdíl mezi teplotou naměřenou v lesním porostu v národním parku Šumava ve výšce $\SI{2}{m}$ a při povrchu, tedy $\SI{0}{cm}$ a $\SI{15}{cm}$. Použitá čidla kromě teploty ještě půdní vlhkost, ostatní proměnné jsou z nejbližší meteorologické stanice.
 
-\section{Popis měření meteorologický veličin}
+\section{Popis měření meteorologický veličin} \label{chap:measure}
 \subsection{Měření na meteorologických stanicích}
 Teplota vzduchu by podle Světové meteorologické organizace (WMO) měla být měřena ve výšce $\SI{1.25}{m}$ až $\SI{2}{m}$\cite{wmoGuidance2021}. V České republice Český hydrometeorologický ústav provozuje celou řadu meteorologických stanic různého charakteru, ať už jde o SYNOP stanice nebo jiné +++. Měření probíhá standardizovaným způsobem, stanice by měla být na trávníku nikoliv například na asfaltu a měření probíhají v pravidelných intervalech. Pro synoptické stanice je to například v takzvaných hlavních termínech ($00$, $06$, $12$ a $18$ UTC) a případně vedlejších ($03$, $09$, $15$, $21$ hodin UTC). Podobně jsou na stanicích měřeny i další veličiny jako například, vlhkost, výška sněhu, část zatažené oblohy, tlak a další. 
 
@@ -139,6 +141,6 @@ Teplotní senzor měří s přesností $\SI{\pm 0.5}{\degree C}$ a funguje na in
 
 Při srovnání TMS loggeru se standartní meteorologickou stanicí typu METEOS 5 byla pozorována větší variabilita u teplot v $\SI{15}{cm}$ než ve $\SI{2}{m}$. TMS loggeru byl instalován na krátkém posekaném trávníku, tři metry od stanice a rozdíl teplot při hodinovém měření se pohyboval od $\SI{+8.45}{\degree C}$ do $\SI{-6.05}{\degree C}$. Průměrné denní teploty naměřené z TMS loggeru byly systematicky nižší, průměrný rozdíl ovšem pouze $\SI{-0.58}{\degree C}$, v zimě jsou tyto rozdíly větší a to $\SI{-2.02}{\degree C}$ až $\SI{0.6}{\degree C}$. Opačný trend pak můžeme pozorovat, pokud není teplotní senzor v $\SI{15}{cm}$ odstíněn plastovým krytem. V létě byly teploty nižší až o $\SI{5.08}{\degree C}$, ale v zimě byly podobné. Teploty z půdních senzorů jak TMS loggeru tak stanice METEOS 5 se lišily velmi málo, rozdíl mezi naměřenými teplotami byl tedy zřejmě způsoben primárně polohou senzorů a použitým stíněním než jejich typem. Rozdíly mězi naměřenými teplotami nad zemí byly ještě výraznější pro proměnné, které jsou často používány v ekologických studiích jako například kvantily extrémních teplot\cite{WildJan2019Caer}. 
 
-\section{Národní park Šumava}
+\section{Národní park Šumava} \label{chap:sumavabavorskyles}
 Čidla TMS logger z kterých pocházejí data použitá v této práci jsou v oblasti Národní parku Šumava. Národní park Šumava vyhlášený v roce 1991 má rozlohu $\SI{680}{km^2}$. Jeho výška se pohybuje od $\SI{600}{m.\ n.\ m.}$ do $\SI{1378}{m.\ n.\ m.}$. Nejvyšší bod je vrchol Plechý. Více než $\SI{80}{\%}$ územi pokrývá les. Šumava je v rámci Evropy jedno z nejstarších pohoří, tvořené je metamorfovanými horninami jako ruly a svory a žulovými masivy. Typické pro toto území jsou horské smrčiny, rašeliniště, karová jezera a pralesní porosty.
 

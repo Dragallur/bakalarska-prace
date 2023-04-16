@@ -4,11 +4,11 @@ library(cowplot)
 library(plyr)
 
 tim_c <- c("all")
-height_c <- c("15cm", "0cm")
-minmax_c <- c("max", "min")
+height_c <- c("15cm")
+minmax_c <- c("max")
 bayerischer_wald_c <- TRUE
 bw_text <- ifelse(bayerischer_wald == 1, "yes", "no")
-dist_cutoff_c <- 0
+dist_cutoff_c <- c(10000,20000,30000,40000,60000,100000)
 station_cutoff <- "c1chur01"
 
 #nahrani dat z predchoziho skriptu. Tj. fit vsech stanic
@@ -89,7 +89,7 @@ hist_precmm <- ggplot(data = precmm, aes(x=precmm)) + geom_histogram() +
             geom_vline(aes(xintercept=mean(precmm)), linetype="dashed", color="red") +
             theme(text=element_text(family="Latin Modern Math",size=12), plot.title = element_text(hjust = 0.5))
 hist_month <- ggplot(data = month, aes(x=month)) + geom_histogram() +
-            labs(title=paste("Měsíc", "\n", "(n=", nrow(month), ", ", signif(mean(month[,]),2), "±", signif(sd(month[,]),2), ")", sep=""), x="", y="") +
+            labs(title=paste("Insolace", "\n", "(n=", nrow(month), ", ", signif(mean(month[,]),2), "±", signif(sd(month[,]),2), ")", sep=""), x="", y="") +
             geom_vline(aes(xintercept=mean(month)), linetype="dashed", color="red") +
             theme(text=element_text(family="Latin Modern Math",size=12), plot.title = element_text(hjust = 0.5))
 hist_hum <- ggplot(data = hum, aes(x=hum)) + geom_histogram() +
