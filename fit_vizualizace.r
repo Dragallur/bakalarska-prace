@@ -3,17 +3,25 @@ library(ggplot2)
 library(cowplot)
 library(plyr)
 
-tim <- c("all")
-height <- c("15cm")
-minmax <- "max"
-bayerischer_wald <- TRUE
+tim_c <- c("all")
+height_c <- c("15cm", "0cm")
+minmax_c <- c("max", "min")
+bayerischer_wald_c <- TRUE
 bw_text <- ifelse(bayerischer_wald == 1, "yes", "no")
-dist_cutoff <- 0
+dist_cutoff_c <- 0
 station_cutoff <- "c1chur01"
+
+#nahrani dat z predchoziho skriptu. Tj. fit vsech stanic
+for (tim in tim_c){
+for (height in height_c){
+for (minmax in minmax_c){
+for (bayerischer_wald in bayerischer_wald_c){
+for (dist_cutoff in dist_cutoff_c){
+
 if (dist_cutoff > 0){
 	dist_cutoff <- paste(station_cutoff,dist_cutoff, sep="")
 } else { dist_cutoff <- "" }
-#nahrani dat z predchoziho skriptu. Tj. fit vsech stanic
+
 setwd("/home/vojta/Desktop/mffuk/bakalarka/out_fit")
 dat <- na.omit(read.csv(paste("f", minmax, tim, height, "_BW", bw_text, dist_cutoff, ".csv",sep="")))[, -1] # nolint
 f <- dat[,1:8]
@@ -98,7 +106,7 @@ final_plot <- plot_grid(hist_snowcm, hist_nt, hist_precmm, hist_month, hist_hum,
     draw_plot_label(paste("Počet čidel ", "(N=" ,nrow(f), ")", sep=""), x=0, y=0.15, vjust=1.5, angle=90, family="Latin Modern Math")
 
 ggsave(paste("all",nrow(f), minmax, "T", tim, height, "_BW", bw_text, dist_cutoff, ".png",sep=""), plot=final_plot)
-
+}}}}}
 #print(colnames(lokalita_data))
 #plot(f$snowcm, lokalita_data$SlopeDeg_DEM[lokalita_data$ID_lokalita %in% f$station_name])
 #cor(f$snowcm, lokalita_data$SlopeDeg_DEM[lokalita_data$ID_lokalita %in% f$station_name])
