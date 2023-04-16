@@ -1,0 +1,27 @@
+vítr přidat, čidlo nejblíže churáňovu jestli se to změní, solární radiace, zkusit další čidla, zkusit roční období nebo rozdělení na měsíce, 
+čidla dát dohromady po regresi a zjistit jestli tam je nějaký vliv enviro proměnných jako zápoj atp.
+
+
+
+
+okolí meteo stanice.. nižší subset čidel, minimální teploty, teploty 0cm, 
+
+
+
+1. Zvažte přeuspořádání kapitol tak, aby byly více souvislé. Například můžete začít s kapitolou "Vliv meteorologických podmínek na teplotu", poté přejít k "Fyzikální pohled na děje při povrchu země" a následně k "Vliv topografie a struktury krajiny na teplotu" a "Vliv porostu na teplotu".
+
+2. V sekci "Fyzikální pohled na děje při povrchu země" byste mohl více vysvětlit jednotlivé složky energetické bilance. Například co přesně znamená latentní teplo a jak je spojeno s výparem a kondenzací vody.
+
+3. V sekci "Vliv topografie a struktury krajiny na teplotu" byste mohl uvést více detailů o výzkumu, například jaké metody byly použity k zjištění výsledků a jaký byl vzorek dat.
+
+4. V sekci "Vliv porostu na teplotu" byste mohl uvést více informací o tom, jak byly zkoumány vlivy jednotlivých proměnných týkajících se porostu a jaký byl základ pro zjištění výsledků.
+
+5. V sekci "Vliv meteorologických podmínek na teplotu" byste mohl uvést více informací o tom, jakým způsobem budete zkoumat vliv jednotlivých meteorologických proměnných na rozdíl teplot.
+
+6. V textu se objevuje několik překlepů a gramatických chyb. Doporučuji pečlivě přečíst a opravit text, abyste zajistil jeho správnost a srozumitelnost.
+
+7. V některých částech textu byste mohl uvést více odkazů na literaturu, aby byly vaše tvrzení podloženy relevantními zdroji.
+
+8. Uveďte, co znamená "(+++)" v textu, aby bylo jasné, že se jedná o místo, kde plánujete doplnit další informace.
+
+9. Při uvádění jednotek (např. "2 m") je třeba dodržet správný formát. Použijte symbol pro metr (m) místo "m" a procenta (%) místo "procent".
