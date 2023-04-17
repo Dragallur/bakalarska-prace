@@ -2,6 +2,8 @@ vítr přidat, čidlo nejblíže churáňovu jestli se to změní, solární rad
 čidla dát dohromady po regresi a zjistit jestli tam je nějaký vliv enviro proměnných jako zápoj atp.
 
 
+1 blízko čídlo vs churáňov, oddělit čidla s velkým množstvím sněhu 0.5m, rozdělit sezónu na půl
+
 
 
 okolí meteo stanice.. nižší subset čidel, minimální teploty, teploty 0cm, 

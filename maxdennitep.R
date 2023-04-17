@@ -22,10 +22,10 @@ dist_f2 <- function(station, sensor){
 	return(distm(station, sensor, fun=distHaversine))
 }
 tim_c <- c("all")
-minmax_c <- c("max")
-height_c <- c("15cm")
+minmax_c <- c("max", "min")
+height_c <- c("15cm", "0cm")
 bayerischer_wald_c <- c(TRUE)
-dist_cutoff_c <- c(10000,20000,30000,40000,60000,100000) #cutoff around C1BLAD01
+dist_cutoff_c <- c(5000, 7000)
 station_cutoff <- c(c1chur01, deparse(substitute(c1chur01)))
 insol <- TRUE
 size_nrow <- 228

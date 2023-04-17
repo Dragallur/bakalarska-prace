@@ -4,11 +4,11 @@ library(cowplot)
 library(plyr)
 
 tim_c <- c("all")
-height_c <- c("15cm")
-minmax_c <- c("max")
+height_c <- c("15cm", "0cm")
+minmax_c <- c("max", "min")
 bayerischer_wald_c <- TRUE
 bw_text <- ifelse(bayerischer_wald == 1, "yes", "no")
-dist_cutoff_c <- c(10000,20000,30000,40000,60000,100000)
+dist_cutoff_c <- c(5000, 7000)
 station_cutoff <- "c1chur01"
 
 #nahrani dat z predchoziho skriptu. Tj. fit vsech stanic
