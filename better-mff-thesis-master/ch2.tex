@@ -1,8 +1,13 @@
 \chapter{Analýza dat}
-\label{chap:math}
-Vybrali jsme si interval (+++) pro datovou analýzu. 
+V první části druhé kapitoly se zaměříme na popis struktury použitých dat. Budeme pracovat maximálně na časovém intervalu od 12.10.2019 do 21.5.2021, ačkoliv meteorologické stanice mají dostupná data pro celý tento interval tak některá čidla měřila po kratší dobu.
+\label{chap:analysis}
+\section{Využitá data z ČHMÚ}
+Využili jsme data z řady nejvhodnější a nejbližších meteorologických stanic. Nejvíce informací můžeme získat ze synoptické stanice Churáňov. Z dostupných dat jsme pro další analýzu stáhli data o aktuální teplotě ve výšce $\SI{2}{m}$, rychlosti větru, výšce sněhové pokrývky, hodinových srážek a oblačnosti. Tyto data, měřená každou hodinu, jsme dále doplnili stanicemi v Borové Ladě, Kvildě, Horské Kvildě a Javoří Pile. Pro všechny stanice jsme měli k dispozici hodinová data o výšce sněhové pokrývky a pro Borovou Ladu informace ze srážkoměrů každých deseti minut.
 
-After the reader gained sufficient knowledge to understand your problem in \cref{chap:refs}, you can jump to your own advanced material and conclusions.
+\section{Data z BÚ AV}
+Data poskytnutá Botanickým ústavem Akademie věd České republiky byla naměřená dvěma typy čidel popisovanými v \ref{chap:loggers}. V části o zpracování dat se budeme zabývat pouze těmi plochami, které jsou opatřeny jak pozemními čidly, tak čidly ve standartní výšce $\SI{2}{m}$.
+
+
 
 You will need definitions (see \cref{defn:x} below in \cref{sec:demo}), theorems (\cref{thm:y}), general mathematics, algorithms (\cref{alg:w}), and tables (\cref{tab:z})\todo{See documentation of package \texttt{booktabs} for hints on typesetting tables. As a main rule, \emph{never} draw a vertical line.}. \Cref{fig:f,fig:g} show how to make a nice figure. See \cref{fig:schema} for an example of TikZ-based diagram. Cross-referencing helps a lot to keep the necessary parts of the narrative close --- use references to the previous chapter with theory wherever it seems that the reader could have forgotten the required context.
 

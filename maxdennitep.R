@@ -33,10 +33,10 @@ dist_f2 <- function(station, sensor){
 	return(distm(station, sensor, fun=distHaversine))
 }
 tim_c <- c("all")
-minmax_c <- c("max", "min")
-height_c <- c("15cm", "0cm")
+minmax_c <- c("max")
+height_c <- c("15cm")
 bayerischer_wald_c <- c(TRUE)
-dist_cutoff_c <- 0
+dist_cutoff_c <- 1
 station_cutoff <- c(c1chur01, deparse(substitute(c1chur01)))
 insol <- TRUE
 size_nrow <- 228
@@ -65,6 +65,8 @@ durbwatson <- vector(length=size_nrow)
 gqtest_c <- vector(length=size_nrow)
 station_arr <- vector(length=size_nrow)
 ndays <- vector(length=size_nrow)
+smolday <- vector(length=size_nrow)
+bigday <- vector(length=size_nrow)
 vif_fit <- matrix(nrow = size_nrow, ncol = 6)
 resid <- data.frame(matrix(nrow=length(seq(as.Date("2019-01-01"), as.Date("2021-12-31"), by="+1 day")), ncol=2))
 resid[,1] <- seq( as.Date("2019-01-01"), as.Date("2021-12-31"), by="day")
@@ -80,6 +82,8 @@ if (isTRUE(file.exists(paste(station_name, "_a.csv", sep = "")))){
  da <- read.csv(paste(station_name,"_a.csv",sep=""),sep=";",header=FALSE)
  db <- read.csv(paste(station_name,"_b.csv",sep=""),sep=";",header=FALSE)
  lok <- zeta[zeta$ID_lokalit == station_name,]
+ smolday[out_ind] <- da[1,4]
+ bigday[out_ind] <- da[nrow(da),4]
 } else {next}
 
 if (dist_cutoff > 0){
@@ -341,8 +345,8 @@ if (dist_cutoff > 0){
 	dist_cutoff <- paste(station_cutoff[3],dist_cutoff, sep="")
 } else { dist_cutoff <- "" }
 print(paste("Fitting was done for ", sum(complete.cases(out)), " stations.", sep = ""))
-write.csv(final_out,paste("f", minmax, tim, height, "_BW", bw_text, dist_cutoff, ".csv", sep = ""))
-write.csv(supp_out,paste("supp", minmax, tim, height, "_BW", bw_text, dist_cutoff, ".csv", sep = ""))
+#write.csv(final_out,paste("f", minmax, tim, height, "_BW", bw_text, dist_cutoff, ".csv", sep = ""))
+#write.csv(supp_out,paste("supp", minmax, tim, height, "_BW", bw_text, dist_cutoff, ".csv", sep = ""))
 }}}}}
 #write.csv(out,paste("f_T", minmax, tim, height, "_BW", bw_text, dist_cutoff, ".csv", sep = ""))
 #write.csv(out_err,paste("f_T", minmax, tim, height, "_BW", bw_text, dist_cutoff, "_err.csv", sep = ""))
