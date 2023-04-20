@@ -7,8 +7,7 @@ tim_c <- c("all")
 height_c <- c("15cm", "0cm")
 minmax_c <- c("max", "min")
 bayerischer_wald_c <- TRUE
-bw_text <- ifelse(bayerischer_wald == 1, "yes", "no")
-dist_cutoff_c <- c(5000, 7000)
+dist_cutoff_c <- 0
 station_cutoff <- "c1chur01"
 
 #nahrani dat z predchoziho skriptu. Tj. fit vsech stanic
@@ -18,12 +17,14 @@ for (minmax in minmax_c){
 for (bayerischer_wald in bayerischer_wald_c){
 for (dist_cutoff in dist_cutoff_c){
 
+bw_text <- ifelse(bayerischer_wald == 1, "yes", "no")
 if (dist_cutoff > 0){
 	dist_cutoff <- paste(station_cutoff,dist_cutoff, sep="")
 } else { dist_cutoff <- "" }
 
 setwd("/home/vojta/Desktop/mffuk/bakalarka/out_fit")
 dat <- na.omit(read.csv(paste("f", minmax, tim, height, "_BW", bw_text, dist_cutoff, ".csv",sep="")))[, -1] # nolint
+supp_dat <- na.omit(read.csv(paste("supp", minmax, tim, height, "_BW", bw_text, dist_cutoff, ".csv",sep="")))[, -1] # nolint
 f <- dat[,1:8]
 f[, 1:7] <- signif((f[, 1:7]), 2)
 colnames(f) <- c("intercept", "snowcm", "nt",
@@ -64,10 +65,6 @@ f$lat <- lokalita_data$Lat_WGS84[lokalita_data$ID_lokalita %in% f$station_name] 
 f$lon <- lokalita_data$Lon_WGS84[lokalita_data$ID_lokalita %in% f$station_name] # nolint
 f$dist_churanov <- ((f$lat-49.0707)^2+(f$lon-13.6173)^2)^(1/2) #nolint
 
-#plt <- ggplot(f, aes(x = lat, y = lon)) +
-#    geom_point(size = 10, aes(colour = factor(snowcm))) +
-#    scale_color_discrete(guide = "none")
-#show(plt)
 snowcm <- data.frame(snowcm = f$snowcm[which(as.numeric(f_prob$snowcm)<0.05)])
 nt <- data.frame(nt = f$nt[which(as.numeric(f_prob$nt)<0.05)])
 precmm <- data.frame(precmm = f$precmm[which(as.numeric(f_prob$precmm)<0.05)])
@@ -107,13 +104,3 @@ final_plot <- plot_grid(hist_snowcm, hist_nt, hist_precmm, hist_month, hist_hum,
 
 ggsave(paste("all",nrow(f), minmax, "T", tim, height, "_BW", bw_text, dist_cutoff, ".png",sep=""), plot=final_plot)
 }}}}}
-#print(colnames(lokalita_data))
-#plot(f$snowcm, lokalita_data$SlopeDeg_DEM[lokalita_data$ID_lokalita %in% f$station_name])
-#cor(f$snowcm, lokalita_data$SlopeDeg_DEM[lokalita_data$ID_lokalita %in% f$station_name])
-
-#hist(f$snowcm[which(as.numeric(f_prob$snowcm)<0.05)])
-#hist(f$nt[which(as.numeric(f_prob$nt)<0.05)])
-#hist(f$precmm[which(as.numeric(f_prob$precmm)<0.05)])
-#hist(f$month[which(as.numeric(f_prob$month)<0.05)])
-#hist(f$hum[which(as.numeric(f_prob$hum)<0.05)])
-#hist(f$ffkmh[which(as.numeric(f_prob$ffkmh)<0.05)])

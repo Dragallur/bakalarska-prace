@@ -8,12 +8,23 @@ library(lmtest)
 library(data.table)
 library(lubridate)
 library(car)
+library(pscl)
+
 
 c1kvil01 <- c(49.0192269, 13.5792156)
 c1hkvi01 <- c(49.0537242, 13.5651661)
 c1blad01 <- c(48.9904850, 13.6620817)
 c4japi01 <- c(49.0361536, 13.4212786)
 c1chur01 <- c(49.0682586, 13.6156192)
+
+plot_f <- function(plt){
+	wd <- getwd()
+	setwd("/home/vojta/Desktop/mffuk/bakalarka/out_fit/")
+	jpeg("plot.png")
+	show(plt)
+	dev.off()
+	setwd(wd)
+}
 
 dist_f <- function(stations, sensor){ 
     return(sqrt((stations[,1] - sensor[1])^2 + (stations[,2] - sensor[2])^2))
@@ -25,7 +36,7 @@ tim_c <- c("all")
 minmax_c <- c("max", "min")
 height_c <- c("15cm", "0cm")
 bayerischer_wald_c <- c(TRUE)
-dist_cutoff_c <- c(5000, 7000)
+dist_cutoff_c <- 0
 station_cutoff <- c(c1chur01, deparse(substitute(c1chur01)))
 insol <- TRUE
 size_nrow <- 228
@@ -51,6 +62,7 @@ out_prob <- data.frame(matrix(ncol = 8, nrow = size_nrow))
 diff_mean <- vector(length=size_nrow)
 rsquared <- vector(length=size_nrow)
 durbwatson <- vector(length=size_nrow)
+gqtest_c <- vector(length=size_nrow)
 station_arr <- vector(length=size_nrow)
 ndays <- vector(length=size_nrow)
 vif_fit <- matrix(nrow = size_nrow, ncol = 6)
@@ -197,10 +209,12 @@ colnames(snowcm) <- c("cm","time")
 snowcm$cm <- as.numeric(gsub("-Inf",0,snowcm$cm))
 snowcm$cm <- as.numeric(gsub("Inf",0,snowcm$cm))
 final_data$diff <- as.numeric(maxdennitep$maxtemp15cm)-as.numeric(maxdennitep$maxtemp2m)
+#final_data$diff[is.na(final_data$diff)] <- 0
+#final_data$diff <- predict(caret::BoxCoxTrans(final_data$diff), final_data$diff)
+#final_data$diff <- final_data$diff^(1/2)*sign(final_data$diff)
 #setwd("~/Desktop/mffuk/bakalarka/out_fit/diff_pics/")
 #plt <- ggplot(data=final_data, aes(x=1:length(diff), y=diff)) + geom_point()
 #ggsave(paste(station_name, ".png", sep=""), plt)
-
 final_data$snowcm  <- snowcm$cm
 nt_vec <- c()
 for (i in 1:length(maxdennitep$date)){
@@ -285,7 +299,9 @@ final_data$snowcm <- as.numeric(final_data$snowcm)
 final_data$nt <- as.numeric(final_data$nt)
 final_data$pr24 <- as.numeric(final_data$pr24)
 final_data$month <- as.numeric(final_data$month)
-fit <- lm(diff ~ snowcm + nt + precmm + month + hum + ffkmh, data = final_data)
+final_data <- final_data[complete.cases(final_data),]
+#fit <- glm(diff ~ snowcm + nt + precmm + month + hum + ffkmh, data = final_data)
+fit <- glm(diff ~ snowcm + nt + precmm + month + hum + ffkmh, data = final_data)
 if (anyNA(fit$coefficients)){
 	print("One or more NA values in fit were detected. Skipping station.")
 	next
@@ -295,8 +311,14 @@ if (anyNA(summary(fit))){
 	next
 }
 
-rsquared[out_ind] <- summary(fit)$adj.r.square
-durbwatson[out_ind] <- dwtest(fit)$statistic
+rsquared[out_ind] <- pR2(fit)['McFadden']# summary(fit)$adj.r.square
+#durbwatson[out_ind] <- dwtest(fit)$statistic
+#gqtest_c[out_ind] <- gqtest(fit)$p.value
+#gqtest_c[out_ind] <- bptest(fit)$p.value
+gqtest_c[out_ind] <- skedastic::white(fit)
+#gqtest(fit)
+#if (gqtest(fit)$p.value == 1.0) {stop()}
+
 station_arr[out_ind] <- station_name
 ind_resid <- seq(which(resid[,1]==as.Date(final_data$date[1], format="%d.%m.%Y")), length.out=nrow(final_data))
 resid[ind_resid,2] <- resid[ind_resid,2]+residuals(fit)
@@ -308,12 +330,10 @@ out_err[out_ind,] <- v_out
 v_out <- c(as.vector(summary(fit)$coefficients[,4]), station_name)
 out_prob[out_ind,] <- v_out
 diff_mean[out_ind] <- mean(final_data$diff)
-vif_fit[out_ind,] <- vif(fit)
-ndays[out_ind] <- nrow(final_data)
-#print(length(residuals(fit)))
-#plt <- plot(x = 1:length(residuals(fit)), y = residuals(fit), type ="l")
+
 } #end for loop for 1 station
-supp_out <- cbind(rsquared, durbwatson, ndays, vif_fit, station_arr)
+#supp_out <- cbind(rsquared, durbwatson, ndays, vif_fit, station_arr)
+supp_out <- cbind(rsquared, ndays, vif_fit, station_arr)
 final_out <- cbind(out, out_err, out_prob)
 setwd("~/Desktop/mffuk/bakalarka/out_fit")
 bw_text <- ifelse(bayerischer_wald == 1, "yes", "no")
