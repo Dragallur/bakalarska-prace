@@ -65,8 +65,7 @@ durbwatson <- vector(length=size_nrow)
 gqtest_c <- vector(length=size_nrow)
 station_arr <- vector(length=size_nrow)
 ndays <- vector(length=size_nrow)
-smolday <- vector(length=size_nrow)
-bigday <- vector(length=size_nrow)
+coords <- data.frame(matrix(ncol = 2, nrow = size_nrow))
 vif_fit <- matrix(nrow = size_nrow, ncol = 6)
 resid <- data.frame(matrix(nrow=length(seq(as.Date("2019-01-01"), as.Date("2021-12-31"), by="+1 day")), ncol=2))
 resid[,1] <- seq( as.Date("2019-01-01"), as.Date("2021-12-31"), by="day")
@@ -75,15 +74,14 @@ resid[,2] <- 0
 for (out_ind in 1:size_nrow){
 setwd("~/Desktop/mffuk/bakalarka/ZETA_Klimes/data_all")
 station_name <- lokalita_data$ID_lokalita[out_ind]
-if (station_name == "NPS_1110_TMS") {print("ASDF")}
 #check if file with the station name exists for both _a and _b, then proceed to calculate
 if (isTRUE(file.exists(paste(station_name, "_a.csv", sep = "")))){
  print(c(station_name, out_ind))
  da <- read.csv(paste(station_name,"_a.csv",sep=""),sep=";",header=FALSE)
  db <- read.csv(paste(station_name,"_b.csv",sep=""),sep=";",header=FALSE)
  lok <- zeta[zeta$ID_lokalit == station_name,]
- smolday[out_ind] <- da[1,4]
- bigday[out_ind] <- da[nrow(da),4]
+ coords[out_ind,1] <- lok$Lat_WGS84
+ coords[out_ind,2] <- lok$Lon_WGS84
 } else {next}
 
 if (dist_cutoff > 0){
