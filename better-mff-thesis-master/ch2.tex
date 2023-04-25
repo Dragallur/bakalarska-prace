@@ -1,13 +1,123 @@
-\chapter{Analýza dat}
+\chapter{Analýza dat} \label{chap:analysis}
 V první části druhé kapitoly se zaměříme na popis struktury použitých dat. Budeme pracovat maximálně na časovém intervalu od 12.10.2019 do 21.5.2021, ačkoliv meteorologické stanice mají dostupná data pro celý tento interval tak některá čidla měřila po kratší dobu.
-\label{chap:analysis}
+
 \section{Využitá data z ČHMÚ}
-Využili jsme data z řady nejvhodnější a nejbližších meteorologických stanic. Nejvíce informací můžeme získat ze synoptické stanice Churáňov. Z dostupných dat jsme pro další analýzu stáhli data o aktuální teplotě ve výšce $\SI{2}{m}$, rychlosti větru, výšce sněhové pokrývky, hodinových srážek a oblačnosti. Tyto data, měřená každou hodinu, jsme dále doplnili stanicemi v Borové Ladě, Kvildě, Horské Kvildě a Javoří Pile. Pro všechny stanice jsme měli k dispozici hodinová data o výšce sněhové pokrývky a pro Borovou Ladu informace ze srážkoměrů každých deseti minut.
+Využili jsme data z řady nejvhodnější a nejbližších meteorologických stanic. Nejvíce informací můžeme získat ze synoptické stanice Churáňov. Z dostupných dat jsme pro další analýzu stáhli data o aktuální teplotě ve výšce $\SI{2}{m}$, rychlosti větru, výšce sněhové pokrývky, hodinových srážek a oblačnosti. Tyto data, měřená každou hodinu, jsme dále doplnili stanicemi v Borové Ladě, Kvildě, Horské Kvildě a Javoří Pile. Pro všechny stanice jsme měli k dispozici hodinová data o výšce sněhové pokrývky a pro Borovou Ladu informace ze srážkoměrů každých deset minut.
 
 \section{Data z BÚ AV}
-Data poskytnutá Botanickým ústavem Akademie věd České republiky byla naměřená dvěma typy čidel popisovanými v \ref{chap:loggers}. V části o zpracování dat se budeme zabývat pouze těmi plochami, které jsou opatřeny jak pozemními čidly, tak čidly ve standartní výšce $\SI{2}{m}$.
+Data poskytnutá Botanickým ústavem Akademie věd České republiky byla naměřená dvěma typy čidel popisovanými v \ref{chap:loggers}. V části o zpracování dat se budeme zabývat pouze těmi plochami, které jsou opatřeny jak pozemními čidly, tak čidly ve standartní výšce $\SI{2}{m}$. Na obrázku \ref{fig:rozlozenicidel} můžeme vidět jejich prostorové rozložení, celkově jde o 157 čidel. 
 
+Umístění čidel bylo vybíráno tak aby pokryly gradienty nadmořské výšky (5 tříd), potenciální solární radiace (3 třídy) a topografického vlhkostního indexu (3 třídy). Plochy byly dále doplněny tak, aby bylo rovnoměrně pokryto území národních parků a aby se nevyskytovaly poblíž turistických stezek.
 
+\begin{figure}
+	\centering
+	\includegraphics[width=0.95\textwidth]{img/rozlozenicidel.pdf}
+	\caption{Rozložení čidel a meteorologický stanic napříč Národním parkem Šumava ($N=112$) a Národním parkem Bavorský les ($N=45$)}
+	\label{fig:rozlozenicidel}
+\end{figure}
+
+Data vykazují malou chybovost, duplicitní a chybějící záznamy byly vyřazeny. Dále byla data vizuálně překontrolována a části, kdy byla čidla např. povytažená ze země (pozná se podle hodnot půdní vlhkosti), byly nahrazeny hodnotami NA. Podobně pokud čidlo T1 spadlo ze stromu tak jsou hodnoty nahrazeny NA. Toto čištění dat provedli RNDr. Josef Brůna, Ph.D., doc. Ing. Jan Wild, Ph.D. a další s jejichž svolením jsou data využitá v této práci.
+
+Dostupnost dat z čidel je vidět na obrázku \ref{fig:dostupnostdat}, vidíme zde dvě skupiny čidel, jedny, nacházející se v Národním parku Bavorský les mají dostupná data pro cca 400 dnů, zatímco čidla z Národního parku Šumava mají dostupná data pro téměř 600 dnů. Na obrázku \ref{fig:dostupnostdnu} vidíme pak na kolika čidlech jsou zastoupeny jednotlivé dny.
+
+\begin{figure}
+	\centering
+	\begin{subfigure}{0.45\textwidth}
+  \includegraphics[width=\textwidth]{img/hist_numofdayavailability.png}
+	\caption{Histogram ukazující množství dostupných dnů pro jednotlivá čidla}
+	\label{fig:dostupnostdat}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}{0.45\textwidth}
+  \includegraphics[width=\textwidth]{img/date_availability.png}
+	\caption{Graf zastoupení čidel pro jednotlivé dny}
+	\label{fig:dostupnostdnu}
+	\end{subfigure}
+	\caption{Dostupnost dat z čidel}
+\end{figure}
+
+\section{Ukázky použitých dat}
+Dále se podívejme na ukázku dat naměřených na čidlech. Na obrázcích \ref{fig:hours} můžeme vidět kdy nastávaly maximální a minimální teploty ve výškách $\SI{0}{cm}$ a $\SI{15}{cm}$ nad zemí, denní hodina je uvedená v UTC, nikoliv SEČ nebo SELČ. U maximálních teplot si můžeme všimnout kromě maxima v okolí 10 UTC také menšího maxima a odlehlých hodnot způsobených přítomností sněhu v zimě. Podobně měl sníh vliv i na dobu minimálních teplot v zimě.
+
+\begin{figure}
+	\centering
+	\begin{subfigure}{0.45\textwidth}
+  \includegraphics[width=\textwidth]{img/hist_hourmax15cm.png}
+		\caption{}
+		\label{fig:hourmax15cm}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}{0.45\textwidth}
+  \includegraphics[width=\textwidth]{img/hist_hourmax0cm.png}
+		\caption{}
+		\label{fig:hourmax0cm}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}{0.45\textwidth}
+  \includegraphics[width=\textwidth]{img/hist_hourmin15cm.png}
+		\caption{}
+		\label{fig:hourmin15cm}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}{0.45\textwidth}
+  \includegraphics[width=\textwidth]{img/hist_hourmin0cm.png}
+		\caption{}
+		\label{fig:hourmin0cm}
+	\end{subfigure}
+	\caption{Denní doba (UTC) dosažení maximální resp. minimální teploty v $\SI{15}{cm}$ resp. v $\SI{0}{cm}$ nad zemí na čidle nejblíže Churáňovu}
+	\label{fig:hours}
+\end{figure}
+
+Pro ilustraci se ještě podívejme na konkrétní hodnoty teplot pozorované na nejbližším čidlu meteorologické stanice Churáňov. Na obrázcích \ref{fig:hours} můžeme vidět průběh denních minim a maxim na jednom z čidel, celkově jde o období od 12.10.2019 do 20.5.2021 tedy 587 dnů. Na obrázcích \ref{fig:2mhours} můžeme vidět obrázkům \ref{fig:hourmax15cm} a \ref{fig:hourmin15cm} odpovídající hodnoty teplot naměřených ve výšce $\SI{2}{m}$ na čidle zavěšeném na stromě poblíž pozemním čidlům.
+
+\begin{figure}
+	\centering
+	\begin{subfigure}{0.45\textwidth}
+  \includegraphics[width=\textwidth]{img/maxtempmax15cm.png}
+		\caption{}
+		\label{fig:maxtempmax15cm}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}{0.45\textwidth}
+  \includegraphics[width=\textwidth]{img/maxtempmax0cm.png}
+		\caption{}
+		\label{fig:maxtempmax0cm}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}{0.45\textwidth}
+  \includegraphics[width=\textwidth]{img/maxtempmin15cm.png}
+		\caption{}
+		\label{fig:maxtempmin15cm}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}{0.45\textwidth}
+  \includegraphics[width=\textwidth]{img/maxtempmin0cm.png}
+		\caption{}
+		\label{fig:maxtempmin0cm}
+	\end{subfigure}
+	\caption{Průběh denních maximální resp. minimálních teplot ve výšce $\SI{15}{cm}$ resp. $\SI{0}{cm}$ nad zemí na čidle nejblíže Churáňovu}
+	\label{fig:hours}
+\end{figure}
+
+\begin{figure}
+	\centering
+	\begin{subfigure}{0.45\textwidth}
+  \includegraphics[width=\textwidth]{img/2mmaxtempmax15cm.png}
+		\caption{Teploty naměřené ve stejnou dobu jako maximální teploty v $\SI{15}{cm}$}
+		\label{fig:2mmaxtempmax15cm}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}{0.45\textwidth}
+  \includegraphics[width=\textwidth]{img/2mmaxtempmin15cm.png}
+		\caption{Teploty naměřené ve stejnou dobu jako minimální teploty v $\SI{15}{cm}$}
+		\label{fig:2mmaxtempmin15cm}
+	\end{subfigure}
+	\caption{Teploty ve výšce $\SI{2}{m}$ nad zemí na čidle nejblíže Churáňovu v době kdy nastalo maximum resp. minimum na čidle ve výšce $\SI{15}{cm}$}
+	\label{fig:2mhours}
+\end{figure}
+
+\section{Metody analýzy dat}
+Cílem následující části je ukázat jakým způsobem byly data zpracována, proč byl vybrán daný model a ukázat ověření jeho předpokladů.
 
 You will need definitions (see \cref{defn:x} below in \cref{sec:demo}), theorems (\cref{thm:y}), general mathematics, algorithms (\cref{alg:w}), and tables (\cref{tab:z})\todo{See documentation of package \texttt{booktabs} for hints on typesetting tables. As a main rule, \emph{never} draw a vertical line.}. \Cref{fig:f,fig:g} show how to make a nice figure. See \cref{fig:schema} for an example of TikZ-based diagram. Cross-referencing helps a lot to keep the necessary parts of the narrative close --- use references to the previous chapter with theory wherever it seems that the reader could have forgotten the required context.
 

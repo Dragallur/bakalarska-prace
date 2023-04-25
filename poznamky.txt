@@ -10,6 +10,10 @@ okolí meteo stanice.. nižší subset čidel, minimální teploty, teploty 0cm,
 
 
 
+balíček nlme a funkce lme na linear-mixed (effect) models, gls -> na časovou a prostorovou strukturu
+
+
+
 1. Zvažte přeuspořádání kapitol tak, aby byly více souvislé. Například můžete začít s kapitolou "Vliv meteorologických podmínek na teplotu", poté přejít k "Fyzikální pohled na děje při povrchu země" a následně k "Vliv topografie a struktury krajiny na teplotu" a "Vliv porostu na teplotu".
 
 2. V sekci "Fyzikální pohled na děje při povrchu země" byste mohl více vysvětlit jednotlivé složky energetické bilance. Například co přesně znamená latentní teplo a jak je spojeno s výparem a kondenzací vody.
