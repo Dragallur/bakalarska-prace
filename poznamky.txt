@@ -13,6 +13,14 @@ okolí meteo stanice.. nižší subset čidel, minimální teploty, teploty 0cm,
 balíček nlme a funkce lme na linear-mixed (effect) models, gls -> na časovou a prostorovou strukturu
 
 
+Adam feedback: mixed effect model s náhodným efektem loggeru, použití funkce lme z balířku nlme, 
+	ignoruje to časovej a prostorovej vliv -> očekává to že je to nezávislé
+	můžu zkusit vyhodit každej druhej den abych se zbavil autokorelace 
+
+insolace: https://brian-rose.github.io/ClimateLaboratoryBook/courseware/insolation.html
+https://www.pveducation.org/pvcdrom/properties-of-sunlight/declination-angle
+wiki: Sun-rise equation
+
 
 1. Zvažte přeuspořádání kapitol tak, aby byly více souvislé. Například můžete začít s kapitolou "Vliv meteorologických podmínek na teplotu", poté přejít k "Fyzikální pohled na děje při povrchu země" a následně k "Vliv topografie a struktury krajiny na teplotu" a "Vliv porostu na teplotu".
 

@@ -1,4 +1,5 @@
 library(ggplot2)
+library(stringr)
 
 setwd("~/Desktop/mffuk/bakalarka/SYNOP")
 synop <- read.csv("11457.txt",header=TRUE)
@@ -27,12 +28,32 @@ synop$Precmm[synop$Precmm=="NA"] <- 0 #chtelo by to komplikovanejsi nahrazeni ca
 #12.10.2019-21.5.2021
 synop <- synop[min(which(synop$Date == "12.10.2019")):max(which(synop$Date == "21.05.2021")),]
 
-plt <- ggplot(data=synop, aes(x=month, y=TC)) + geom_boxplot() +
-    labs(x="Měsíc v roce", y="Teplota [°C]", title="Teploty ve 2 m měřené na stanici Churáňov") +
-    theme(text=element_text(family="Latin Modern Math",size=20))
 setwd("~/Desktop/mffuk/bakalarka/out_fit/pics/")
-ggsave("synop_temperature.png", plt)
-
 plt <- ggplot(data=synop, aes(x=month, y=TC)) + geom_boxplot() +
     labs(x="Měsíc v roce", y="Teplota [°C]", title="Teploty ve 2 m měřené na stanici Churáňov") +
     theme(text=element_text(family="Latin Modern Math",size=20))
+ggsave("synop_temperature.png", plt, height=8, width=8, dpi=343)
+
+plt <- ggplot(data=synop, aes(x=month, y=pr24)) + geom_boxplot() +
+    labs(x="Měsíc v roce", y="Srážky za 24 hodin [mm]", title="Sumace srážek naměřená na stanici Churáňov") +
+    theme(text=element_text(family="Latin Modern Math",size=20))
+ggsave("synop_prec.png", plt, height=8, width=8, dpi=343)
+
+snowcm24 <- vector(length=nrow(synop))
+snowcm24 <- NA
+for (day in unique(synop$Date)){
+    ind <- synop$Date==day
+    snowcm24[max(which(ind==TRUE))] <- max(na.omit(synop$Snowcm[ind]))
+}
+snowcm24[snowcm24==-Inf] <- 0
+synop$snowcm24 <- snowcm24
+plt <- ggplot(data=synop, aes(x=month, y=snowcm24)) + geom_boxplot() +
+    labs(x="Měsíc v roce", y="Maximální denní sněhová pokrývka [cm]", title="Maximální denní sněhová pokrývka\n na stanici Churáňov") +
+    theme(text=element_text(family="Latin Modern Math",size=20))
+ggsave("synop_snowcm.png", plt, height=8, width=8, dpi=343)
+
+#sub_synop <- synop[(synop$month==10 & synop$year==2020),]
+plt <- ggplot(data=synop, aes(x=ffkmh)) + geom_histogram(binwidth=3.6) +
+    labs(x="Rychlost větru [km/h]", y="Počet pozorování", title="Měření rychlosti větru na stanici Churáňov") +
+    theme(text=element_text(family="Latin Modern Math",size=20))
+ggsave("synop_ffkmh.png", plt, units="in", height=8, width=8, dpi=343) 

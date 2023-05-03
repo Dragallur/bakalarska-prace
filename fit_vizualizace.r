@@ -4,8 +4,8 @@ library(cowplot)
 library(plyr)
 
 tim_c <- c("all")
-height_c <- c("15cm", "0cm")
-minmax_c <- c("max", "min")
+height_c <- c("15cm")
+minmax_c <- c("max")
 bayerischer_wald_c <- TRUE
 dist_cutoff_c <- 0
 station_cutoff <- "c1chur01"

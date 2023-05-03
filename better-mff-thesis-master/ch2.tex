@@ -4,6 +4,37 @@ V první části druhé kapitoly se zaměříme na popis struktury použitých d
 \section{Využitá data z ČHMÚ}
 Využili jsme data z řady nejvhodnější a nejbližších meteorologických stanic. Nejvíce informací můžeme získat ze synoptické stanice Churáňov. Z dostupných dat jsme pro další analýzu stáhli data o aktuální teplotě ve výšce $\SI{2}{m}$, rychlosti větru, výšce sněhové pokrývky, hodinových srážek a oblačnosti. Tyto data, měřená každou hodinu, jsme dále doplnili stanicemi v Borové Ladě, Kvildě, Horské Kvildě a Javoří Pile. Pro všechny stanice jsme měli k dispozici hodinová data o výšce sněhové pokrývky a pro Borovou Ladu informace ze srážkoměrů každých deset minut.
 
+Na obrázku \ref{fig:chmuukazka} můžeme vidět ukázku dat z meteorologické stanice Churáňov. Maximální teplota za období 12.10.2019 až 20.5.2021 byla $\SI{27}{\degree C}$ naměřena 21.8.2020 a minimální $\SI{-16.1}{\degree C}$ naměřena 11.2.2021 a 13.2.2021.
+
+\begin{figure}
+	\centering
+	\begin{subfigure}{0.45\textwidth}
+  \includegraphics[width=\textwidth]{img/synop_temperature.png}
+		\caption{}
+		\label{fig:synop_temperature}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}{0.45\textwidth}
+  \includegraphics[width=\textwidth]{img/synop_snowcm.png}
+		\caption{}
+		\label{fig:synop_snowcm}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}{0.45\textwidth}
+  \includegraphics[width=\textwidth]{img/synop_prec.png}
+		\caption{}
+		\label{fig:synop_prec}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}{0.45\textwidth}
+  \includegraphics[width=\textwidth]{img/synop_ffkmh.png}
+		\caption{}
+		\label{fig:synop_ffkmh}
+	\end{subfigure}
+	\caption{Data ze synoptické stanice Churáňov za období 12.10.2019 až 20.5.2021} 
+	\label{fig:chmuukazka}
+\end{figure}
+
 \section{Data z BÚ AV}
 Data poskytnutá Botanickým ústavem Akademie věd České republiky byla naměřená dvěma typy čidel popisovanými v \ref{chap:loggers}. V části o zpracování dat se budeme zabývat pouze těmi plochami, které jsou opatřeny jak pozemními čidly, tak čidly ve standartní výšce $\SI{2}{m}$. Na obrázku \ref{fig:rozlozenicidel} můžeme vidět jejich prostorové rozložení, celkově jde o 157 čidel. 
 

@@ -10,8 +10,8 @@ library(lubridate)
 library(car)
 library(pscl)
 
-setwd("/home/vojta/Desktop/mffuk/bakalarka")
-source("functions.r")
+setwd("/home/vojta/Desktop/mffuk/bakalarka/analyze/")
+source("functions_analyze.r")
 
 c1kvil01 <- c(49.0192269, 13.5792156)
 c1hkvi01 <- c(49.0537242, 13.5651661)
@@ -20,10 +20,10 @@ c4japi01 <- c(49.0361536, 13.4212786)
 c1chur01 <- c(49.0682586, 13.6156192)
 
 tim_c <- c("all")
-minmax_c <- c("max", "min")
-height_c <- c("15cm", "0cm")
-bayerischer_wald_c <- c(FALSE)
-dist_cutoff_c <- 2000
+minmax_c <- c("max")
+height_c <- c("15cm")
+bayerischer_wald_c <- c(TRUE)
+dist_cutoff_c <- 0
 station_cutoff <- c(c1chur01, deparse(substitute(c1chur01)))
 insol <- TRUE
 size_nrow <- 228
@@ -54,6 +54,7 @@ station_arr <- vector(length=size_nrow)
 ndays <- vector(length=size_nrow)
 availability_data <- data.frame(data=vector(length=size_nrow))
 availability_data$data <- NA
+all_loggers <- c()
 date_availability <- data.frame(dates=vector(length=588))
 date_availability$dates <- 0
 date_availability$day <- seq(as.Date("2019-10-12"), as.Date("2021-05-21"), by="+1 day")
@@ -67,7 +68,6 @@ resid[,2] <- 0
 for (out_ind in 1:size_nrow){
 setwd("~/Desktop/mffuk/bakalarka/ZETA_Klimes/data_all")
 station_name <- lokalita_data$ID_lokalita[out_ind]
-if (station_name != "NPS_4311_D_TMS") {next}
 #check if file with the station name exists for both _a and _b, then proceed to calculate
 if (isTRUE(file.exists(paste(station_name, "_a.csv", sep = "")))){
  print(c(station_name, out_ind))
@@ -214,6 +214,8 @@ final_data$diff <- as.numeric(maxdennitep$maxtemp15cm)-as.numeric(maxdennitep$ma
 #plt <- ggplot(data=final_data, aes(x=1:length(diff), y=diff)) + geom_point()
 #ggsave(paste(station_name, ".png", sep=""), plt)
 final_data$snowcm  <- snowcm$cm
+final_data$station_snowcm <- row.names(chmu_stations)[min_dist]
+
 nt_vec <- c()
 for (i in 1:length(maxdennitep$date)){
 	ind <- which(maxdennitep$date[i]==synop$Date)
@@ -270,6 +272,7 @@ if (row.names(chmu_stations)[min_dist] == "c1chur01"){
 }
 print(paste("Used the station ", row.names(chmu_stations)[min_dist], " for 10 min precipitation.", sep=""))
 final_data$precmm <- as.numeric(precmm_vec)
+final_data$station_precmm <- row.names(chmu_stations)[min_dist]
 
 ffkmh <- c()
 for (i in 1:length(maxdennitep$date)){
@@ -296,64 +299,17 @@ final_data$snowcm <- as.numeric(final_data$snowcm)
 final_data$nt <- as.numeric(final_data$nt)
 final_data$pr24 <- as.numeric(final_data$pr24)
 final_data$month <- as.numeric(final_data$month)
-#final_data <- final_data[complete.cases(final_data),]
-#fit <- glm(diff ~ snowcm + nt + precmm + month + hum + ffkmh, data = final_data)
-fit <- glm(diff ~ snowcm + nt + precmm + month + hum + ffkmh, data = final_data)
-if (anyNA(fit$coefficients)){
-	print("One or more NA values in fit were detected. Skipping station.")
-	next
-}
-if (anyNA(summary(fit))){
-	print("One or more NA values in summary fit were detected. Skipping station.")
-	next
-}
-
-rsquared[out_ind] <- pR2(fit)['McFadden']# summary(fit)$adj.r.square
-#durbwatson[out_ind] <- dwtest(fit)$statistic
-#gqtest_c[out_ind] <- gqtest(fit)$p.value
-#gqtest_c[out_ind] <- bptest(fit)$p.value
-gqtest_c[out_ind] <- skedastic::white(fit)
-availability_data$data[out_ind] <- nrow(final_data)
-date_availability$dates[rownames(date_availability) %in% final_data$date] <- date_availability$dates[rownames(date_availability) %in% final_data$date] + 1
-#gqtest(fit)
-#if (gqtest(fit)$p.value == 1.0) {stop()}
-
-station_arr[out_ind] <- station_name
-ind_resid <- seq(which(resid[,1]==as.Date(final_data$date[1], format="%d.%m.%Y")), length.out=nrow(final_data))
-resid[ind_resid,2] <- resid[ind_resid,2]+residuals(fit)
-
-v_out <- c(as.vector(fit$coefficients[1:7]), station_name)
-out[out_ind,] <- v_out
-v_out <- c(as.vector(summary(fit)$coefficients[,2]), station_name)
-out_err[out_ind,] <- v_out
-v_out <- c(as.vector(summary(fit)$coefficients[,4]), station_name)
-out_prob[out_ind,] <- v_out
-diff_mean[out_ind] <- mean(final_data$diff)
+final_data$station_name <- station_name
+all_loggers <- rbind(all_loggers, final_data)
 } #end for loop for 1 station
 
-#supp_out <- cbind(rsquared, durbwatson, ndays, vif_fit, station_arr)
-supp_out <- cbind(rsquared, ndays, vif_fit, station_arr)
-final_out <- cbind(out, out_err, out_prob)
-setwd("~/Desktop/mffuk/bakalarka/out_fit")
+setwd("~/Desktop/mffuk/bakalarka/analyze/out/")
 bw_text <- ifelse(bayerischer_wald == 1, "yes", "no")
 if (dist_cutoff > 0){
 	dist_cutoff <- paste(station_cutoff[3],dist_cutoff, sep="")
 } else { dist_cutoff <- "" }
 print(paste("Fitting was done for ", sum(complete.cases(out)), " stations.", sep = ""))
 
-#gg_hist_data_availability(availability_data)
-#gg_plot_date_availability(date_availability)
-#gg_hist_hour(maxdennitep, minmax, height)
-#gg_plot_minmax_temp(maxdennitep, minmax, height)
-#write.csv(final_out,paste("f", minmax, tim, height, "_BW", bw_text, dist_cutoff, ".csv", sep = ""))
-#write.csv(supp_out,paste("supp", minmax, tim, height, "_BW", bw_text, dist_cutoff, ".csv", sep = ""))
+save(all_loggers, file=paste("data_", minmax, tim, height, "_BW", bw_text, dist_cutoff, ".RData", sep = ""))
+
 }}}}}
-#write.csv(out,paste("f_T", minmax, tim, height, "_BW", bw_text, dist_cutoff, ".csv", sep = ""))
-#write.csv(out_err,paste("f_T", minmax, tim, height, "_BW", bw_text, dist_cutoff, "_err.csv", sep = ""))
-#write.csv(out_prob,paste("f_T", minmax, tim, height, "_BW", bw_text, dist_cutoff, "_prob.csv", sep = ""))
-### f_T + 
-	#time interval + 
-	#min or max if we are looking for minimum or maximum for the day +
-	#temperature sensor height + 
-	#_BW + if sensors from Bayerischer Wald are included +
-	#nothing or name of station around which we use only subset of sensors depending on radius
