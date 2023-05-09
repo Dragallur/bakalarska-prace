@@ -137,15 +137,17 @@ if (tim == "winter"){
 dat <- str_split_fixed(synop$time,"\\:",3)
 synop$hour <- dat[,1]
 
-#get rid of the part with weird fit residuals (currently worsens results)
-#mar <- rev(unique(synop$Date))[which(rev(unique(synop$Date)) == "01.03.2020"):length(unique(synop$Date))]
-fin_date <- rev(intersect(unique(synop$Date),unique(da$date)))
-#fin_date <- fin_date[min(which((fin_date %in% mar) == TRUE)):length(fin_date)]
+#Delete non complete last day, this can be different for da and db
+if (nrow(da[da$date==unique(da$date)[length(unique(da$date))],])!=96){
+	da <- da[-which(da$date==unique(da$date)[length(unique(da$date))]),]
+}
+if (nrow(db[db$date==unique(db$date)[length(unique(db$date))],])!=96){
+	db <- db[-which(db$date==unique(db$date)[length(unique(db$date))]),]
+}
+
+fin_date <- rev(intersect(intersect(unique(synop$Date),unique(da$date)),unique(db$date)))
 final_data <- data.frame(date=fin_date)
-#if (sum(nchar(as.character(fin_date))==10)!=length(fin_date)) {stop()}
-#if (sum(final_data$date %in% "01.04.2020") == 0) {stop()}
-#get rid of small datasets
-if (nrow(final_data)<60) next
+
 da <- da[da$date %in% final_data$date,]
 synop <- synop[synop$Date %in% final_data$date,]
 
@@ -175,16 +177,22 @@ if (height == "0cm"){
 colnames(maxdennitep) <- c("date","maxtemp15cm","time15cm")
 dat <- str_split_fixed(maxdennitep$time15cm,"\\:",3)
 maxdennitep$hour15cm <- dat[,1] #zaokrouhluji hodiny dolu
-
 #match max temperature at 15cm with temperature measured at 2m
 maxtemp2m <- c()
 for (i in 1:length(maxdennitep$date)){
 	ind <- which(maxdennitep$date[i]==db$date)
-	ind <- ind[db$hour[ind]==maxdennitep$hour15cm[i]][1]
+	#ind <- ind[db$hour[ind]==maxdennitep$hour15cm[i]][1]
+	ind <- ind[str_pad(db$time[ind], 5, pad="0", side="left")==str_pad(maxdennitep$time[i], 5, pad="0", side="left")][1]
+	if (!is.na(ind)){
+	if (length(ind)!=1){stop()}
+	while(is.na(db$temp2m[ind])){ 
+		print("NA in 2m detected, taking 15 minutes older value.")
+		ind <- ind - 1
+	}
+	}
 	maxtemp2m <- c(maxtemp2m,db$temp2m[ind])
 }
 maxdennitep$maxtemp2m <- maxtemp2m
-
 chmu_stations <- rbind(c1kvil01, c1hkvi01, c1blad01, c4japi01, c1chur01)
 
 station_latlon <- c(lok$Lat_WGS84, lok$Lon_WGS84) #function to calculate the distance between sensor and all stations

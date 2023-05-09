@@ -69,3 +69,38 @@ dist_f2 <- function(station, sensor){
 loggers_names_for_dates <- function(d, all_loggers){
 	return(unique(all_loggers$station_name[all_loggers$date==d]))
 }
+
+f_permutation_test <- function(day, shuffle_all_loggers){
+	day_all_loggers <- all_loggers[date==dates_all[day],]
+    all_val_change <- all_loggers[date==shuffle_dates_all[day], c(..permutation_str, "station_name")]
+    changed_values <- merge(day_all_loggers, all_val_change, by="station_name", all.x=TRUE)
+    changed_values[, snowcm := ifelse(is.na(snowcm.y), sample(na.omit(snowcm.y),1), snowcm.y)]
+    changed_values[, snowcm.x := NULL]
+    changed_values[, snowcm.y := NULL]
+    shuffle_all_loggers <- rbindlist(list(shuffle_all_loggers, changed_values))
+	return(shuffle_all_loggers)
+}
+
+autocorrelation <- function(logger){
+	plt <- ggAcf(all_loggers[all_loggers$station_name==logger,]$diff) +
+	    labs(x="lag", y="ACF", title="Autokorelační funkce rozdílu teplot") +
+        theme(text=element_text(family="Latin Modern Math",size=20))
+	wd <- getwd()
+	setwd("/home/vojta/Desktop/mffuk/bakalarka/analyze/out/")
+	ggsave(paste("acf", logger, ".png", sep=""), plot = plt, width=8, height=8, dpi=343)
+	setwd(wd)
+}
+
+mod_resid_vs_fitted_and_qq <- function(data, minmax, height, transformation){
+	plt <- ggplot(data, aes(x=x, y=y)) + geom_point() + 
+		labs(x="Fitované hodnoty", y="Residuály", title="") +
+        theme(text=element_text(family="Latin Modern Math",size=20))
+	plt2 <- ggplot(data, aes(sample=y)) + geom_qq() + geom_qq_line() + 
+		labs(x="Teoretické kvantily", y="Empirické kvantily", title="") +
+        theme(text=element_text(family="Latin Modern Math",size=20))
+	wd <- getwd()
+	setwd("/home/vojta/Desktop/mffuk/bakalarka/analyze/out/")
+	ggsave(paste("mod", minmax, height, "_", transformation, ".png", sep=""), plot = plt, width=8, height=8, dpi=343)
+	ggsave(paste("qq_mod", minmax, height, "_", transformation, ".png", sep=""), plot = plt2, width=8, height=8, dpi=343)
+	setwd(wd)
+}

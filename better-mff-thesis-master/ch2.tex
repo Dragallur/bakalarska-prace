@@ -4,7 +4,7 @@ V první části druhé kapitoly se zaměříme na popis struktury použitých d
 \section{Využitá data z ČHMÚ}
 Využili jsme data z řady nejvhodnější a nejbližších meteorologických stanic. Nejvíce informací můžeme získat ze synoptické stanice Churáňov. Z dostupných dat jsme pro další analýzu stáhli data o aktuální teplotě ve výšce $\SI{2}{m}$, rychlosti větru, výšce sněhové pokrývky, hodinových srážek a oblačnosti. Tyto data, měřená každou hodinu, jsme dále doplnili stanicemi v Borové Ladě, Kvildě, Horské Kvildě a Javoří Pile. Pro všechny stanice jsme měli k dispozici hodinová data o výšce sněhové pokrývky a pro Borovou Ladu informace ze srážkoměrů každých deset minut.
 
-Na obrázku \ref{fig:chmuukazka} můžeme vidět ukázku dat z meteorologické stanice Churáňov. Maximální teplota za období 12.10.2019 až 20.5.2021 byla $\SI{27}{\degree C}$ naměřena 21.8.2020 a minimální $\SI{-16.1}{\degree C}$ naměřena 11.2.2021 a 13.2.2021.
+Na obrázku \ref{fig:chmuukazka} můžeme vidět ukázku dat z meteorologické stanice Churáňov. Maximální teplota za období 12.10.2019 až 20.5.2021 byla $\SI{27}{\degree C}$ naměřena 21.8.2020 a minimální $\SI{-16.1}{\degree C}$ naměřena 11.2.2021 a 13.2.2021. Nejsilnější sněhová pokrývka byla $\SI{48}{cm}$
 
 \begin{figure}
 	\centering
@@ -150,25 +150,68 @@ Pro ilustraci se ještě podívejme na konkrétní hodnoty teplot pozorované na
 \section{Metody analýzy dat}
 Cílem následující části je ukázat jakým způsobem byly data zpracována, proč byl vybrán daný model a ukázat ověření jeho předpokladů.
 
-You will need definitions (see \cref{defn:x} below in \cref{sec:demo}), theorems (\cref{thm:y}), general mathematics, algorithms (\cref{alg:w}), and tables (\cref{tab:z})\todo{See documentation of package \texttt{booktabs} for hints on typesetting tables. As a main rule, \emph{never} draw a vertical line.}. \Cref{fig:f,fig:g} show how to make a nice figure. See \cref{fig:schema} for an example of TikZ-based diagram. Cross-referencing helps a lot to keep the necessary parts of the narrative close --- use references to the previous chapter with theory wherever it seems that the reader could have forgotten the required context.
+\subsection{Autokorelace dat}
+Z povahy naměřených dat je zřejmé, že zde bude existovat autokorelace mezi naměřenými maximálními teplotami. Autokorelace se pak projeví i u rozdílu teploty naměřené blízko země a ve $\SI{2}{m}$. Na obrázku \ref{fig:acf} vidíme autokorelační funkci pro jedno z čidel.
 
-\section{Example with some mathematics}
-\label{sec:demo}
+\begin{figure}
+	\centering
+	\includegraphics[width=0.55\textwidth]{img/ch2/acfNPS_4311_D_TMS.png}
+	\caption{Autokorelační funkce pro rozdíl teplot mezi maximální teplotou v $\SI{15}{cm}$ a teplotou ve $\SI{2}{m}$ na páru čidel nejblíže meteorologické stanici Churáňov.}
+	\label{fig:acf}
+\end{figure}
 
-\begin{defn}[Triplet]\label{defn:x}
-Given stuff $X$, $Y$ and $Z$, we will write a \emph{triplet} of the stuff as $(X,Y,Z)$.
-\end{defn}
+Autokorelace není takto významná pro všechna čidla, ale i tak nám vylučuje možnost využít jednoduché mnohonásobné lineární regrese.
 
-\newcommand{\Col}{\textsc{Colour}}
+\subsection{Lineární model se smíšenými efekty}
+Nabízí se využití lineárního modelu se smíšenými efekty. Jako náhodný efekt, jehož reálná hodnota pro nás není důležitá, určíme název čidla. Pro všechna čidla a všechny dostupné dny máme kolem 78000 pozorování rozdílu maximální teploty při zemi a ve $\SI{2}{m}$ (konkrétní počet se může lišit, jestliže bereme teplotu v $\SI{0}{cm}$ nebo $\SI{15}{cm}$ nad zemí). Když vyřadíme měření pro která chybí některá data z meteorologický stanic (typicky oblačnost z Churáňova) a poslední čtyři dny měření, kdy máme data z menšího množství čidel, tak máme 63000 měření.
 
-\begin{thm}[Car coloring]\label{thm:y}
-All cars have the same color. More specifically, for any set of cars $C$, we have
-$$(\forall c_1, c_2 \in C)\:\Col(c_1) = \Col(c_2).$$
-\end{thm}
+Zpracovávaná data mají šest prediktorů: insolace, srážky za poslední hodinu, celková sněhová pokrývka, oblačnost, rychlost větru a půdní vlhkost. Oblačnost nabývá fixní hodnot, je vyjádřena v osminách celkové oblačnosti. Rychlost větru je měřená v celočíselných násobcích $\SI{3.6}{m/s}$. Ostatní prediktory, stejně jako rozdíl mezi teplotami při povrchu země který se snažíme vysvětlit, jsou spojité proměnné. 
 
-\begin{proof}
-Use induction on sets of cars $C$. The statement holds trivially for $|C|\leq1$. For larger $C$, select 2 overlapping subsets of $C$ smaller than $|C|$ (thus same-colored). Overlapping cars need to have the same color as the cars outside the overlap, thus also the whole $C$ is same-colored.\todo{This is plain wrong though.}
-\end{proof}
+Pro výpočet lineárního modelu se smíšenými efekty použijeme funkci \texttt{lme} z balíčku \texttt{nlme} programovacího jazyka \texttt{R}.
+
+Dále ověříme předpoklady modelu pracujeme s maximální denní teplotou ve výšce $\SI{15}{cm}$ a jejím rozdílem od teploty naměřené ve $\SI{2}{m}$. Porovnáme mezi sebou transformace proměnné kterou se snažíme vysvětlit a to bez transformace, s logaritmem, odmocninou a třetí odmocninou. Na obrázcích \ref{fig:qq} vidíme kvantil-kvantilový graf pro jednotlivé transformace. Hodnoty rozdílu teplot jsou ovšem i záporné tudíž místo jednoduchého logaritmu použijeme transformaci \eqref{eq:transformace}. Podobně ošetříme záporné hodnoty i pro ostatní transformace.
+
+$$ T \mapsto \mathrm{sign}(T)\cdot \ln\left|T\right|$$ \label{eq:transformace}
+
+\begin{figure}
+	\centering
+	\begin{subfigure}{0.45\textwidth}
+  \includegraphics[width=\textwidth]{img/ch2/qq_modmax15cm_none.png}
+		\caption{Bez transformace}
+		\label{fig:qq_none}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}{0.45\textwidth}
+  \includegraphics[width=\textwidth]{img/ch2/qq_modmax15cm_log.png}
+		\caption{Přirozený logaritmus}
+		\label{fig:qq_log}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}{0.45\textwidth}
+  \includegraphics[width=\textwidth]{img/ch2/qq_modmax15cm_sqrt.png}
+		\caption{Druhá odmocnina}
+		\label{fig:qq_sqrt}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}{0.45\textwidth}
+  \includegraphics[width=\textwidth]{img/ch2/qq_modmax15cm_curt.png}
+		\caption{Třetí odmocnina}
+		\label{fig:qq_curt}
+	\end{subfigure}
+	\caption{Kvantil-kvantilový graf pro jednotlivé transformace vysvětlované proměnné.}
+	\label{fig:qq}
+\end{figure}
+
+Vidíme, že nejlépe normálnímu rozdělení odpovídá transformace logaritmu a proto s ní budeme nadále pracovat. Na obrázku \ref{fig:resvsfit_log} můžeme vidět srovnání residuálů modelu s fitovanými hodnotami. Diagonálně rozložené body jsou způsobené přítomností faktorové veličiny oblačnosti v modelu. Kromě toho můžeme vidět, že v takto transformovaných datech není výrazná heteroskedasticita.
+
+\begin{figure}
+	\centering
+  \includegraphics[width=0.55\textwidth]{img/ch2/modmax15cm_log.png}
+	\caption{Srovnání residuálů modelu s fitovanými hodnotami pro transformaci pomocí přirozeného logaritmu.}
+	\label{fig:resvsfit_log}
+\end{figure}
+
+
 
 \begin{table}
 % uncomment the following line if you use the fitted top captions for tables
@@ -220,21 +263,6 @@ Asd qsd 1sd & DIFFERENT & 234234234 & (no data) \\
 \caption{An example diagram typeset with TikZ.}
 \end{figure}
 
-\begin{algorithm}
-\begin{algorithmic}
-\Function{ExecuteWithHighProbability}{$A$}
-	\State $r \gets$ a random number between $0$ and $1$
-	\State $\varepsilon \gets 0.0000000000000000000000000000000000000042$
-	\If{$r\geq\varepsilon$}
-		\State execute $A$ \Comment{We discard the return value}
-	\Else
-		\State print: \texttt{Not today, sorry.}
-	\EndIf
-\EndFunction
-\end{algorithmic}
-\caption{Algorithm that executes an action with high probability. Do not care about formal semantics in the pseudocode --- semicolons, types, correct function call parameters and similar nonsense from `realistic' languages can be safely omitted. Instead make sure that the intuition behind (and perhaps some hints about its correctness or various corner cases) can be seen as easily as possible.}
-\label{alg:w}
-\end{algorithm}
 
 \section{Extra typesetting hints}
 

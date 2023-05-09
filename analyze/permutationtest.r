@@ -14,8 +14,6 @@ station_cutoff <- "c1chur01"
 
 permutation_str <- "snowcm"
 
-p<-profvis({
-
 for (tim in tim_c){
 for (height in height_c){
 for (minmax in minmax_c){
@@ -60,30 +58,16 @@ for (day in seq(1, length(dates_95))){
 }
 
 dates_all <- unique(all_loggers$date)
+permutation_vector <- vector(length=20)
+
+t0 <- proc.time()
+for (permutation in seq(1,length(permutation_vector))){
 shuffle_all_loggers <- c()
 shuffle_dates_all <- sample(dates_all)
-#for (day in seq(1, length(dates_all))){
-#for (day in seq(420, 440)){
-#    print(day)
-#    day_all_loggers <- all_loggers[date==dates_all[day],]
-#    logger_vector <- day_all_loggers[,station_name]
-#    all_val_change <- all_loggers[date==shuffle_dates_all[day], ..permutation_str]
-#    for (logger in seq(1,length(logger_vector))){
-#        one_row <- day_all_loggers[day_all_loggers$station_name %in% logger_vector[logger],]
-#        val_change <- all_val_change[logger, ..permutation_str]
-#        if (dim(val_change)[1]==0) {val_change <- all_loggers[date==shuffle_dates_all[day], ..permutation_str][sample(.N, 1)]}
-#        one_row[, (permutation_str) := val_change]
-#        shuffle_all_loggers <- rbindlist(list(shuffle_all_loggers, one_row))
-#    }
-#}
-#print(nrow(shuffle_all_loggers))
-#mod1 <- lme(diff ~ snowcm + nt + hum + precmm + ffkmh + month,
-#    random = ~1 | station_name, data=shuffle_all_loggers, na.action=na.exclude)
-
-shuffle_all_loggers <- c()
-
+print(permutation)
+t1 <- proc.time()
+#shuffle_all_loggers <- sapply(seq(1, length(dates_all)), f_permutation_test, shuffle_all_loggers)
 for (day in seq(1, length(dates_all))){
-    print(day)
     day_all_loggers <- all_loggers[date==dates_all[day],]
     all_val_change <- all_loggers[date==shuffle_dates_all[day], c(..permutation_str, "station_name")]
     changed_values <- merge(day_all_loggers, all_val_change, by="station_name", all.x=TRUE)
@@ -93,9 +77,10 @@ for (day in seq(1, length(dates_all))){
     shuffle_all_loggers <- rbindlist(list(shuffle_all_loggers, changed_values))
 }
 
-mod2 <- lme(diff ~ snowcm + nt + hum + precmm + ffkmh + month,
-    random = ~1 | station_name, data=shuffle_all_loggers, na.action=na.exclude)
+t <- try(mod <- lme(diff ~ snowcm + nt + hum + precmm + ffkmh + month,
+    random = ~1 | station_name, data=shuffle_all_loggers, na.action=na.exclude))
+if ("error" %in% t) {permutation<-permutation-1} else permutation_vector[permutation] <- summary(mod)$coefficients$fixed[permutation_str]
+print(paste("Time elapsed: ", round(proc.time()[3]-t1[3]), ". Estimated time till end: ", round((proc.time()[3]-t0[3])/permutation*(length(permutation_vector)-permutation)), sep=""))
+}
 
-print(nrow(shuffle_all_loggers))
 }}}}}
-})
