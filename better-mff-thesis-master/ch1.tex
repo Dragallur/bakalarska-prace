@@ -47,7 +47,7 @@ Vliv vlhkosti a deště můžeme ilustrovat na takzvaném "oázovém efektu". V 
 
 \subsection{Vliv vegetace} \label{chap:veg}
 \subsubsection{Albedo}
-Albedo je koeficient udávající poměr mezi zářením a dopadajícím zářením, nabývá tedy hodnot v intervalu $\langle 0,1\rangle$, kde $0$ znamená, že povrch všechno záření pohlcuje, jde o ideálně černé těleso a $1$ znamená, že vše záření odráží. Už samotný typ povrchu má na albedo významným vliv, kde může dosahovat velmi různých hodnot ať už jde o písek, vodní plochu, odhalenou půdu, vlhkou půdu atd. Růst vegetace a jejího typu má ovšem také významným vliv na albedo s odlišnými hodnotami pro různé typy plodin a různé typy dřevin, ilustrační příklady jsou vidět v tabulce \ref{tab:albedo}. Hodnoty jsou závislé i na úhlu dopadu záření, vliv má i výška porostu nebo roční období\cite{arya2001,alma}.
+Albedo je koeficient udávající poměr mezi odraženým a dopadajícím zářením, nabývá tedy hodnot v intervalu $\langle 0,1\rangle$, kde $0$ znamená, že povrch všechno záření pohlcuje, jde o ideálně černé těleso a $1$ znamená, že vše záření odráží. Už samotný typ povrchu má na albedo významným vliv, kde může dosahovat velmi různých hodnot ať už jde o písek, vodní plochu, odhalenou půdu, vlhkou půdu atd. Růst vegetace a jejího typu má ovšem také významným vliv na albedo s odlišnými hodnotami pro různé typy plodin a různé typy dřevin, ilustrační příklady jsou vidět v tabulce \ref{tab:albedo}. Hodnoty jsou závislé i na úhlu dopadu záření, vliv má i výška porostu nebo roční období\cite{arya2001,alma}.
 
 (+++ tabulka)
 
@@ -61,7 +61,7 @@ Podle \cite{alma} ovlivňuje teplotu hustota porostu. Jestliže měříme teplot
 Tok tepla v lese je ovlivněn i větrem. Jestliže fouká silný vítr, může docházet k rychlému přenosu energie mimo lesní porost\cite{alma}. 
 
 \subsubsection{Vliv na rychlost větru}
-Turbulence vzduchu je zodpovědná za přenos hmoty, tepla a hybnosti v oblasti blízko povrchu země. Bez turbulence by promíchávání probíhalo na molekulární úrovni a řádově menším měřítku. Na míru turbulence a promíchávání má vliv rychlost větru. Vegetace ovlivňuje nejen rychlost větru, ale také její profil. Například koruny stromů můžou rychlost větru výrazně snižovat zatímco, pokud blízko země nejsou menší stromy, keře nebo jiné překážky tak zde může být rychlost větru větší. To má pak vliv na teploty uvnitř porostu, které se mohou více podobat teplotám ve volném vzduchu. Tímto je zřejmé, že vliv na rychlost větru má i přítomnost listů a jejich absence v zimě \cite{alma}. 
+Turbulence vzduchu je zodpovědná za přenos hmoty, tepla a hybnosti v blízkosti povrchu země. Bez turbulence by promíchávání probíhalo na molekulární úrovni a řádově menším měřítku. Na míru turbulence a promíchávání má vliv rychlost větru. Vegetace ovlivňuje nejen rychlost větru, ale také její profil. Například koruny stromů můžou rychlost větru výrazně snižovat zatímco, pokud blízko země nejsou menší stromy, keře nebo jiné překážky tak zde může být rychlost větru větší. To má pak vliv na teploty uvnitř porostu, které se mohou více podobat teplotám ve volném vzduchu. Tímto je zřejmé, že vliv na rychlost větru má i přítomnost listů a jejich absence v zimě \cite{alma}. 
 
 \subsubsection{Vliv na vlhkost vzduchu}
 V předchozím odstavci jsme zmínili transpiraci flóry, která slouží jako zdroj vodní páry. Ukázková situace v jehličnatém lese může vypadat tak že tlak vodní páry dosahuje dvou maxim a to při povrchu půdy z důvodu nižšího promíchávání vzduchu a výparu a v oblasti korun stromů kvůli listům. Druhé maximum bývá ovšem menší kvůli promíchávání se suchým vzduchem nad korunami stromů. Vzhledem k absolutním rozdíl tlaku vodních par v řádu jednotek milibarů tak změna relativní vlhkost napříč dnem a výškou je dána především teplotním zvrstvením \cite{alma}. 
@@ -115,15 +115,15 @@ Tyto výsledky ovšem nejsou nutně konzistentní mezi různými studiemi. Např
 Druhou skupinou prediktorů kterou se \cite{ZellwegerFlorian2019Sdou} zabýval byly proměnné týkající se porostu v blízkém okolí čidla.
 
 \begin{itemize}
-	\item Zápoj má nelineární a záporný vliv na maximální teploty. Pod hodnotou $\SI{89}{\%}$ dochází k prudkému nárůstu vlivu vegetace.
-	\item Otevřenost porostu vyjádřená jako část viditelné oblohy a plocha koruny stromů také má záporný nelineární vztah k maximální teplotě.
+	\item Zápoj má pro hodnoty nižší než $\SI{89}{\%}$ záporný vliv, pro vyšší hodnoty pak neutrální až lehce kladný vliv.
+	\item Otevřenost porostu vyjádřená jako část viditelné oblohy a plocha koruny stromů má také záporný nelineární vztah k maximální teplotě.
 	\item Procento plochy pokryté dřevinami nad určitý průměr je pouze slabým prediktorem. 
 	\item Výška stromu na kterém bylo čidlo upevněno naopak souvisí s rozdílem maximální teplot kladně, ale opět zde vztah není příliš silný.
 	\item Schopnost porostu vytvářet stín podle typu dřeviny je středním prediktorem rozdílu maximálních teplot.
 \end{itemize}
 
 \subsection{Vliv meteorologických podmínek na teplotu}
-Jak bylo zmíněno v předchozí části tak na rozdíl mezi teplotou mimo porost ať už lesní nebo jiný má vliv mnoho faktorů od topografických po konkrétní typ porostu. Tyto faktory se dají vyjádřit mnoha různými prediktory jejichž vliv můžeme sledovat. Aktuální stav počasí je ovšem další faktorem, který ovlivňuje naměřené teploty. Tím může být oblačnost, vlhkost, sněhová pokrývka, srážky, rychlost větru a roční doba.
+Jak bylo zmíněno v předchozí části tak na rozdíl mezi teplotou mimo porost a v lese má vliv mnoho faktorů od topografických po konkrétní typ porostu. Tyto faktory se dají vyjádřit mnoha různými prediktory jejichž vliv můžeme sledovat. Aktuální stav počasí je ovšem další faktorem, který ovlivňuje naměřené teploty. Tím může být oblačnost, vlhkost, sněhová pokrývka, srážky, rychlost větru a roční doba.
 
 V praktické části práce se budeme zabývat tím jaký vliv mají tyto proměnné na rozdíl mezi teplotou naměřenou v lesním porostu v národním parku Šumava ve výšce $\SI{2}{m}$ a při povrchu, tedy $\SI{0}{cm}$ a $\SI{15}{cm}$. Použitá čidla kromě teploty ještě půdní vlhkost, ostatní proměnné jsou z nejbližší meteorologické stanice.
 
@@ -143,6 +143,24 @@ Při srovnání TMS4 loggeru se standartní meteorologickou stanicí typu METEOS
 
 Data měřená při povrchu země jsou na některých místech doplněna stejnými teplotními senzory ve výšce $\SI{2}{m}$ upevněnými na kmenu stromu a také opatřena plastovým stínítkem.
 
-\section{Národní park Šumava} \label{chap:sumavabavorskyles}
-Čidla TMS logger z kterých pocházejí data použitá v této práci jsou v oblasti Národní parku Šumava. Národní park Šumava vyhlášený v roce 1991 má rozlohu $\SI{680}{km^2}$. Jeho výška se pohybuje od $\SI{600}{m.\ n.\ m.}$ do $\SI{1378}{m.\ n.\ m.}$. Nejvyšší bod je vrchol Plechý. Více než $\SI{80}{\%}$ územi pokrývá les. Šumava je v rámci Evropy jedno z nejstarších pohoří, tvořené je metamorfovanými horninami jako ruly a svory a žulovými masivy. Typické pro toto území jsou horské smrčiny, rašeliniště, karová jezera a pralesní porosty.
+\section{Národní park Šumava a Bavorský les} \label{chap:sumavabavorskyles}
+Čidla TMS logger z kterých pocházejí data použitá v této práci se nacházejí v oblasti Národní parku Šumava o rozloze $\SI{68 064}{ha}$\cite{npsumava} a Národního parku Bavorský les, $\SI{24250}{ha}$.
+
+\subsection{Geologie}
+Šumava patří mezi nejstarší pohoří ve střední Evropě\cite{WildJan2004Cops}. Typické horniny Šumavy jsou přeměněné horniny a to především ruly a vyvřelé horniny, zejména granity. Dále zde nalezneme uloženiny jako jsou rašeliny, ale i sedimenty ledovcového původu. Svahové sedimenty jsou pak tvořeny hlínami, hlinitými písky, hlinito kamenitými sedimenty a blokovými sedimenty. Nejvyšším bodem NP Šumava je Plechý $\SI{1378}{m.\ n.\ m.}$, Šumavské pláně ve výšce $\SI{1000}{m.\ n.\ m.}$ tvoří hlavní část národního parku\cite{npsumava}. 
+
+\subsection{Hydrologie}
+Většina pohoří náleží povodí Labe a tedy řekám Vltava a Otava. Dále se zde vyskytuje 5 ledovcových jezer.
+
+\subsection{Klima}
+Průměrná teplota se pohybuje od $\SI{6}{\degree C}$ ve výšce $\SI{750}{m.\ n.\ m.}$ do $\SI{3}{\degree C}$ ve výšce $\SI{1300}{m.\ n.\ m.}$. Rekordně nejnižší teplota byla naměřena v Jezerní slati a to $\SI{-41.6}{\degree C}$. Roční úhrn srážek se pohybuje ve velkém rozmezí od $\SI{800}{mm}$ až po ojedinělých $\SI{1600}{mm}$. Sněhová pokrývka se pohybuje mezi $\SI{40}{cm}$ až $\SI{150}{cm}$ a drží se 120 až 150 dní. 
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.95\textwidth]{img/ch1/srazkovepomerysumava.png}
+	\caption{Srážkové poměry Šumavy\cite{srazkovepomerysumava}}
+	\label{fig:srazkovepomerysumava}
+\end{figure}
+
+Národní park Šumava vyhlášený v roce 1991 má rozlohu $\SI{680}{km^2}$. Jeho výška se pohybuje od $\SI{600}{m.\ n.\ m.}$ do $\SI{1378}{m.\ n.\ m.}$. Nejvyšší bod je vrchol Plechý. Více než $\SI{80}{\%}$ územi pokrývá les. Šumava je v rámci Evropy jedno z nejstarších pohoří, tvořené je metamorfovanými horninami jako ruly a svory a žulovými masivy. Typické pro toto území jsou horské smrčiny, rašeliniště, karová jezera a pralesní porosty.
 
