@@ -9,3 +9,4 @@ literatura/
 maxdennitepzaloha.R
 out_fit/
 weird_residuals.svg
+*.RData
