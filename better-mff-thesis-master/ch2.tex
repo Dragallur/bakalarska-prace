@@ -2,9 +2,9 @@
 V první části druhé kapitoly se zaměříme na popis struktury použitých dat. Budeme pracovat maximálně na časovém intervalu od 12.10.2019 do 21.5.2021, ačkoliv meteorologické stanice mají dostupná data pro celý tento interval tak některá čidla měřila po kratší dobu.
 
 \section{Využitá data z ČHMÚ}
-Využili jsme data z řady nejvhodnější a nejbližších meteorologických stanic. Nejvíce informací můžeme získat ze synoptické stanice Churáňov. Z dostupných dat jsme pro další analýzu stáhli data o aktuální teplotě ve výšce $\SI{2}{m}$, rychlosti větru, výšce sněhové pokrývky, hodinových srážek a oblačnosti. Tyto data, měřená každou hodinu, jsme dále doplnili stanicemi v Borové Ladě, Kvildě, Horské Kvildě a Javoří Pile. Pro všechny stanice jsme měli k dispozici hodinová data o výšce sněhové pokrývky a pro Borovou Ladu informace ze srážkoměrů každých deset minut.
+Využili jsme data z řady nejvhodnější a nejbližších meteorologických stanic. Nejvíce informací můžeme získat ze synoptické stanice Churáňov. Z dostupných dat jsme pro další analýzu stáhli data o aktuální teplotě ve výšce $\SI{2}{m}$, rychlosti větru, výšce sněhové pokrývky, hodinových srážek a oblačnosti. Tyto data, měřená každou hodinu, jsme dále doplnili stanicemi v Borové Ladě, Kvildě, Horské Kvildě a Javoří Pile. Pro tyto stanice jsme měli k dispozici hodinová data o výšce sněhové pokrývky a pro Borovou Ladu informace ze srážkoměrů každých deset minut.
 
-Na obrázku \ref{fig:chmuukazka} můžeme vidět ukázku dat z meteorologické stanice Churáňov. Maximální teplota za období 12.10.2019 až 20.5.2021 byla $\SI{27}{\degree C}$ naměřena 21.8.2020 a minimální $\SI{-16.1}{\degree C}$ naměřena 11.2.2021 a 13.2.2021. Nejsilnější sněhová pokrývka byla $\SI{48}{cm}$
+Na obrázku \ref{fig:chmuukazka} můžeme vidět ukázku dat z meteorologické stanice Churáňov. Maximální teplota za období 12.10.2019 až 20.5.2021 byla $\SI{27}{\degree C}$ naměřena 21.8.2020 a minimální $\SI{-16.1}{\degree C}$ naměřena 11.2.2021 a 13.2.2021. Nejsilnější sněhová pokrývka byla $\SI{48}{cm}$.
 
 \begin{figure}
 	\centering
@@ -99,7 +99,7 @@ Dále se podívejme na ukázku dat naměřených na čidlech. Na obrázcích \re
 	\label{fig:hours}
 \end{figure}
 
-Pro ilustraci se ještě podívejme na konkrétní hodnoty teplot pozorované na nejbližším čidlu meteorologické stanice Churáňov. Na obrázcích \ref{fig:hours} můžeme vidět průběh denních minim a maxim na jednom z čidel, celkově jde o období od 12.10.2019 do 20.5.2021 tedy 587 dnů. Na obrázcích \ref{fig:2mhours} můžeme vidět obrázkům \ref{fig:hourmax15cm} a \ref{fig:hourmin15cm} odpovídající hodnoty teplot naměřených ve výšce $\SI{2}{m}$ na čidle zavěšeném na stromě poblíž pozemním čidlům.
+Pro ilustraci se ještě podívejme na konkrétní hodnoty teplot pozorované na nejbližším čidlu meteorologické stanice Churáňov. Na obrázcích \ref{fig:maxtemp} můžeme vidět průběh denních minim a maxim na jednom z čidel, celkově jde o období od 12.10.2019 do 20.5.2021 tedy 587 dnů. Na obrázcích \ref{fig:2mhours} můžeme vidět obrázkům \ref{fig:hourmax15cm} a \ref{fig:hourmin15cm} odpovídající hodnoty teplot naměřených ve výšce $\SI{2}{m}$ na čidle zavěšeném na stromě poblíž pozemním čidlům.
 
 \begin{figure}
 	\centering
@@ -127,7 +127,7 @@ Pro ilustraci se ještě podívejme na konkrétní hodnoty teplot pozorované na
 		\label{fig:maxtempmin0cm}
 	\end{subfigure}
 	\caption{Průběh denních maximální resp. minimálních teplot ve výšce $\SI{15}{cm}$ resp. $\SI{0}{cm}$ nad zemí na čidle nejblíže Churáňovu}
-	\label{fig:hours}
+	\label{fig:maxtemp}
 \end{figure}
 
 \begin{figure}
@@ -151,7 +151,7 @@ Pro ilustraci se ještě podívejme na konkrétní hodnoty teplot pozorované na
 Cílem následující části je ukázat jakým způsobem byly data zpracována, proč byl vybrán daný model a ukázat ověření jeho předpokladů.
 
 \subsection{Autokorelace dat}
-Z povahy naměřených dat je zřejmé, že zde bude existovat autokorelace mezi naměřenými maximálními teplotami. Autokorelace se pak projeví i u rozdílu teploty naměřené blízko země a ve $\SI{2}{m}$. Na obrázku \ref{fig:acf} vidíme autokorelační funkci pro jedno z čidel.
+Z povahy naměřených dat je zřejmé, že zde bude existovat autokorelace mezi naměřenými maximálními nebo minimálními teplotami. Autokorelace se pak projeví i u rozdílu teploty naměřené blízko země a ve $\SI{2}{m}$. Na obrázku \ref{fig:acf} vidíme autokorelační funkci pro jedno z čidel.
 
 \begin{figure}
 	\centering
@@ -169,9 +169,11 @@ Zpracovávaná data mají šest prediktorů: insolace, srážky za poslední hod
 
 Pro výpočet lineárního modelu se smíšenými efekty použijeme funkci \texttt{lme} z balíčku \texttt{nlme} programovacího jazyka \texttt{R}.
 
-Dále ověříme předpoklady modelu pracujeme s maximální denní teplotou ve výšce $\SI{15}{cm}$ a jejím rozdílem od teploty naměřené ve $\SI{2}{m}$. Porovnáme mezi sebou transformace proměnné kterou se snažíme vysvětlit a to bez transformace, s logaritmem, odmocninou a třetí odmocninou. Na obrázcích \ref{fig:qq} vidíme kvantil-kvantilový graf pro jednotlivé transformace. Hodnoty rozdílu teplot jsou ovšem i záporné tudíž místo jednoduchého logaritmu použijeme transformaci \eqref{eq:transformace}. Podobně ošetříme záporné hodnoty i pro ostatní transformace.
+Pro každý model budeme ověřovat předpoklady, nyní krátce ilustrujeme problémy s kterými se budeme v kapitole \ref{chap:ch3} potýkat na jednom modelu. Pracujeme s maximální denní teplotou ve výšce $\SI{15}{cm}$ a jejím rozdílem od teploty naměřené ve $\SI{2}{m}$. Porovnáme mezi sebou transformace proměnné kterou se snažíme vysvětlit a to bez transformace, s logaritmem, odmocninou a třetí odmocninou. Na obrázcích \ref{fig:qq} vidíme kvantil-kvantilový graf pro jednotlivé transformace. Hodnoty rozdílu teplot jsou ovšem i záporné tudíž místo jednoduchého logaritmu použijeme transformaci \eqref{eq:transformace}. Podobně ošetříme záporné hodnoty i pro ostatní transformace.
 
-$$ T \mapsto \mathrm{sign}(T)\cdot \ln\left|T\right|$$ \label{eq:transformace}
+\begin{gather*}
+T \mapsto \mathrm{sign}(T)\cdot \ln\left|T\right| \label{eq:transformace}
+\end{gather*}
 
 \begin{figure}
 	\centering
@@ -211,67 +213,3 @@ Vidíme, že nejlépe normálnímu rozdělení odpovídá transformace logaritmu
 	\label{fig:resvsfit_log}
 \end{figure}
 
-
-
-\begin{table}
-% uncomment the following line if you use the fitted top captions for tables
-% (see the \floatsetup[table] comments in `macros.tex`.
-%\floatbox{table}[\FBwidth]{
-\centering\footnotesize\sf
-\begin{tabular}{llrl}
-\toprule
-Column A & Column 2 & Numbers & More \\
-\midrule
-Asd & QWERTY & 123123 & -- \\
-Asd qsd 1sd & \textcolor{red}{BAD} & 234234234 & This line should be helpful. \\
-Asd & \textcolor{blue}{INTERESTING} & 123123123 & -- \\
-Asd qsd 1sd & \textcolor{violet!50}{PLAIN WEIRD} & 234234234 & -- \\
-Asd & QWERTY & 123123 & -- \\
-\addlinespace % a nice non-intrusive separator of data groups (or final table sums)
-Asd qsd 1sd & \textcolor{green!80!black}{GOOD} & 234234299 & -- \\
-Asd & NUMBER & \textbf{123123} & -- \\
-Asd qsd 1sd & DIFFERENT & 234234234 & (no data) \\
-\bottomrule
-\end{tabular}
-%}{  % uncomment if you use the \floatbox (as above), erase otherwise
-\caption{An example table.  Table caption should clearly explain how to interpret the data in the table. Use some visual guide, such as boldface or color coding, to highlight the most important results (e.g., comparison winners).}
-%}  % uncomment if you use the \floatbox
-\label{tab:z}
-\end{table}
-
-\begin{figure}
-\centering
-\includegraphics[width=.6\linewidth]{img/ukazka-obr02.pdf}
-\caption{A figure with a plot, not entirely related to anything. If you copy the figures from anywhere, always refer to the original author, ideally by citation (if possible). In particular, this picture --- and many others, also a lot of surrounding code --- was taken from the example bachelor thesis of MFF, originally created by Martin Mareš and others.}
-\label{fig:g}
-\end{figure}
-
-\begin{figure}
-\centering
-\tikzstyle{box}=[rectangle,draw,rounded corners=0.5ex,fill=green!10]
-\begin{tikzpicture}[thick,font=\sf\scriptsize]
-\node[box,rotate=45] (a) {A test.};
-\node[] (b) at (4,0) {Node with no border!};
-\node[circle,draw,dashed,fill=yellow!20, text width=6em, align=center] (c) at (0,4) {Ugly yellow node.\\Is this the Sun?};
-\node[box, right=1cm of c] (d) {Math: $X=\sqrt{\frac{y}{z}}$};
-\draw[->](a) to (b);
-\draw[->](a) to[bend left=30] node[midway,sloped,anchor=north] {flow flows} (c);
-\draw[->>>,dotted](b) to[bend right=30] (d);
-\draw[ultra thick](c) to (d);
-
-\end{tikzpicture}
-\caption{An example diagram typeset with TikZ.}
-\end{figure}
-
-
-\section{Extra typesetting hints}
-
-Do not overuse text formatting for highlighting various important parts of your sentences. If an idea cannot be communicated without formatting, the sentence probably needs rewriting anyway. Imagine the thesis being read aloud as a podcast --- the storytellers are generally unable to speak in boldface font.
-
-Most importantly, do \underline{not} overuse bold text, which is designed to literally \textbf{shine from the page} to be the first thing that catches the eye of the reader. More precisely, use bold text only for `navigation' elements that need to be seen and located first, such as headings, list item leads, and figure numbers.
-
-Use underline only in dire necessity, such as in the previous paragraph where it was inevitable to ensure that the reader remembers to never typeset boldface text manually again.
-
-Use \emph{emphasis} to highlight the first occurrences of important terms that the reader should notice. The feeling the emphasis produces is, roughly, ``Oh my --- what a nicely slanted word! Surely I expect it be important for the rest of the thesis!''
-
-Finally, never draw a vertical line, not even in a table or around figures, ever. Vertical lines outside of the figures are ugly.

@@ -244,7 +244,6 @@ for (i in 1:length(maxdennitep$date)){
 	hum_vec <- c(hum_vec,da$hum[ind])
 }
 final_data$hum <- as.numeric(hum_vec)
-
 chmu_stations <- rbind(c1chur01, c1blad01)
 dist_vec <- apply(chmu_stations, 1, dist_f2, station_latlon)
 min_dist <- which(dist_vec == min(dist_vec))
@@ -292,13 +291,22 @@ final_data$ffkmh <- as.numeric(ffkmh)
 dat <- str_split_fixed(final_data$date, "\\.", 3)
 
 f_insolation <- function(S0, d, dd, phi, delta, h){
-	return(S0*(d/dd)^2*(sin(phi)*sin(delta)+cos(phi)*cos(delta)*h))
+	return(S0*(d/dd)^2*(sin(phi)*sin(delta)+cos(phi)*cos(delta)*cos(h)))
 }
 if (insol == TRUE){
-	delta <- -23.45*pi/180 * cos(2*pi/365*(yday(as.Date(maxdennitep$date, format='%d.%m.%Y'))+10))
-	coshour <- (sin(-pi/180*0.83)-sin(lok$Lat_WGS84*pi/180)*sin(delta))/(cos(lok$Lat_WGS84)*cos(delta))
-	sunearth_dist <- 1-0.01672*cos(pi/180*360/365.256363*(yday(as.Date(maxdennitep$date, format='%d.%m.%Y'))+10))
-	final_data$month <- f_insolation(1361, 1, sunearth_dist, lok$Lat_WGS84*pi/180, delta, coshour)
+	dday <- yday(as.Date(maxdennitep$date, format='%d.%m.%Y'))
+	hhour <- as.numeric(substr(str_pad(substr(maxdennitep$time15cm, 1, 5), 5, pad="0"), 1, 2))
+	mmin <- as.numeric(substr(str_pad(substr(maxdennitep$time15cm, 1, 5), 5, pad="0"), 4, 5))
+	delta <- -23.45*pi/180 * cos(2*pi/365*(dday+10))
+	fractionalyear <- 2*pi/365*(dday-1+(hhour-12)/24)
+	eot <- 229.18*(0.000075+0.001868*cos(fractionalyear)-
+		0.032077*sin(fractionalyear)-
+		0.014615*cos(2*fractionalyear)-
+		0.040849*sin(2*fractionalyear))
+	longv <- 4*lok$Lon_WGS84
+	hourangle <- ((hhour+mmin/60+(eot+longv)/60)-12)*15*pi/180
+	sunearth_dist <- 1-0.01672*cos(pi/180*360/365.256363*(dday+10))
+	final_data$month <- f_insolation(1361, 1, sunearth_dist, lok$Lat_WGS84*pi/180, delta, hourangle)
 } else {
 	final_data$month <- as.numeric(dat[, 2])
 }
@@ -318,6 +326,7 @@ if (dist_cutoff > 0){
 } else { dist_cutoff <- "" }
 print(paste("Fitting was done for ", sum(complete.cases(out)), " stations.", sep = ""))
 
+all_loggers$month <- (abs(all_loggers$month)+all_loggers$month)/2
 save(all_loggers, file=paste("data_", minmax, tim, height, "_BW", bw_text, dist_cutoff, ".RData", sep = ""))
 
 }}}}}
