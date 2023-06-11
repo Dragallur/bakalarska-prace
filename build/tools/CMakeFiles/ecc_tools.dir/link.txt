@@ -1,0 +1,2 @@
+/usr/bin/ar qc libecc_tools.a  CMakeFiles/ecc_tools.dir/grib_tools.cc.o CMakeFiles/ecc_tools.dir/grib_options.cc.o
+/usr/bin/ranlib libecc_tools.a

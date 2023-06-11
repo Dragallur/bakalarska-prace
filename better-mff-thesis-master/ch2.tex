@@ -67,6 +67,8 @@ Dostupnost dat z čidel je vidět na obrázku \ref{fig:dostupnostdat}, vidíme z
 	\caption{Dostupnost dat z čidel}
 \end{figure}
 
+Pro samotné zpracování jsme vyřadili poslední 4 dny v květnu, protože mají menší počet čidel z kterých máme v té době měření.
+
 \section{Ukázky použitých dat}
 Dále se podívejme na ukázku dat naměřených na čidlech. Na obrázcích \ref{fig:hours} můžeme vidět kdy nastávaly maximální a minimální teploty ve výškách $\SI{0}{cm}$ a $\SI{15}{cm}$ nad zemí, denní hodina je uvedená v UTC, nikoliv SEČ nebo SELČ. U maximálních teplot si můžeme všimnout kromě maxima v okolí 10 UTC také menšího maxima a odlehlých hodnot způsobených přítomností sněhu v zimě. Podobně měl sníh vliv i na dobu minimálních teplot v zimě.
 
@@ -147,6 +149,38 @@ Pro ilustraci se ještě podívejme na konkrétní hodnoty teplot pozorované na
 	\label{fig:2mhours}
 \end{figure}
 
+Na obrázku \ref{fig:hist_diff} můžeme vidět histogramy rozdílů teplot pro jednotlivé výšky a pro maxima a minima.
+
+\begin{figure}
+	\centering
+	\begin{subfigure}{0.45\textwidth}
+  \includegraphics[width=\textwidth]{img/ch2/hist_diff_max15cm.png}
+		\caption{Histogram rozdílu maximálních teplot v $\SI{15}{cm}$ a $\SI{2}{m}$. $\text{M} = 0.69$, $\text{MD} = 0.25$.}
+		\label{fig:hist_diff_max15cm}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}{0.45\textwidth}
+  \includegraphics[width=\textwidth]{img/ch2/hist_diff_max0cm.png}
+		\caption{Histogram rozdílu maximálních teplot v $\SI{0}{cm}$ a $\SI{2}{m}$. $\text{M} = -0.24$, $\text{MD} = -0.25$.}
+		\label{fig:hist_diff_max0cm}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}{0.45\textwidth}
+  \includegraphics[width=\textwidth]{img/ch2/hist_diff_min15cm.png}
+		\caption{Histogram rozdílu minimálních teplot v $\SI{15}{cm}$ a $\SI{2}{m}$. $\text{M} = -0.36$, $\text{MD} = -0.125$.}
+		\label{fig:hist_diff_min15cm}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}{0.45\textwidth}
+  \includegraphics[width=\textwidth]{img/ch2/hist_diff_min0cm.png}
+		\caption{Histogram rozdílu miniálních teplot v $\SI{0}{cm}$ a $\SI{2}{m}$. $\text{M} = 1.14$, $\text{MD} = 0.9375$.}
+		\label{fig:hist_diff_min0cm}
+	\end{subfigure}
+	\caption{Histogramy rozdílů maximální resp. minimální teploty v $\SI{15}{cm}$ resp. v $\SI{0}{cm}$ a ve $\SI{2}{m}$. K tomu odpovídající hodnoty, průměru $\text{M}$ a mediánu $\text{MD}$.}
+	\label{fig:hist_diff}
+\end{figure}
+
+
 \section{Metody analýzy dat}
 Cílem následující části je ukázat jakým způsobem byly data zpracována, proč byl vybrán daný model a ukázat ověření jeho předpokladů.
 
@@ -162,6 +196,88 @@ Z povahy naměřených dat je zřejmé, že zde bude existovat autokorelace mezi
 
 Autokorelace není takto významná pro všechna čidla, ale i tak nám vylučuje možnost využít jednoduché mnohonásobné lineární regrese.
 
+\subsection{Prostorová korelace}
+Vzhledem k tomu, že pracujeme s daty rozloženými v prostoru, měli bychom otestovat, jestli mezi nimi existuje prostorová korelace. Využijeme teorii popsanou v odstavci \ref{chap:variogram}. Na obrázcích \ref{fig:variograms} vidíme dvanáct semivariogramů pro každý první den měsíce v roce 2020. Kvůli lišícím se hodnotám semivariance nemůžeme semivariogramy zakreslit do jednoho grafu. 
+
+\begin{figure}
+	\centering
+	\begin{subfigure}{0.30\textwidth}
+		\includegraphics[width=\textwidth]{img/ch2/variograms/variogram_max15cm1.png}
+		\caption{}
+		\label{fig:variogram1}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}{0.30\textwidth}
+		\includegraphics[width=\textwidth]{img/ch2/variograms/variogram_max15cm2.png}
+		\caption{}
+		\label{fig:variogram2}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}{0.30\textwidth}
+		\includegraphics[width=\textwidth]{img/ch2/variograms/variogram_max15cm3.png}
+		\caption{}
+		\label{fig:variogram3}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}{0.30\textwidth}
+		\includegraphics[width=\textwidth]{img/ch2/variograms/variogram_max15cm4.png}
+		\caption{}
+		\label{fig:variogram4}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}{0.30\textwidth}
+		\includegraphics[width=\textwidth]{img/ch2/variograms/variogram_max15cm5.png}
+		\caption{}
+		\label{fig:variogram5}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}{0.30\textwidth}
+		\includegraphics[width=\textwidth]{img/ch2/variograms/variogram_max15cm6.png}
+		\caption{}
+		\label{fig:variogram6}
+	\end{subfigure}
+\hfill
+	\begin{subfigure}{0.30\textwidth}
+		\includegraphics[width=\textwidth]{img/ch2/variograms/variogram_max15cm7.png}
+		\caption{}
+		\label{fig:variogram7}
+	\end{subfigure}
+\hfill
+	\begin{subfigure}{0.30\textwidth}
+		\includegraphics[width=\textwidth]{img/ch2/variograms/variogram_max15cm8.png}
+		\caption{}
+		\label{fig:variogram8}
+	\end{subfigure}
+\hfill
+	\begin{subfigure}{0.30\textwidth}
+		\includegraphics[width=\textwidth]{img/ch2/variograms/variogram_max15cm9.png}
+		\caption{}
+		\label{fig:variogram9}
+	\end{subfigure}
+\hfill
+	\begin{subfigure}{0.30\textwidth}
+		\includegraphics[width=\textwidth]{img/ch2/variograms/variogram_max15cm10.png}
+		\caption{}
+		\label{fig:variogram10}
+	\end{subfigure}
+\hfill
+	\begin{subfigure}{0.30\textwidth}
+		\includegraphics[width=\textwidth]{img/ch2/variograms/variogram_max15cm11.png}
+		\caption{}
+		\label{fig:variogram11}
+	\end{subfigure}
+\hfill
+	\begin{subfigure}{0.30\textwidth}
+		\includegraphics[width=\textwidth]{img/ch2/variograms/variogram_max15cm12.png}
+		\caption{}
+		\label{fig:variogram12}
+	\end{subfigure}
+
+	\caption{Semivariogramy pro jednotlivé první dny měsíců v roce 2020.}
+	\label{fig:variograms}
+\end{figure}
+
+
 \subsection{Lineární model se smíšenými efekty}
 Nabízí se využití lineárního modelu se smíšenými efekty. Jako náhodný efekt, jehož reálná hodnota pro nás není důležitá, určíme název čidla. Pro všechna čidla a všechny dostupné dny máme kolem 78000 pozorování rozdílu maximální teploty při zemi a ve $\SI{2}{m}$ (konkrétní počet se může lišit, jestliže bereme teplotu v $\SI{0}{cm}$ nebo $\SI{15}{cm}$ nad zemí). Když vyřadíme měření pro která chybí některá data z meteorologický stanic (typicky oblačnost z Churáňova) a poslední čtyři dny měření, kdy máme data z menšího množství čidel, tak máme 63000 měření.
 
@@ -169,10 +285,11 @@ Zpracovávaná data mají šest prediktorů: insolace, srážky za poslední hod
 
 Pro výpočet lineárního modelu se smíšenými efekty použijeme funkci \texttt{lme} z balíčku \texttt{nlme} programovacího jazyka \texttt{R}.
 
-Pro každý model budeme ověřovat předpoklady, nyní krátce ilustrujeme problémy s kterými se budeme v kapitole \ref{chap:ch3} potýkat na jednom modelu. Pracujeme s maximální denní teplotou ve výšce $\SI{15}{cm}$ a jejím rozdílem od teploty naměřené ve $\SI{2}{m}$. Porovnáme mezi sebou transformace proměnné kterou se snažíme vysvětlit a to bez transformace, s logaritmem, odmocninou a třetí odmocninou. Na obrázcích \ref{fig:qq} vidíme kvantil-kvantilový graf pro jednotlivé transformace. Hodnoty rozdílu teplot jsou ovšem i záporné tudíž místo jednoduchého logaritmu použijeme transformaci \eqref{eq:transformace}. Podobně ošetříme záporné hodnoty i pro ostatní transformace.
+Pro každý model budeme ověřovat předpoklady, nyní krátce ilustrujeme problémy s kterými se budeme v kapitole \ref{chap:ch3} potýkat na jednom modelu. Pracujeme s maximální denní teplotou ve výšce $\SI{15}{cm}$ a jejím rozdílem od teploty naměřené ve $\SI{2}{m}$. Porovnáme mezi sebou transformace proměnné kterou se snažíme vysvětlit a to bez transformace, s logaritmem, odmocninou a třetí odmocninou. Zároveň data mají silnou autokorelaci a tudíž, jak bylo popsáno v kapitole \ref{chap:lme} použijeme pro autokorelační strukturu model ARMA s parametry $p=2$ a $q=2$ (tyto hodnoty byly vybrány vyzkoušením několika kombinací). Na obrázcích \ref{fig:qq} vidíme kvantil-kvantilový graf pro jednotlivé transformace. Hodnoty rozdílu teplot jsou ovšem i záporné tudíž místo jednoduchého logaritmu použijeme transformaci \eqref{eq:logtrans}. Podobně ošetříme záporné hodnoty i pro ostatní transformace, jako například 3. odmocninu \eqref{eq:curttrans}. V datech se objevují i hodnoty rozdílu teplot $\Delta t=0$ pro které nemůžeme spočítat logaritmus. Jde ovšem o hodnoty pouze blízké nule, způsobené konečnou přesností čidel, tudíž na tyto hodnoty aplikujeme funkci \texttt{jitter} a tím je odlišíme od nuly a následně provedeme transformaci.
 
 \begin{gather*}
-T \mapsto \mathrm{sign}(T)\cdot \ln\left|T\right| \label{eq:transformace}
+	T \mapsto \mathrm{sign}(T)\cdot \ln\left|T\right| \label{eq:logtrans}\\
+	T \mapsto \mathrm{sign}(T)\cdot \sqrt[3]{\left|T\right|} \label{eq:curttrans}
 \end{gather*}
 
 \begin{figure}
@@ -204,12 +321,30 @@ T \mapsto \mathrm{sign}(T)\cdot \ln\left|T\right| \label{eq:transformace}
 	\label{fig:qq}
 \end{figure}
 
-Vidíme, že nejlépe normálnímu rozdělení odpovídá transformace logaritmu a proto s ní budeme nadále pracovat. Na obrázku \ref{fig:resvsfit_log} můžeme vidět srovnání residuálů modelu s fitovanými hodnotami. Diagonálně rozložené body jsou způsobené přítomností faktorové veličiny oblačnosti v modelu. Kromě toho můžeme vidět, že v takto transformovaných datech není výrazná heteroskedasticita.
+Vidíme, že nejlépe normálnímu rozdělení odpovídá transformace třetí odmocniny a proto s ní budeme nadále pracovat. Transformace ovšem není dokonalá, stále jsme se úplně nezbavili šikmosti (skewness). Na obrázku \ref{fig:resvsfit_curt} můžeme vidět srovnání residuálů modelu s fitovanými hodnotami. Na obrázku můžeme vidět, že v takto transformovaných datech není výrazná heteroskedasticita. Pro ilustraci důležitosti ARMA modelu na obrázku \ref{fig:acf_curtnoARMA} autokorelační funkci bez modelu ARMA a na \ref{fig:acf_curtARMA22} s modelem ARMA. Hodnota $\text{ACF}$ pro $\text{lag}=0$ je vyřazená pro větší přehlednost grafu, vždy nabývá hodnoty $1$.
 
 \begin{figure}
 	\centering
-  \includegraphics[width=0.55\textwidth]{img/ch2/modmax15cm_log.png}
-	\caption{Srovnání residuálů modelu s fitovanými hodnotami pro transformaci pomocí přirozeného logaritmu.}
-	\label{fig:resvsfit_log}
+  \includegraphics[width=0.55\textwidth]{img/ch2/modmax15cm_curt.png}
+	\caption{Srovnání residuálů modelu s fitovanými hodnotami pro transformaci pomocí třetí odmocniny.}
+	\label{fig:resvsfit_curt}
 \end{figure}
 
+Vidíme, že přidání ARMA s hodnotami se výrazně zlepší autokorelační funkce a korelační strukturu jsme téměř odfiltrovali. Testovali jsme i jiné hodnoty $p$ a $q$, ale pro tyto nám vyšla autokorelační funkce nejlepší. S rostoucím $p$ a $q$ také roste výpočetní náročnost, pro $p=3$ a $q=3$ se ACF téměř nezmění, ale výpočet trvá až 4-krát déle (na počítači, který byl používán ke spracování šlo o více než 2 hodiny výpočetního času).
+
+\begin{figure}
+	\centering
+	\begin{subfigure}{0.45\textwidth}
+  \includegraphics[width=\textwidth]{img/ch2/acf_curt.png}
+		\caption{Autokorelační funkce pro model s transformací $\sqrt[3]{}$, ale bez modelování autokorelační struktury.}
+		\label{fig:acf_curtnoARMA}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}{0.45\textwidth}
+  \includegraphics[width=\textwidth]{img/ch2/acf_curtARMA22.png}
+		\caption{Autokorelační funkce pro model s transformací $\sqrt[3]{}$, s modelování autokorelační struktury, kde $p=2,\ q=2$.}
+		\label{fig:acf_curtARMA22}
+	\end{subfigure}
+	\caption{Srovnání autokorelační funkce modelu s a bez ARMA}
+	\label{fig:acf_curt}
+\end{figure}

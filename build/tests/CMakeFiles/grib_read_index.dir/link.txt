@@ -1,0 +1,1 @@
+/usr/bin/c++   -pipe -Wno-write-strings -Wno-deprecated -O2 -g -DNDEBUG      -Wl,--disable-new-dtags CMakeFiles/grib_read_index.dir/grib_read_index.cc.o  -o grib_read_index  -Wl,-rpath,/home/vojta/Desktop/mffuk/bakalarka/build/lib ../lib/libeccodes.so -lm 

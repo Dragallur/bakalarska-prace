@@ -1,0 +1,34 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/vojta/Desktop/mffuk/bakalarka/eccodes-2.30.2-Source/src/eccodes_windef.h
+
+/home/vojta/Desktop/mffuk/bakalarka/eccodes-2.30.2-Source/src/grib_api.h
+stdio.h
+-
+stdlib.h
+-
+string.h
+-
+sys/types.h
+-
+eccodes_windef.h
+/home/vojta/Desktop/mffuk/bakalarka/eccodes-2.30.2-Source/src/eccodes_windef.h
+sys/time.h
+-
+math.h
+-
+eccodes_version.h
+/home/vojta/Desktop/mffuk/bakalarka/eccodes-2.30.2-Source/src/eccodes_version.h
+
+/home/vojta/Desktop/mffuk/bakalarka/eccodes-2.30.2-Source/tests/gauss_sub.cc
+grib_api.h
+/home/vojta/Desktop/mffuk/bakalarka/eccodes-2.30.2-Source/tests/grib_api.h
+
+src/eccodes_version.h
+

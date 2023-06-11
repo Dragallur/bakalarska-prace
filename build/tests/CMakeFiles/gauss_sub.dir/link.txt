@@ -1,0 +1,1 @@
+/usr/bin/c++   -pipe -Wno-write-strings -Wno-deprecated -O2 -g -DNDEBUG      -Wl,--disable-new-dtags CMakeFiles/gauss_sub.dir/gauss_sub.cc.o  -o gauss_sub  -Wl,-rpath,/home/vojta/Desktop/mffuk/bakalarka/build/lib ../lib/libeccodes.so -lm 

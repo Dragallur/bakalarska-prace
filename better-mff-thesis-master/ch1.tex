@@ -227,7 +227,7 @@ d = 1-0.01672\cdot \cos\left(0.9856\cdot(t-4)\right)
 V praktické části práce budeme analyzovat, jaký vliv mají tyto proměnné na rozdíl mezi teplotou naměřenou v lesním porostu v Národním parku Šumava a Národním parku Bavorský les ve výšce $\SI{2}{m}$ a při povrchu, tedy $\SI{0}{cm}$ a $\SI{15}{cm}$.
 
 \section{Popis měření meteorologický veličin} \label{chap:measure}
-\subsection{Měření na meteorologických stanicích}
+\subsection{Měření na meteorologických stanicích}\label{chap:meteostations}
 Teplota vzduchu by podle Světové meteorologické organizace (WMO) měla být měřena ve výšce $\SI{1.25}{m}$ až $\SI{2}{m}$\cite{wmoGuidance2021}. V České republice Český hydrometeorologický ústav provozuje celou řadu meteorologických stanic různého charakteru s různými měřenými meteorologickými proměnnými. Měření na stanicích probíhá následujícím způsobem. Stanice by měla být na trávníku nikoliv například na asfaltu a měření probíhají v pravidelných intervalech. Pro synoptické stanice je to například v takzvaných hlavních termínech ($00$, $06$, $12$ a $18$ UTC) a případně vedlejších ($03$, $09$, $15$, $21$ hodin UTC). Na stanicích jsou měřeny veličiny jako například, vlhkost, výška sněhu, část zatažené oblohy, tlak a další\cite{chmustanice}. 
 
 \subsection{Měření v terénu pomocí čidel}
@@ -241,6 +241,11 @@ Teplotní senzor měří s přesností $\SI{\pm 0.5}{\degree C}$ a funguje na in
 Při srovnání TMS4 loggeru se standardní meteorologickou stanicí typu METEOS 5 byla pozorována větší variabilita u teplot v $\SI{15}{cm}$ než ve $\SI{2}{m}$. TMS4 loggeru byl instalován na krátkém posekaném trávníku, tři metry od stanice, a rozdíl teplot při hodinovém měření se pohyboval od $\SI{+8.45}{\degree C}$ do $\SI{-6.05}{\degree C}$. Průměrné denní teploty naměřené z TMS4 loggeru byly systematicky nižší, průměrný rozdíl ovšem pouze $\SI{-0.58}{\degree C}$, v zimě jsou tyto rozdíly větší a to $\SI{-2.02}{\degree C}$ až $\SI{0.6}{\degree C}$. Opačný trend pak můžeme pozorovat, pokud není teplotní senzor v $\SI{15}{cm}$ odstíněn plastovým krytem. V létě byly teploty nižší až o $\SI{5.08}{\degree C}$, ale v zimě byly podobné. Teploty z půdních senzorů jak TMS4 loggeru tak stanice METEOS 5 se lišily velmi málo, rozdíl mezi naměřenými teplotami byl tedy zřejmě způsoben primárně polohou senzorů a použitým stíněním než jejich typem. Rozdíly mezi naměřenými teplotami nad zemí byly ještě výraznější pro proměnné, které jsou často používány v ekologických studiích, jako například kvantily extrémních teplot\cite{WildJan2019Caer}. 
 
 Data měřená při povrchu země jsou na některých místech doplněna stejnými teplotními senzory ve výšce $\SI{2}{m}$ upevněnými na kmenu stromu a také opatřena plastovým stínítkem.
+
+\subsection{ERA5}
+Meteorologická stanice Churáňov měřící podle principů popsaných v odstavci \ref{chap:meteostations} zaznamenává oblačnost každou hodinu, ale pouze přes den, v noci máme chybějící hodnoty. Maximální teploty jsou typicky dosažené během dne, kdy je většinou oblačnost dostupná, ovšem například v zimě pod sněhem může maximální denní teplota být i v noci. Minimální denní teploty na druhou stranu typicky nastávají během ranních hodin, po východu Slunce, ale ojediněle i před ním. Pro minimální teploty nám tedy často chybí odpovídající oblačnost. Vyřazení těchto hodnot by vložilo velký bias do dat, tudíž byla zvolena cesta, kdy využijeme data z projektu ERA5.
+
+Copernicus Climate Change and Atmosphere Monitoring Services provádí atmosférickou reanalýzu. ERA5 je pátou verzí této reanalýzy s daty od roku 1940\cite{era5}. Data o celkové oblačnosti jsou dostupná pro každou hodinu s rozlišením $\SI{0.5}{\degree}$, konkrétně jde o produkt "ERA5 hourly data on single levels from 1940 to present". Pro každou hodnotu, která chybí ze staničního měření použijeme nejbližší hodnotu z ERA5 a to konkrétně $\SI{49}{\degree}$ severní šířky a $\SI{13.5}{\degree}$ východní délky. Tyto data byla vzdálená od stanice Churáňov $\SI{14.8}{km}$. 
 
 \section{Národní park Šumava a Bavorský les} \label{chap:sumavabavorskyles}
 Čidla TMS logger z kterých pocházejí data použitá v této práci se nacházejí v oblasti Národního parku Šumava o rozloze $\SI{68 064}{ha}$\cite{npsumava} a Národního parku Bavorský les, $\SI{24 250}{ha}$.
@@ -272,7 +277,7 @@ Více než $\SI{80}{\%}$ území NP Šumava pokrývá les. Typické pro toto úz
 \section{Statistické metody}\label{chap:statistika}
 V kapitole \ref{chap:analysis} je vysvětleno jakým způsobem byla data zpracována. Zde nastíníme relevantní teorii.
 
-\subsection{Lineární smíšený model}
+\subsection{Lineární smíšený model}\label{chap:lme}
 V maticovém zápisu je lineární smíšený model definován následovně\cite{mcleanrobert1991}
 $$\boldsymbol{y} = \boldsymbol{X}\boldsymbol{\beta} + \boldsymbol{Z}\boldsymbol{u} + \boldsymbol{\epsilon},$$ \label{eq:linearmixedeffectmodel}
 kde $\mathbf{y}$ je vektor pozorovaných hodnot, $\mathbf{\beta}$ je neznámý vektor hledaných fixní efektů, $\mathbf{u}$ je neznámý vektor náhodných efektů $\mathbf{\epsilon}$ je neznámý vektor náhodných chyb a matice $\mathbf{X}$ a $\mathbf{Z}$ jsou známé matice udávající vztah mezi pozorovanými hodnotami a fixními, resp. náhodnými efekty, jejichž velikost je daná počtem prediktorů a pozorování\cite{mcleanrobert1991}.
@@ -282,3 +287,12 @@ Předpokládáme u lineárního smíšeného modelu normální rozdělení resid
 Pro modelování autokorelační struktury můžeme využít ARMA (autoregressive-moving-average) model. Ten je definován jako\cite{wilsongranville2016}
 $$y_T = \epsilon_T + \sum_{i=1}^{p}u_i y_{T-i} + \sum_{i=1}^{q}\beta_i\varepsilon_{T-i}$$,
 kde $y_T$ časová řada, $\epsilon$ je náhodná chyba, $u_i$ jsou parametry náhodné proměnné a $\beta_i$ jsou parametry fixní proměnné. 
+
+\subsection{Semivariogram}\label{chap:variogram}
+Pro posouzení prostorové korelace dat využijeme metodu variogramu. Experimentální variogram nám určuje prostorovou závislost naměřených hodnot. V našem případě jde o hodnoty naměřených teplot neboli jejich rozdíl. Je zřejmé, že na měřítku jednoho pohoří se bude prostorová korelace vyskytovat, protože typicky zažívá celé pohoří "podobné" počasí. Experimentální semivariogram může být definován například následovně
+
+\begin{gather*}
+	\gamma(\mathbf{h}) = \frac{1}{2m(\mathbf{h})}\sum_{i=1}^{m(\mathbf{h})}\left(t(\mathbf{x}_i) - t(\mathbf{x}_i+\mathbf{h})\right)^2,
+\end{gather*}
+
+kde v našem případě $t(\mathbf{x}_i)$ a $t(\mathbf{x}_i+\mathbf{h})$ jsou pozorované hodnoty (rozdílů) teplot na jednotlivých čidlech a $m(\mathbf{h})$ je počet párů teplot vzdálených od sebe o $\mathbf{h}$. Hodnota vzdálenosti $\mathbf{h}$ se tedy pohybuje od vzdálenosti dvou nejbližších čidel až po vzdálenost dvou nejvzdálenějších čidel. Variogram je typicky dvojnásobek semivariogramu tedy $2\gamma(\mathbf{h})$\cite{variogram}.

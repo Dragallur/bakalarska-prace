@@ -1,0 +1,1 @@
+/usr/bin/gcc  -pipe -pedantic -O2 -g -DNDEBUG      -Wl,--disable-new-dtags CMakeFiles/c_bufr_get_string_array.dir/bufr_get_string_array.c.o  -o c_bufr_get_string_array  -Wl,-rpath,/home/vojta/Desktop/mffuk/bakalarka/build/lib ../../lib/libeccodes.so -lm 

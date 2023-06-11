@@ -1,0 +1,38 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/vojta/Desktop/mffuk/bakalarka/eccodes-2.30.2-Source/examples/C/bufr_set_keys.c
+eccodes.h
+/home/vojta/Desktop/mffuk/bakalarka/eccodes-2.30.2-Source/examples/C/eccodes.h
+
+/home/vojta/Desktop/mffuk/bakalarka/eccodes-2.30.2-Source/src/eccodes.h
+grib_api.h
+/home/vojta/Desktop/mffuk/bakalarka/eccodes-2.30.2-Source/src/grib_api.h
+
+/home/vojta/Desktop/mffuk/bakalarka/eccodes-2.30.2-Source/src/eccodes_windef.h
+
+/home/vojta/Desktop/mffuk/bakalarka/eccodes-2.30.2-Source/src/grib_api.h
+stdio.h
+-
+stdlib.h
+-
+string.h
+-
+sys/types.h
+-
+eccodes_windef.h
+/home/vojta/Desktop/mffuk/bakalarka/eccodes-2.30.2-Source/src/eccodes_windef.h
+sys/time.h
+-
+math.h
+-
+eccodes_version.h
+/home/vojta/Desktop/mffuk/bakalarka/eccodes-2.30.2-Source/src/eccodes_version.h
+
+src/eccodes_version.h
+

@@ -1,0 +1,1 @@
+/usr/bin/c++   -pipe -Wno-write-strings -Wno-deprecated -O2 -g -DNDEBUG      -Wl,--disable-new-dtags CMakeFiles/grib_geo_iter.dir/grib_geo_iter.cc.o  -o grib_geo_iter  -Wl,-rpath,/home/vojta/Desktop/mffuk/bakalarka/build/lib ../lib/libeccodes.so -lm 

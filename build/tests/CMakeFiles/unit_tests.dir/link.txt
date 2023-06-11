@@ -1,0 +1,1 @@
+/usr/bin/c++   -pipe -Wno-write-strings -Wno-deprecated -O2 -g -DNDEBUG      -Wl,--disable-new-dtags CMakeFiles/unit_tests.dir/unit_tests.cc.o  -o unit_tests  -Wl,-rpath,/home/vojta/Desktop/mffuk/bakalarka/build/lib ../lib/libeccodes.so -lm 

@@ -1,0 +1,1 @@
+/usr/bin/c++   -pipe -Wno-write-strings -Wno-deprecated -O2 -g -DNDEBUG      -Wl,--disable-new-dtags CMakeFiles/gts_ls.dir/gts_ls.cc.o  -o ../bin/gts_ls  -Wl,-rpath,"\$ORIGIN/../lib" libecc_tools.a ../lib/libeccodes.so -lm 

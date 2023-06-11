@@ -1,0 +1,1 @@
+/usr/bin/c++   -pipe -Wno-write-strings -Wno-deprecated -O2 -g -DNDEBUG      -Wl,--disable-new-dtags CMakeFiles/grib_to_netcdf.dir/grib_to_netcdf.cc.o  -o ../bin/grib_to_netcdf  -Wl,-rpath,"\$ORIGIN/../lib" libecc_tools.a /usr/lib/x86_64-linux-gnu/libnetcdf.so ../lib/libeccodes.so -lm 

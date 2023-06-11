@@ -1,0 +1,1 @@
+/usr/bin/c++   -pipe -Wno-write-strings -Wno-deprecated -O2 -g -DNDEBUG      -Wl,--disable-new-dtags CMakeFiles/tigge_check.dir/tigge_check.cc.o  -o ../bin/tigge_check  -Wl,-rpath,"\$ORIGIN/../lib" ../lib/libeccodes.so libtigge_tools.a -lm 

@@ -1,0 +1,1 @@
+/usr/bin/c++   -pipe -Wno-write-strings -Wno-deprecated -O2 -g -DNDEBUG      -Wl,--disable-new-dtags CMakeFiles/codes_set_samples_path.dir/codes_set_samples_path.cc.o  -o codes_set_samples_path  -Wl,-rpath,/home/vojta/Desktop/mffuk/bakalarka/build/lib ../lib/libeccodes.so -lm 

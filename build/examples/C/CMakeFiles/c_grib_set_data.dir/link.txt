@@ -1,0 +1,1 @@
+/usr/bin/gcc  -pipe -pedantic -O2 -g -DNDEBUG      -Wl,--disable-new-dtags CMakeFiles/c_grib_set_data.dir/grib_set_data.c.o  -o c_grib_set_data  -Wl,-rpath,/home/vojta/Desktop/mffuk/bakalarka/build/lib ../../lib/libeccodes.so -lm 

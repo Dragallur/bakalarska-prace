@@ -20,8 +20,8 @@ c4japi01 <- c(49.0361536, 13.4212786)
 c1chur01 <- c(49.0682586, 13.6156192)
 
 tim_c <- c("all")
-minmax_c <- c("max")
-height_c <- c("15cm")
+minmax_c <- c("min", "max")
+height_c <- c("15cm", "0cm")
 bayerischer_wald_c <- c(TRUE)
 dist_cutoff_c <- 0
 station_cutoff <- c(c1chur01, deparse(substitute(c1chur01)))
@@ -36,6 +36,8 @@ for (minmax in minmax_c){
 for (height in height_c){
 for (bayerischer_wald in bayerischer_wald_c){
 for (dist_cutoff in dist_cutoff_c){
+print(paste("Starting with: time: ", tim, ", temperature: ", minmax, " and height: ", height, ".", sep = ""))
+
 setwd("~/Desktop/mffuk/bakalarka/ZETA_Klimes")
 lokalita_data <- read.xlsx("Lokalita.xlsx",sheetIndex=1)
 if (bayerischer_wald == TRUE) {
@@ -70,7 +72,7 @@ setwd("~/Desktop/mffuk/bakalarka/ZETA_Klimes/data_all")
 station_name <- lokalita_data$ID_lokalita[out_ind]
 #check if file with the station name exists for both _a and _b, then proceed to calculate
 if (isTRUE(file.exists(paste(station_name, "_a.csv", sep = "")))){
- print(c(station_name, out_ind))
+ #print(c(station_name, out_ind))
  da <- read.csv(paste(station_name,"_a.csv",sep=""),sep=";",header=FALSE)
  db <- read.csv(paste(station_name,"_b.csv",sep=""),sep=";",header=FALSE)
  lok <- zeta[zeta$ID_lokalit == station_name,]
@@ -80,7 +82,7 @@ if (isTRUE(file.exists(paste(station_name, "_a.csv", sep = "")))){
 
 if (dist_cutoff > 0){
 if (dist_f2(c(lok$Lat_WGS84,lok$Lon_WGS84), as.numeric(station_cutoff[1:2])) > dist_cutoff){
-	print(paste(station_name," skipped for being too far.", sep=""))
+	#print(paste(station_name," skipped for being too far.", sep=""))
 	next
 }
 }
@@ -117,6 +119,9 @@ db$second <- dat[,3]
 
 setwd("~/Desktop/mffuk/bakalarka/SYNOP")
 synop <- read.csv("11457.txt",header=TRUE)
+synop$datetime <- synop$Date
+synop$Nt[synop$Nt==9] <- NA
+synop$Nt <- synop$Nt/8
 dat <- str_split_fixed(synop$Date," ",2)
 synop$Date <- dat[,1]
 synop$time <- dat[,2]
@@ -151,6 +156,28 @@ final_data <- data.frame(date=fin_date)
 da <- da[da$date %in% final_data$date,]
 synop <- synop[synop$Date %in% final_data$date,]
 
+#fill missing cloud cover values in SYNOP file with ERA5 values
+setwd("/home/vojta/Desktop/mffuk/bakalarka/analyze/out/")
+era5 <- read.csv("era5_total_cloud_cover.csv", sep="\t", header=TRUE)
+era5$datetime <- era5$time
+dat <- str_split_fixed(era5$time," ",2)
+era5$Date <- dat[,1]
+era5$time <- dat[,2]
+dat <- str_split_fixed(era5$Date,"\\-",3)
+era5$day <- dat[,3]
+era5$month <- dat[,2]
+era5$year <- dat[,1]
+era5$Date <- paste(era5$day,era5$month,era5$year,sep=".")
+era5 <- era5[era5$Date %in% final_data$date,]
+
+era5tcc_subset <- era5$tcc[match(synop$datetime[is.na(synop$Nt)], era5$datetime)]
+synop$Nt[is.na(synop$Nt)] <- era5tcc_subset
+#leave out previous line to plot synop vs ERA5 or calculate correlation
+#synop <- synop[!duplicated(synop),]
+#synop <- synop[!is.na(synop$Nt),]
+#ttime <- rev(intersect(unique(synop$datetime),unique(era5$datetime)))
+#plot(era5$tcc[era5$datetime %in% ttime], synop$Nt[synop$datetime %in% ttime])
+
 #function to find time at which max temperature is reached
 f <- function(temp,dat,tim){
 	max_temp <- c()
@@ -176,21 +203,27 @@ if (height == "0cm"){
 }
 colnames(maxdennitep) <- c("date","maxtemp15cm","time15cm")
 dat <- str_split_fixed(maxdennitep$time15cm,"\\:",3)
-maxdennitep$hour15cm <- dat[,1] #zaokrouhluji hodiny dolu
+maxdennitep$hour15cm <- dat[,1]
+
 #match max temperature at 15cm with temperature measured at 2m
-maxtemp2m <- c()
+#maxtemp2m <- c()
+maxtemp2m <- vector(length=length(maxdennitep$date))
 for (i in 1:length(maxdennitep$date)){
 	ind <- which(maxdennitep$date[i]==db$date)
 	#ind <- ind[db$hour[ind]==maxdennitep$hour15cm[i]][1]
 	ind <- ind[str_pad(db$time[ind], 5, pad="0", side="left")==str_pad(maxdennitep$time[i], 5, pad="0", side="left")][1]
 	if (!is.na(ind)){
 	if (length(ind)!=1){stop()}
+	ii <- 0
 	while(is.na(db$temp2m[ind])){ 
-		print("NA in 2m detected, taking 15 minutes older value.")
+		ii <- ii + 1
+		print(paste("NA in 2m detected, taking 15 minutes older value.", " Station: ", station_name, sep=""))
 		ind <- ind - 1
+		if (ii == 2) {break} #at most 30 minutes older value
 	}
 	}
-	maxtemp2m <- c(maxtemp2m,db$temp2m[ind])
+	#maxtemp2m <- c(maxtemp2m,db$temp2m[ind])
+	maxtemp2m[i] <- db$temp2m[ind]
 }
 maxdennitep$maxtemp2m <- maxtemp2m
 chmu_stations <- rbind(c1kvil01, c1hkvi01, c1blad01, c4japi01, c1chur01)
@@ -208,7 +241,7 @@ if (row.names(chmu_stations)[min_dist] == "c1chur01"){
 	chmu_data_sce <- chmu_data_sce[chmu_data_sce$date %in% final_data$date,] #chmu_data is always superset of final_data
 	snowcm <- data.frame(cm = chmu_data_sce$Snowcm, time = chmu_data_sce$time)
 }
-print(paste("Used the station ", row.names(chmu_stations)[min_dist], " for snow cover.", sep=""))
+#print(paste("Used the station ", row.names(chmu_stations)[min_dist], " for snow cover.", sep=""))
 
 #snowcm <- f(synop$Snowcm,synop$Date,synop$time)
 colnames(snowcm) <- c("cm","time")
@@ -277,7 +310,7 @@ if (row.names(chmu_stations)[min_dist] == "c1chur01"){
 		precmm_vec <- c(precmm_vec,sum(chmu_data_sra10m$Precmm[ind]))
 	}
 }
-print(paste("Used the station ", row.names(chmu_stations)[min_dist], " for 10 min precipitation.", sep=""))
+#print(paste("Used the station ", row.names(chmu_stations)[min_dist], " for 10 min precipitation.", sep=""))
 final_data$precmm <- as.numeric(precmm_vec)
 final_data$station_precmm <- row.names(chmu_stations)[min_dist]
 
@@ -316,6 +349,7 @@ final_data$nt <- as.numeric(final_data$nt)
 final_data$pr24 <- as.numeric(final_data$pr24)
 final_data$month <- as.numeric(final_data$month)
 final_data$station_name <- station_name
+final_data <- final_data[!is.na(final_data$diff), ]
 all_loggers <- rbind(all_loggers, final_data)
 } #end for loop for 1 station
 
@@ -324,7 +358,8 @@ bw_text <- ifelse(bayerischer_wald == 1, "yes", "no")
 if (dist_cutoff > 0){
 	dist_cutoff <- paste(station_cutoff[3],dist_cutoff, sep="")
 } else { dist_cutoff <- "" }
-print(paste("Fitting was done for ", sum(complete.cases(out)), " stations.", sep = ""))
+#print(paste("Fitting was done for ", sum(complete.cases(out)), " stations.", sep = ""))
+print(paste("Total of  ", nrow(all_loggers), " data points.", sep = ""))
 
 all_loggers$month <- (abs(all_loggers$month)+all_loggers$month)/2
 save(all_loggers, file=paste("data_", minmax, tim, height, "_BW", bw_text, dist_cutoff, ".RData", sep = ""))

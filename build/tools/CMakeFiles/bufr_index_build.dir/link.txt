@@ -1,0 +1,1 @@
+/usr/bin/c++   -pipe -Wno-write-strings -Wno-deprecated -O2 -g -DNDEBUG      -Wl,--disable-new-dtags CMakeFiles/bufr_index_build.dir/bufr_index_build.cc.o  -o ../bin/bufr_index_build  -Wl,-rpath,"\$ORIGIN/../lib" libecc_tools.a ../lib/libeccodes.so -lm 

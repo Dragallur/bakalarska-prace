@@ -1,0 +1,131 @@
+Determining if the funopen exist failed with the following output:
+Change Dir: /home/vojta/Desktop/mffuk/bakalarka/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_472b0/fast && /usr/bin/make -f CMakeFiles/cmTC_472b0.dir/build.make CMakeFiles/cmTC_472b0.dir/build
+make[1]: Entering directory '/home/vojta/Desktop/mffuk/bakalarka/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_472b0.dir/CheckSymbolExists.c.o
+/usr/bin/gcc   -pipe  -fPIE   -o CMakeFiles/cmTC_472b0.dir/CheckSymbolExists.c.o   -c /home/vojta/Desktop/mffuk/bakalarka/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+/home/vojta/Desktop/mffuk/bakalarka/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c: In function ‘main’:
+/home/vojta/Desktop/mffuk/bakalarka/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c:8:19: error: ‘funopen’ undeclared (first use in this function); did you mean ‘fdopen’?
+    8 |   return ((int*)(&funopen))[argc];
+      |                   ^~~~~~~
+      |                   fdopen
+/home/vojta/Desktop/mffuk/bakalarka/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c:8:19: note: each undeclared identifier is reported only once for each function it appears in
+make[1]: *** [CMakeFiles/cmTC_472b0.dir/build.make:66: CMakeFiles/cmTC_472b0.dir/CheckSymbolExists.c.o] Error 1
+make[1]: Leaving directory '/home/vojta/Desktop/mffuk/bakalarka/build/CMakeFiles/CMakeTmp'
+make: *** [Makefile:121: cmTC_472b0/fast] Error 2
+
+
+File /home/vojta/Desktop/mffuk/bakalarka/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <stdio.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef funopen
+  return ((int*)(&funopen))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+Performing C SOURCE FILE Test IEEE_BE failed with the following compile output:
+Change Dir: /home/vojta/Desktop/mffuk/bakalarka/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_150f6/fast && /usr/bin/make -f CMakeFiles/cmTC_150f6.dir/build.make CMakeFiles/cmTC_150f6.dir/build
+make[1]: Entering directory '/home/vojta/Desktop/mffuk/bakalarka/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_150f6.dir/src.c.o
+/usr/bin/gcc   -pipe -DIEEE_BE -fPIE   -o CMakeFiles/cmTC_150f6.dir/src.c.o   -c /home/vojta/Desktop/mffuk/bakalarka/build/CMakeFiles/CMakeTmp/src.c
+Linking C executable cmTC_150f6
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_150f6.dir/link.txt --verbose=1
+/usr/bin/gcc  -pipe -DIEEE_BE      -Wl,--disable-new-dtags  CMakeFiles/cmTC_150f6.dir/src.c.o  -o cmTC_150f6 
+make[1]: Leaving directory '/home/vojta/Desktop/mffuk/bakalarka/build/CMakeFiles/CMakeTmp'
+
+
+...and run output:
+
+Return value: 1
+Source file was:
+int compare(unsigned char* a,unsigned char* b) {
+         while(*a != 0) if (*(b++)!=*(a++)) return 1;
+         return 0;
+       }
+       int main(int argc,char** argv) {
+         unsigned char dc[]={0x30,0x61,0xDE,0x80,0x93,0x67,0xCC,0xD9,0};
+         double da=1.23456789e-75;
+         unsigned char* ca;
+
+         unsigned char fc[]={0x05,0x83,0x48,0x22,0};
+         float fa=1.23456789e-35;
+
+         if (sizeof(double)!=8) return 1;
+
+         ca=(unsigned char*)&da;
+         if (compare(dc,ca)) return 1;
+
+         if (sizeof(float)!=4) return 1;
+
+         ca=(unsigned char*)&fa;
+         if (compare(fc,ca)) return 1;
+
+         return 0;
+       }
+Performing C SOURCE FILE Test CMAKE_HAVE_LIBC_PTHREAD failed with the following output:
+Change Dir: /home/vojta/Desktop/mffuk/bakalarka/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_c7a8d/fast && /usr/bin/make -f CMakeFiles/cmTC_c7a8d.dir/build.make CMakeFiles/cmTC_c7a8d.dir/build
+make[1]: Entering directory '/home/vojta/Desktop/mffuk/bakalarka/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_c7a8d.dir/src.c.o
+/usr/bin/gcc   -pipe -DCMAKE_HAVE_LIBC_PTHREAD -fPIE   -o CMakeFiles/cmTC_c7a8d.dir/src.c.o   -c /home/vojta/Desktop/mffuk/bakalarka/build/CMakeFiles/CMakeTmp/src.c
+Linking C executable cmTC_c7a8d
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_c7a8d.dir/link.txt --verbose=1
+/usr/bin/gcc  -pipe -DCMAKE_HAVE_LIBC_PTHREAD      -Wl,--disable-new-dtags  CMakeFiles/cmTC_c7a8d.dir/src.c.o  -o cmTC_c7a8d 
+/usr/bin/ld: CMakeFiles/cmTC_c7a8d.dir/src.c.o: in function `main':
+src.c:(.text+0x46): undefined reference to `pthread_create'
+/usr/bin/ld: src.c:(.text+0x52): undefined reference to `pthread_detach'
+/usr/bin/ld: src.c:(.text+0x63): undefined reference to `pthread_join'
+collect2: error: ld returned 1 exit status
+make[1]: *** [CMakeFiles/cmTC_c7a8d.dir/build.make:87: cmTC_c7a8d] Error 1
+make[1]: Leaving directory '/home/vojta/Desktop/mffuk/bakalarka/build/CMakeFiles/CMakeTmp'
+make: *** [Makefile:121: cmTC_c7a8d/fast] Error 2
+
+
+Source file was:
+#include <pthread.h>
+
+void* test_func(void* data)
+{
+  return data;
+}
+
+int main(void)
+{
+  pthread_t thread;
+  pthread_create(&thread, NULL, test_func, NULL);
+  pthread_detach(thread);
+  pthread_join(thread, NULL);
+  pthread_atfork(NULL, NULL, NULL);
+  pthread_exit(NULL);
+
+  return 0;
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /home/vojta/Desktop/mffuk/bakalarka/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_e53cd/fast && /usr/bin/make -f CMakeFiles/cmTC_e53cd.dir/build.make CMakeFiles/cmTC_e53cd.dir/build
+make[1]: Entering directory '/home/vojta/Desktop/mffuk/bakalarka/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_e53cd.dir/CheckFunctionExists.c.o
+/usr/bin/gcc   -pipe -DCHECK_FUNCTION_EXISTS=pthread_create -fPIE   -o CMakeFiles/cmTC_e53cd.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-3.16/Modules/CheckFunctionExists.c
+Linking C executable cmTC_e53cd
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_e53cd.dir/link.txt --verbose=1
+/usr/bin/gcc  -pipe -DCHECK_FUNCTION_EXISTS=pthread_create      -Wl,--disable-new-dtags  CMakeFiles/cmTC_e53cd.dir/CheckFunctionExists.c.o  -o cmTC_e53cd  -lpthreads 
+/usr/bin/ld: cannot find -lpthreads
+collect2: error: ld returned 1 exit status
+make[1]: *** [CMakeFiles/cmTC_e53cd.dir/build.make:87: cmTC_e53cd] Error 1
+make[1]: Leaving directory '/home/vojta/Desktop/mffuk/bakalarka/build/CMakeFiles/CMakeTmp'
+make: *** [Makefile:121: cmTC_e53cd/fast] Error 2
+
+
+

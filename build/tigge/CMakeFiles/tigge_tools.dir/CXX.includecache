@@ -1,0 +1,26 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/vojta/Desktop/mffuk/bakalarka/eccodes-2.30.2-Source/src/eccodes_windef.h
+
+/home/vojta/Desktop/mffuk/bakalarka/eccodes-2.30.2-Source/tigge/tigge_tools.cc
+tigge_tools.h
+/home/vojta/Desktop/mffuk/bakalarka/eccodes-2.30.2-Source/tigge/tigge_tools.h
+eccodes_windef.h
+/home/vojta/Desktop/mffuk/bakalarka/eccodes-2.30.2-Source/tigge/eccodes_windef.h
+dirent.h
+-
+direct.h
+-
+io.h
+-
+stdio.h
+-
+
+/home/vojta/Desktop/mffuk/bakalarka/eccodes-2.30.2-Source/tigge/tigge_tools.h
+

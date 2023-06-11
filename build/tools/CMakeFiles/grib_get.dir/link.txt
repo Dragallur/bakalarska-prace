@@ -1,0 +1,1 @@
+/usr/bin/c++   -pipe -Wno-write-strings -Wno-deprecated -O2 -g -DNDEBUG      -Wl,--disable-new-dtags CMakeFiles/grib_get.dir/grib_get.cc.o  -o ../bin/grib_get  -Wl,-rpath,"\$ORIGIN/../lib" libecc_tools.a ../lib/libeccodes.so -lm 

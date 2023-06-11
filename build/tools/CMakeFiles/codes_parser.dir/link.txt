@@ -1,0 +1,1 @@
+/usr/bin/c++   -pipe -Wno-write-strings -Wno-deprecated -O2 -g -DNDEBUG      -Wl,--disable-new-dtags CMakeFiles/codes_parser.dir/codes_parser.cc.o  -o ../bin/codes_parser  -Wl,-rpath,"\$ORIGIN/../lib" libecc_tools.a ../lib/libeccodes.so -lm 

@@ -1,0 +1,16 @@
+# CMake generated Testfile for 
+# Source directory: /home/vojta/Desktop/mffuk/bakalarka/eccodes-2.30.2-Source/examples/C
+# Build directory: /home/vojta/Desktop/mffuk/bakalarka/build/examples/C
+# 
+# This file includes the relevant testing commands required for 
+# testing this directory and lists subdirectories to be tested as well.
+add_test(eccodes_c_grib_set_data "/home/vojta/Desktop/mffuk/bakalarka/eccodes-2.30.2-Source/examples/C/grib_set_data.sh")
+set_tests_properties(eccodes_c_grib_set_data PROPERTIES  ENVIRONMENT "OMP_NUM_THREADS=1" LABELS "eccodes;script;sanity" _BACKTRACE_TRIPLES "/home/vojta/Desktop/mffuk/bakalarka/eccodes-2.30.2-Source/cmake/ecbuild_add_test.cmake;446;add_test;/home/vojta/Desktop/mffuk/bakalarka/eccodes-2.30.2-Source/examples/C/CMakeLists.txt;141;ecbuild_add_test;/home/vojta/Desktop/mffuk/bakalarka/eccodes-2.30.2-Source/examples/C/CMakeLists.txt;0;")
+add_test(eccodes_c_large_grib1 "/home/vojta/Desktop/mffuk/bakalarka/eccodes-2.30.2-Source/examples/C/large_grib1.sh")
+set_tests_properties(eccodes_c_large_grib1 PROPERTIES  ENVIRONMENT "OMP_NUM_THREADS=1" LABELS "eccodes;script;sanity" _BACKTRACE_TRIPLES "/home/vojta/Desktop/mffuk/bakalarka/eccodes-2.30.2-Source/cmake/ecbuild_add_test.cmake;446;add_test;/home/vojta/Desktop/mffuk/bakalarka/eccodes-2.30.2-Source/examples/C/CMakeLists.txt;141;ecbuild_add_test;/home/vojta/Desktop/mffuk/bakalarka/eccodes-2.30.2-Source/examples/C/CMakeLists.txt;0;")
+add_test(eccodes_c_grib_sections_copy "/home/vojta/Desktop/mffuk/bakalarka/eccodes-2.30.2-Source/examples/C/grib_sections_copy.sh")
+set_tests_properties(eccodes_c_grib_sections_copy PROPERTIES  ENVIRONMENT "OMP_NUM_THREADS=1" LABELS "eccodes;script;sanity" _BACKTRACE_TRIPLES "/home/vojta/Desktop/mffuk/bakalarka/eccodes-2.30.2-Source/cmake/ecbuild_add_test.cmake;446;add_test;/home/vojta/Desktop/mffuk/bakalarka/eccodes-2.30.2-Source/examples/C/CMakeLists.txt;141;ecbuild_add_test;/home/vojta/Desktop/mffuk/bakalarka/eccodes-2.30.2-Source/examples/C/CMakeLists.txt;0;")
+add_test(eccodes_c_get_product_kind_samples "/home/vojta/Desktop/mffuk/bakalarka/eccodes-2.30.2-Source/examples/C/get_product_kind_samples.sh")
+set_tests_properties(eccodes_c_get_product_kind_samples PROPERTIES  ENVIRONMENT "OMP_NUM_THREADS=1" LABELS "eccodes;script;sanity" _BACKTRACE_TRIPLES "/home/vojta/Desktop/mffuk/bakalarka/eccodes-2.30.2-Source/cmake/ecbuild_add_test.cmake;446;add_test;/home/vojta/Desktop/mffuk/bakalarka/eccodes-2.30.2-Source/examples/C/CMakeLists.txt;141;ecbuild_add_test;/home/vojta/Desktop/mffuk/bakalarka/eccodes-2.30.2-Source/examples/C/CMakeLists.txt;0;")
+add_test(eccodes_c_new_sample "/home/vojta/Desktop/mffuk/bakalarka/build/examples/C/eccodes_c_new_sample" "out.grib")
+set_tests_properties(eccodes_c_new_sample PROPERTIES  ENVIRONMENT "ECCODES_SAMPLES_PATH=/home/vojta/Desktop/mffuk/bakalarka/eccodes-2.30.2-Source/samples;ECCODES_DEFINITION_PATH=/home/vojta/Desktop/mffuk/bakalarka/eccodes-2.30.2-Source/definitions;OMP_NUM_THREADS=1" LABELS "eccodes;executable" _BACKTRACE_TRIPLES "/home/vojta/Desktop/mffuk/bakalarka/eccodes-2.30.2-Source/cmake/ecbuild_add_test.cmake;448;add_test;/home/vojta/Desktop/mffuk/bakalarka/eccodes-2.30.2-Source/examples/C/CMakeLists.txt;173;ecbuild_add_test;/home/vojta/Desktop/mffuk/bakalarka/eccodes-2.30.2-Source/examples/C/CMakeLists.txt;0;")

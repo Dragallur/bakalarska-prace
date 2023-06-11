@@ -105,108 +105,33 @@ mod_resid_vs_fitted_and_qq <- function(data, minmax, height, transformation){
 	setwd(wd)
 }
 
-#according to https://stackoverflow.com/questions/8708048/position-of-the-sun-given-time-of-day-latitude-and-longitude
-sunPosition <- function(year, month, day, hour, min, sec,
-                    lat, long, declination) {
-	if (anyNA(as.vector(c(year, month, day, hour, min, sec, lat, long)))){
-		return(NA)
-	}
-    twopi <- 2 * pi
-    deg2rad <- pi / 180
+acf_for_model <- function(mod){
+	plt <- ggAcf(residuals(mod, type="n")) +
+	    labs(x="lag", y="ACF", title="Autokorelační funkce modelu") +
+        theme(text=element_text(family="Latin Modern Math",size=20))
+	wd <- getwd()
+	setwd("/home/vojta/Desktop/mffuk/bakalarka/analyze/out/")
+	ggsave(paste("acf_curt", ".png", sep=""), plot = plt, width=8, height=8, dpi=343)
+	setwd(wd)
+}
 
-    # Get day of the year, e.g. Feb 1 = 32, Mar 1 = 61 on leap years
-    month.days <- c(0,31,28,31,30,31,30,31,31,30,31,30)
-    day <- day + cumsum(month.days)[month]
-    leapdays <- year %% 4 == 0 & (year %% 400 == 0 | year %% 100 != 0) & 
-                day >= 60 & !(month==2 & day==60)
-    day[leapdays] <- day[leapdays] + 1
+hist_of_diff <- function(all_loggers, minmax, height){
+	plt <- ggplot(data=all_loggers, aes(x=diff)) + geom_histogram(binwidth = 1) +
+	    labs(x=expression(paste(Delta, " T")), y="N", title="Histogram rozdílu teplot") +
+        theme(text=element_text(family="Latin Modern Math",size=28))
+	wd <- getwd()
+	setwd("/home/vojta/Desktop/mffuk/bakalarka/analyze/out/")
+	ggsave(paste("hist_diff_", minmax, height, ".png", sep=""), plot = plt, width=8, height=8, dpi=343)
+	setwd(wd)
+}
 
-    # Get Julian date - 2400000
-    hour <- hour + min / 60 + sec / 3600 # hour plus fraction
-    delta <- year - 1949
-    leap <- trunc(delta / 4) # former leapyears
-    jd <- 32916.5 + delta * 365 + leap + day + hour / 24
-
-    # The input to the Atronomer's almanach is the difference between
-    # the Julian date and JD 2451545.0 (noon, 1 January 2000)
-    time <- jd - 51545.
-
-    # Ecliptic coordinates
-
-    # Mean longitude
-    mnlong <- 280.460 + .9856474 * time
-    mnlong <- mnlong %% 360
-    mnlong[mnlong < 0] <- mnlong[mnlong < 0] + 360
-
-    # Mean anomaly
-    mnanom <- 357.528 + .9856003 * time
-    mnanom <- mnanom %% 360
-    mnanom[mnanom < 0] <- mnanom[mnanom < 0] + 360
-    mnanom <- mnanom * deg2rad
-
-    # Ecliptic longitude and obliquity of ecliptic
-    eclong <- mnlong + 1.915 * sin(mnanom) + 0.020 * sin(2 * mnanom)
-    eclong <- eclong %% 360
-    eclong[eclong < 0] <- eclong[eclong < 0] + 360
-    oblqec <- 23.439 - 0.0000004 * time
-    eclong <- eclong * deg2rad
-    oblqec <- oblqec * deg2rad
-
-    # Celestial coordinates
-    # Right ascension and declination
-    num <- cos(oblqec) * sin(eclong)
-    den <- cos(eclong)
-    ra <- atan(num / den)
-    ra[den < 0] <- ra[den < 0] + pi
-    ra[den >= 0 & num < 0] <- ra[den >= 0 & num < 0] + twopi
-    dec <- asin(sin(oblqec) * sin(eclong))
-
-    # Local coordinates
-    # Greenwich mean sidereal time
-    gmst <- 6.697375 + .0657098242 * time + hour
-    gmst <- gmst %% 24
-    gmst[gmst < 0] <- gmst[gmst < 0] + 24.
-
-    # Local mean sidereal time
-    lmst <- gmst + long / 15.
-    lmst <- lmst %% 24.
-    lmst[lmst < 0] <- lmst[lmst < 0] + 24.
-    lmst <- lmst * 15. * deg2rad
-
-    # Hour angle
-    ha <- lmst - ra
-    ha[ha < -pi] <- ha[ha < -pi] + twopi
-    ha[ha > pi] <- ha[ha > pi] - twopi
-
-    # Latitude to radians
-    lat <- lat * deg2rad
-
-    # Azimuth and elevation
-    el <- asin(sin(dec) * sin(lat) + cos(dec) * cos(lat) * cos(ha))
-    az <- asin(-cos(dec) * sin(ha) / cos(el))
-
-    # For logic and names, see Spencer, J.W. 1989. Solar Energy. 42(4):353
-    cosAzPos <- (0 <= sin(dec) - sin(el) * sin(lat))
-    sinAzNeg <- (sin(az) < 0)
-    az[cosAzPos & sinAzNeg] <- az[cosAzPos & sinAzNeg] + twopi
-    az[!cosAzPos] <- pi - az[!cosAzPos]
-
-    # if (0 < sin(dec) - sin(el) * sin(lat)) {
-    #     if(sin(az) < 0) az <- az + twopi
-    # } else {
-    #     az <- pi - az
-    # }
-
-
-    el <- el / deg2rad
-    az <- az / deg2rad
-    lat <- lat / deg2rad
-
-	#hour angle: tan(HA) = sin(AZ)*cos(EL) / (cos(LAT)*sin(EL) - sin(LAT)*cos(AZ)*cos(EL))
-	#according to: https://www.cloudynights.com/topic/777661-hour-angle-and-declination-from-azimuth-and-elevation/
-	#ha = atan(sin(az) * cos(el) / (cos(lat) * sin(el) - sin(lat) * cos(az) * cos(el)))
-	ha = acos((sin(el)-sin(lat)*sin(declination))/(cos(lat)*cos(declination)))
-
-	
-    return(ha)
+gg_variogram <- function(vario, minmax, height, dat){
+	plt <- ggplot(data=vario, aes(x=dist, y=gamma)) + geom_point(size=3) +
+	    labs(x=expression(paste("Vzdálenost ", "[km]")), y="semivariance", title=paste("Variogram pro ", dat, sep="")) +
+        theme(text=element_text(family="Latin Modern Math",size=28)) +
+		coord_cartesian(ylim=c(0,max(vario$gamma)))
+	wd <- getwd()
+	setwd("/home/vojta/Desktop/mffuk/bakalarka/analyze/out/variograms/")
+	ggsave(paste("variogram_", minmax, height, month(dat), ".png", sep=""), plot = plt, width=8, height=8, dpi=343)
+	setwd(wd)
 }

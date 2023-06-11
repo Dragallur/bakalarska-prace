@@ -1,0 +1,1 @@
+/usr/bin/gcc  -pipe -pedantic -O2 -g -DNDEBUG      -Wl,--disable-new-dtags CMakeFiles/c_grib_multi_write.dir/grib_multi_write.c.o  -o c_grib_multi_write  -Wl,-rpath,/home/vojta/Desktop/mffuk/bakalarka/build/lib ../../lib/libeccodes.so -lm 
