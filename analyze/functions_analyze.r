@@ -108,7 +108,7 @@ mod_resid_vs_fitted_and_qq <- function(data, minmax, height, transformation){
 acf_for_model <- function(mod){
 	plt <- ggAcf(residuals(mod, type="n")) +
 	    labs(x="lag", y="ACF", title="Autokorelační funkce modelu") +
-        theme(text=element_text(family="Latin Modern Math",size=20))
+        theme(text=element_text(family="Latin Modern Math",size=24))
 	wd <- getwd()
 	setwd("/home/vojta/Desktop/mffuk/bakalarka/analyze/out/")
 	ggsave(paste("acf_curt", ".png", sep=""), plot = plt, width=8, height=8, dpi=343)

@@ -1,4 +1,3 @@
-library(gridExtra)
 library(stringr)
 library(e1071)
 library(xlsx)
@@ -7,8 +6,6 @@ library(ggplot2)
 library(lmtest)
 library(data.table)
 library(lubridate)
-library(car)
-library(pscl)
 
 setwd("/home/vojta/Desktop/mffuk/bakalarka/analyze/")
 source("functions_analyze.r")
@@ -362,6 +359,6 @@ if (dist_cutoff > 0){
 print(paste("Total of  ", nrow(all_loggers), " data points.", sep = ""))
 
 all_loggers$month <- (abs(all_loggers$month)+all_loggers$month)/2
-save(all_loggers, file=paste("data_", minmax, tim, height, "_BW", bw_text, dist_cutoff, ".RData", sep = ""))
+#save(all_loggers, file=paste("data_", minmax, tim, height, "_BW", bw_text, dist_cutoff, ".RData", sep = ""))
 
 }}}}}

@@ -8,8 +8,8 @@ setwd("/home/vojta/Desktop/mffuk/bakalarka/analyze/")
 source("functions_analyze.r")
 
 tim_c <- c("all")
-height_c <- c("15cm", "0cm")
-minmax_c <- c("max", "min")
+height_c <- c("15cm")
+minmax_c <- c("max")
 bayerischer_wald_c <- c(TRUE)
 dist_cutoff_c <- 0
 station_cutoff <- "c1chur01"
@@ -59,15 +59,14 @@ all_loggers <- all_loggers[order(as.Date(all_loggers$date, format="%Y-%m-%d")), 
 #d_mod_sqrt <- data.frame(x=fitted(mod_sqrt_corARMA), y=resid(mod_sqrt_corARMA, type="n"))
 #mod_resid_vs_fitted_and_qq(d_mod_sqrt, minmax, height, "sqrt")
 #
-#all_loggers$curt_diff <- sign(all_loggers$diff)*abs(all_loggers$diff)^(1/3)
-#mod_curt <- lme(curt_diff ~ snowcm + nt + hum + precmm + ffkmh + month,
-#   random = ~1 | station_name, data=all_loggers, na.action=na.exclude)
+all_loggers$curt_diff <- sign(all_loggers$diff)*abs(all_loggers$diff)^(1/3)
+mod_curt <- lme(curt_diff ~ snowcm + nt + hum + precmm + ffkmh + month,
+   random = ~1 | station_name, data=all_loggers, na.action=na.exclude)
 #mod_curt_corARMA <- update(mod_curt, correlation=corARMA(p=2, q=2))
 #d_mod_curt <- data.frame(x=fitted(mod_curt_corARMA), y=resid(mod_curt_corARMA, type="n"))
 #mod_resid_vs_fitted_and_qq(d_mod_curt, minmax, height, "curt")
 
-hist_of_diff(all_loggers, minmax, height)
-#print(nrow(all_loggers))
+#hist_of_diff(all_loggers, minmax, height)
 print(paste("Mean of $diff is ", round(mean(all_loggers$diff), 2),
     ". Median is ",
     median(all_loggers$diff), ". For temperature ", minmax,

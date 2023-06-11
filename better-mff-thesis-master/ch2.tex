@@ -1,8 +1,10 @@
 \chapter{Analýza dat} \label{chap:analysis}
-V první části druhé kapitoly se zaměříme na popis struktury použitých dat. Budeme pracovat maximálně na časovém intervalu od 12.10.2019 do 21.5.2021, ačkoliv meteorologické stanice mají dostupná data pro celý tento interval tak některá čidla měřila po kratší dobu.
+V první části druhé kapitoly se zaměříme na popis struktury použitých dat. Budeme pracovat maximálně na časovém intervalu od 12.10.2019 do 21.5.2021, ačkoliv meteorologické stanice mají dostupná data pro celý tento interval tak některá čidla měřila po kratší dobu. V druhé části budeme analyzovat autokorelační a prostorovou složku dat, a hledat vhodný model pro vysvětlení rozdílů naměřených teplot.
 
 \section{Využitá data z ČHMÚ}
 Využili jsme data z řady nejvhodnější a nejbližších meteorologických stanic. Nejvíce informací můžeme získat ze synoptické stanice Churáňov. Z dostupných dat jsme pro další analýzu stáhli data o aktuální teplotě ve výšce $\SI{2}{m}$, rychlosti větru, výšce sněhové pokrývky, hodinových srážek a oblačnosti. Tyto data, měřená každou hodinu, jsme dále doplnili stanicemi v Borové Ladě, Kvildě, Horské Kvildě a Javoří Pile. Pro tyto stanice jsme měli k dispozici hodinová data o výšce sněhové pokrývky a pro Borovou Ladu informace ze srážkoměrů každých deset minut.
+
+Chybějící oblačnost jsme doplnili z reanalýzy ERA5, způsobem popsaným v odstavci \ref{chap:era5}.
 
 Na obrázku \ref{fig:chmuukazka} můžeme vidět ukázku dat z meteorologické stanice Churáňov. Maximální teplota za období 12.10.2019 až 20.5.2021 byla $\SI{27}{\degree C}$ naměřena 21.8.2020 a minimální $\SI{-16.1}{\degree C}$ naměřena 11.2.2021 a 13.2.2021. Nejsilnější sněhová pokrývka byla $\SI{48}{cm}$.
 
@@ -47,7 +49,7 @@ Umístění čidel bylo vybíráno tak aby pokryly gradienty nadmořské výšky
 	\label{fig:rozlozenicidel}
 \end{figure}
 
-Data vykazují malou chybovost, duplicitní a chybějící záznamy byly vyřazeny. Dále byla data vizuálně překontrolována a části, kdy byla čidla např. povytažená ze země (pozná se podle hodnot půdní vlhkosti), byly nahrazeny hodnotami NA. Podobně pokud čidlo T1 spadlo ze stromu tak jsou hodnoty nahrazeny NA. Toto čištění dat provedli RNDr. Josef Brůna, Ph.D., doc. Ing. Jan Wild, Ph.D. a další s jejichž svolením jsou data využitá v této práci.
+Data vykazují malou chybovost, duplicitní a chybějící záznamy byly vyřazeny. Dále byla data vizuálně překontrolována a části, kdy byla čidla např. povytažená ze země (pozná se podle hodnot půdní vlhkosti), byly nahrazeny hodnotami NA. Podobně pokud čidlo T1 spadlo ze stromu tak jsou hodnoty nahrazeny NA. Toto čištění dat provedli RNDr. Josef Brůna, Ph.D., doc. Ing. Jan Wild, Ph.D. a další s jejichž svolením jsou data využitá v této práci. Ve velmi ojedinělých případech chyběly odpovídající hodnoty teplot ve $\SI{2}{m}$ v době kdy při zemi nastalo denní maximum nebo minimum. Pokud existovaly hodnoty až 30 minut starší tak jsme použily tyto, v opačném případě jsme čidlo pro daný den vyřadili, šlo o jednotky případů.
 
 Dostupnost dat z čidel je vidět na obrázku \ref{fig:dostupnostdat}, vidíme zde dvě skupiny čidel, jedny, nacházející se v Národním parku Bavorský les mají dostupná data pro cca 400 dnů, zatímco čidla z Národního parku Šumava mají dostupná data pro téměř 600 dnů. Na obrázku \ref{fig:dostupnostdnu} vidíme pak na kolika čidlech jsou zastoupeny jednotlivé dny.
 
