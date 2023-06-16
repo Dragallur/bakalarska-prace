@@ -16,7 +16,7 @@ c1blad01 <- c(48.9904850, 13.6620817)
 c4japi01 <- c(49.0361536, 13.4212786)
 c1chur01 <- c(49.0682586, 13.6156192)
 
-tim_c <- c("all")
+tim_c <- c("coldhalf")
 minmax_c <- c("min", "max")
 height_c <- c("15cm", "0cm")
 bayerischer_wald_c <- c(TRUE)
@@ -135,7 +135,11 @@ if (tim == "winter"){
 	synop <- synop[((synop$month == "06" | synop$month == "07") | synop$month == "08"),]
 } else if (tim == "autumn") {
 	synop <- synop[((synop$month == "09" | synop$month == "10") | synop$month == "11"),]
-} 
+}  else if (tim == "coldhalf") {
+	synop <- synop[(((((synop$month == "11" | synop$month == "12") | synop$month == "01") | synop$month == "02") | synop$month == "03") | synop$month == "04"),]
+} else if (tim == "warmhalf") {
+	synop <- synop[(((((synop$month == "05" | synop$month == "06") | synop$month == "07") | synop$month == "08") | synop$month == "09") | synop$month == "10"),]
+}
 dat <- str_split_fixed(synop$time,"\\:",3)
 synop$hour <- dat[,1]
 
@@ -148,6 +152,10 @@ if (nrow(db[db$date==unique(db$date)[length(unique(db$date))],])!=96){
 }
 
 fin_date <- rev(intersect(intersect(unique(synop$Date),unique(da$date)),unique(db$date)))
+if (identical(fin_date, character(0))) {
+	print(paste("Skipping station ", station_name, ", since there are no intersecting dates."))
+	next #when using coldhalf/warmhalf, sometimes there is no data left, thus we need to skip station
+	} 
 final_data <- data.frame(date=fin_date)
 
 da <- da[da$date %in% final_data$date,]
@@ -359,6 +367,6 @@ if (dist_cutoff > 0){
 print(paste("Total of  ", nrow(all_loggers), " data points.", sep = ""))
 
 all_loggers$month <- (abs(all_loggers$month)+all_loggers$month)/2
-#save(all_loggers, file=paste("data_", minmax, tim, height, "_BW", bw_text, dist_cutoff, ".RData", sep = ""))
+save(all_loggers, file=paste("data_", minmax, tim, height, "_BW", bw_text, dist_cutoff, ".RData", sep = ""))
 
 }}}}}
