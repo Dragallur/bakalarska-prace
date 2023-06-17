@@ -135,3 +135,15 @@ gg_variogram <- function(vario, minmax, height, dat){
 	ggsave(paste("variogram_", minmax, height, month(dat), ".png", sep=""), plot = plt, width=8, height=8, dpi=343)
 	setwd(wd)
 }
+
+gg_insolation <- function(all_loggers, station_name, height, minmax){
+	plt <- ggplot(data=all_loggers[all_loggers$station_name == station_name,], aes(x=as.Date(date, format="%d.%m.%Y"), y=month)) + geom_point(size=1) +
+	    labs(x=expression(paste("Měsíc")), y=expression(paste("Insolace ", "[", ~W/m^2, ,"]")), title=paste("Průběh insolace na loggeru", sep="")) +
+        theme(text=element_text(family="Latin Modern Math",size=24)) +
+		scale_x_date(date_breaks = "2 months" , date_labels = "%b")
+	wd <- getwd()
+	setwd("/home/vojta/Desktop/mffuk/bakalarka/analyze/out/")
+	ggsave(paste("insolation_", minmax, height, station_name, ".png", sep=""), plot = plt, width=8, height=8, dpi=343)
+	setwd(wd)
+
+}

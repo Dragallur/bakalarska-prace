@@ -1,5 +1,4 @@
-\chapter{Analýza lesního mikroklimatu}
-\label{chap:ch1}
+\chapter{Analýza lesního mikroklimatu}\label{chap:ch1}
 
 V následující části \ref{chap:fyz} popíšeme fyzikální děje odehrávající se poblíž zemského povrchu z pohledu mikrometeorologie a mikroklimatologie. Od jednoduchých ilustračních příkladů se přesuneme k tomu, jaký vliv má na mikroklima přítomnost vegetace \ref{chap:veg} a topografie \ref{chap:topo}. V závěrečné části této kapitoly \ref{chap:measure} bude popsáno jak meteorologické podmínky ovlivňují teplotu a jak jsou měřeny, a v \ref{chap:sumavabavorskyles} se podíváme na klima typické pro Národní park Šumava a Bavorský les. V kapitole \ref{chap:statistika} jsou popsány statistické metody využité v kapitole \ref{chap:analysis}.
 
@@ -299,11 +298,16 @@ kde $\mathbf{y}$ je vektor pozorovaných hodnot, $\mathbf{\beta}$ je neznámý v
 
 Předpokládáme u lineárního smíšeného modelu normální rozdělení residuí a očekáváme homoskedasticitu, tedy to, že rezidua nezávisí na hodnotě měřené veličiny. Dále také předpokládáme data bez autokorelační struktury. Jak ovšem uvidíme v kapitole \ref{chap:analysis}, tak naše data vykazují časovou korelační strukturu. Další předpoklad je normální rozdělení náhodný efektů modelu\cite{hefleytrevorj2017}. 
 
-Pro modelování autokorelační struktury můžeme využít ARMA (autoregressive-moving-average) model. Ten je definován jako\cite{wilsongranville2016}
+Pro modelování autokorelační struktury můžeme využít ARMA (autoregressive moving average) model. Ten je definován jako\cite{wilsongranville2016}
 $$y_T = \epsilon_T + \sum_{i=1}^{p}u_i y_{T-i} + \sum_{i=1}^{q}\beta_i\varepsilon_{T-i}$$,
 kde $y_T$ časová řada, $\epsilon$ je náhodná chyba, $u_i$ jsou parametry náhodné proměnné a $\beta_i$ jsou parametry fixní proměnné. 
 
 Na vypočteném modelu provedeme F-test pomocí funkce \texttt{anova} programacího jazyku \texttt{R}.
+
+\subsection{Ověření normality residuálů a homoskedasticity}
+Pro srovnání dvou statistických rozdělení používáme kvantil-kvantilový graf. V našem případě chceme zjistit, jestli residuály modelu popsaného v \ref{chap:lme} jsou normálně rozdělené. V tomto případě máme typicky na ose $x$ teoretické kvantily normálního rozdělení a na ose $y$ kvantily našeho rozdělení. Čím blíže jsou pak hodnoty přímce $y(x)=x$ tím lépe odpovídají residuály normálnímu rozdělení (až na násobek a konstantu rozdělení)\cite{qqplot}. Také bychom mohli použít nějaký test normality dat jako například Shapiro-Wilkův test, jak ovšem uvidíme v kapitole \ref{chap:analysis} naše data by nikdy tímto statistickým testem neprošly, protože tento test pro velké datové soubory vyhodnotí, že data nejsou normálně rozdělená i když je zde velmi malá odchylka od normálního rozdělení\cite{shapirowilk}. 
+
+Homoskedasticitu budeme ověřovat také graficky, pomocí srovnání fitovaných hodnot a residuálů modelu. Pokud nebyl porušen předpoklad homoskedasticity tak nesmíme pozorovat závislost mezi fitovanými hodnotami a residuály, heteroskedasticita by například znamenala, že residuály modelu mají větší rozptyl pro vyšší fitované hodnoty\cite{homoscedasticity}.
 
 \subsection{Semivariogram}\label{chap:variogram}
 Pro posouzení prostorové korelace dat využijeme metodu variogramu. Experimentální variogram nám určuje prostorovou závislost naměřených hodnot. V našem případě jde o hodnoty naměřených teplot neboli jejich rozdíl. Experimentální semivariogram může být definován například následovně
@@ -315,4 +319,4 @@ Pro posouzení prostorové korelace dat využijeme metodu variogramu. Experiment
 kde v našem případě $t(\mathbf{x}_i)$ a $t(\mathbf{x}_i+\mathbf{h})$ jsou pozorované hodnoty (rozdílů) teplot na jednotlivých čidlech a $m(\mathbf{h})$ je počet párů teplot vzdálených od sebe o $\mathbf{h}$. Hodnota vzdálenosti $\mathbf{h}$ se tedy pohybuje od vzdálenosti dvou nejbližších čidel až po vzdálenost dvou nejvzdálenějších čidel. Variogram je typicky dvojnásobek semivariogramu tedy $2\gamma(\mathbf{h})$\cite{variogram}.
 
 \subsection{Použitý software}
-Pro zpracování dat jsme využívali primárně programovací jazyk \texttt{R}\cite{Rlanguage} a jeho verzi \texttt{4.1.3}. Dále jsme použili následující knihovny pro přípravu a analýzu dat: \texttt{stringr}\cite{stringr}, \texttt{e1071}\cite{e1071}, \texttt{xlsx}\cite{xlsx}, \texttt{geosphere}\cite{geosphere}, \texttt{ggplot2}\cite{ggplot2}, \texttt{lmtest}\cite{lmtest}, \texttt{data.table}\cite{data.table}, \texttt{lubridate}\cite{lubridate}, \texttt{nlme}\cite{nlme}, \texttt{forecast}\cite{forecast}, \texttt{moments}\cite{moments}, \texttt{profvis}\cite{profvis} a \texttt{climate}\cite{climate}. Pro otevření dat formátu \texttt{grib} a jejich transformaci z reanalýzy ERA5 jsme použili programovací jazyk \texttt{Python}, verzi \texttt{3.8.13}\cite{Python} a knihovny \texttt{xarray}\cite{xarray}, \texttt{numpy}\cite{numpy}, \texttt{pandas}\cite{pandas}, \texttt{cfgrib}\cite{cfgrib} a \texttt{eccodes}\cite{eccodes}. Pro vykreslení obrázku \ref{fig:rozlozenicidel} byl použit software \texttt{QGIS}, verze \texttt{3.10}\cite{qgis}
+Pro zpracování dat jsme využívali primárně programovací jazyk \texttt{R}\cite{Rlanguage} a jeho verzi \texttt{4.1.3}. Použili jsme následující baličky a knihovny pro přípravu a analýzu dat: \texttt{stringr}\cite{stringr}, \texttt{e1071}\cite{e1071}, \texttt{xlsx}\cite{xlsx}, \texttt{geosphere}\cite{geosphere}, \texttt{ggplot2}\cite{ggplot2}, \texttt{lmtest}\cite{lmtest}, \texttt{data.table}\cite{data.table}, \texttt{lubridate}\cite{lubridate}, \texttt{nlme}\cite{nlme}, \texttt{forecast}\cite{forecast}, \texttt{moments}\cite{moments}, \texttt{profvis}\cite{profvis} a \texttt{climate}\cite{climate}. Pro otevření dat formátu \texttt{grib} a jejich transformaci z reanalýzy ERA5 jsme použili programovací jazyk \texttt{Python}, verzi \texttt{3.8.13}\cite{Python} a knihovny \texttt{xarray}\cite{xarray}, \texttt{numpy}\cite{numpy}, \texttt{pandas}\cite{pandas}, \texttt{cfgrib}\cite{cfgrib} a \texttt{eccodes}\cite{eccodes}. Pro vykreslení obrázku \ref{fig:rozlozenicidel} byl použit software \texttt{QGIS}, verze \texttt{3.10}\cite{qgis}
