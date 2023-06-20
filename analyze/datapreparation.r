@@ -16,11 +16,11 @@ c1blad01 <- c(48.9904850, 13.6620817)
 c4japi01 <- c(49.0361536, 13.4212786)
 c1chur01 <- c(49.0682586, 13.6156192)
 
-tim_c <- c("all")
-minmax_c <- c("max")
-height_c <- c("15cm")
+tim_c <- c("warmhalf")
+minmax_c <- c("max", "min")
+height_c <- c("15cm", "0cm")
 bayerischer_wald_c <- c(TRUE)
-dist_cutoff_c <- 3000
+dist_cutoff_c <- 0 #closest logger is NPS_4311_D_TMS
 station_cutoff <- c(c1chur01, deparse(substitute(c1chur01)))
 insol <- TRUE
 size_nrow <- 228
@@ -367,6 +367,6 @@ if (dist_cutoff > 0){
 print(paste("Total of  ", nrow(all_loggers), " data points.", sep = ""))
 
 all_loggers$month <- (abs(all_loggers$month)+all_loggers$month)/2
-#save(all_loggers, file=paste("data_", minmax, tim, height, "_BW", bw_text, dist_cutoff, ".RData", sep = ""))
+save(all_loggers, file=paste("data_", minmax, tim, height, "_BW", bw_text, dist_cutoff, ".RData", sep = ""))
 
 }}}}}
