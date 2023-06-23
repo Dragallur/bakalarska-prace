@@ -4,8 +4,6 @@ V první části druhé kapitoly se zaměříme na popis struktury použitých d
 \section{Využitá data z ČHMÚ}
 Využili jsme data z řady nejvhodnější a nejbližších meteorologických stanic. Nejvíce informací můžeme získat ze synoptické stanice Churáňov. Z dostupných dat jsme pro další analýzu stáhli data o aktuální teplotě ve výšce $\SI{2}{m}$, rychlosti větru, výšce sněhové pokrývky, hodinových srážek a oblačnosti. Tyto data, měřená každou hodinu, jsme dále doplnili stanicemi v Borové Ladě, Kvildě, Horské Kvildě a Javoří Pile. Pro tyto stanice jsme měli k dispozici hodinová data o výšce sněhové pokrývky a pro Borovou Ladu informace ze srážkoměrů každých deset minut.
 
-Chybějící oblačnost jsme doplnili z reanalýzy ERA5, způsobem popsaným v odstavci \ref{chap:era5}.
-
 Na obrázku \ref{fig:chmuukazka} můžeme vidět ukázku dat z meteorologické stanice Churáňov. Maximální teplota za období 12.10.2019 až 20.5.2021 byla $\SI{27}{\degree C}$ naměřena 21.8.2020 a minimální $\SI{-16.1}{\degree C}$ naměřena 11.2.2021 a 13.2.2021. Nejsilnější sněhová pokrývka byla $\SI{48}{cm}$.
 
 \begin{figure}
@@ -36,6 +34,11 @@ Na obrázku \ref{fig:chmuukazka} můžeme vidět ukázku dat z meteorologické s
 	\caption{Data ze synoptické stanice Churáňov za období 12.10.2019 až 20.5.2021} 
 	\label{fig:chmuukazka}
 \end{figure}
+
+\subsection{Doplnění oblačnosti z ERA5}
+Meteorologická stanice Churáňov měřící podle principů popsaných v kapitole \ref{chap:meteostations} zaznamenává oblačnost každou hodinu. Data jsou zaznamenávána pouze přes den, v noci máme chybějící hodnoty. Maximální teploty jsou typicky dosažené během dne, kdy většinou oblačnost známe. Například v zimě pod sněhem může maximální denní teplota být dosažena i v noci (obrázek \ref{fig:hours}). Minimální denní teploty na druhou stranu typicky nastávají během ranních hodin, po východu Slunce, ale ojediněle i před ním. Pro minimální teploty nám tedy často chybí odpovídající oblačnost. Vyřazení těchto hodnot by vložilo velké zkreslení do dat, tudíž byla zvolena cesta, kdy využijeme data z projektu ERA5.
+
+Pro každou hodnotu, která chybí ze staničního měření použijeme nejbližší hodnotu z ERA5 a to konkrétně z $\SI{49}{\degree}$ severní šířky a $\SI{13.5}{\degree}$ východní délky. Tyto data byla vzdálená od stanice Churáňov $\SI{14.8}{km}$.
 
 \section{Insolace}
 Na obrázku \ref{fig:insolacelogger} můžeme vidět hodnoty insolace spočtené podle odstavce \ref{chap:insolation} pro čidlo, které je nejblíž stanici Churáňov. Všimněme si charakteristické sinusoidy, která nám určuje téměř hodnotu maximální denní insolace. Ve většině případů nejde o maximum, protože maximální denní teploty nastávají většinou později, než je maximum insolace a také pracujeme na časovém měřítku 15 minut, a tedy je malá pravděpodobnost, že se maximální denní teplota trefí do maxima insolace. Dále si všimněme nulových hodnot, které jsou přítomny především v zimě. Jde o hodnoty, kdy nastalo denní maximum v noci (typicky kvůli přítomnosti sněhu) a tudíž má insolace nulovou hodnotu.
@@ -333,7 +336,9 @@ Pro každý model budeme ověřovat předpoklady, nyní krátce ilustrujeme prob
 	\label{fig:qq}
 \end{figure}
 
-Vidíme, že nejlépe normálnímu rozdělení odpovídá transformace třetí odmocniny a proto s ní budeme nadále pracovat. Transformace ovšem není dokonalá, stále jsme se úplně nezbavili šikmosti (skewness). Na obrázku \ref{fig:resvsfit_curt} můžeme vidět srovnání residuálů modelu s fitovanými hodnotami. Na obrázku můžeme vidět, že v takto transformovaných datech není výrazná heteroskedasticita. Pro ilustraci důležitosti ARMA modelu na obrázku \ref{fig:acf_curtnoARMA} autokorelační funkci bez modelu ARMA a na \ref{fig:acf_curtARMA22} s modelem ARMA. Hodnota $\text{ACF}$ pro $\text{lag}=0$ je vyřazená pro větší přehlednost grafu, vždy nabývá hodnoty $1$.
+Vidíme, že nejlépe normálnímu rozdělení odpovídá transformace třetí odmocniny a proto s ní budeme nadále pracovat. Transformace ovšem není dokonalá, stále jsme se úplně nezbavili šikmosti (skewness). Na obrázku \ref{fig:resvsfit_curt} můžeme vidět srovnání residuálů modelu s fitovanými hodnotami. Na obrázku můžeme vidět, že v takto transformovaných datech není výrazná heteroskedasticita.
+
+Homoskedasticitu budeme ověřovat graficky, pomocí srovnání fitovaných hodnot a residuálů modelu. Pokud nebyl porušen předpoklad homoskedasticity tak nesmíme pozorovat závislost mezi fitovanými hodnotami a residuály, jak bylo popsáno v kapitole \ref{chap:lme}. Na obrázku \ref{fig:resvsfit_currt} vidíme srovnání residuálů modelu s fitovanými hodnotami a není zde žádná výrazná heteroskedasticita.
 
 \begin{figure}
 	\centering
@@ -341,6 +346,8 @@ Vidíme, že nejlépe normálnímu rozdělení odpovídá transformace třetí o
 	\caption{Srovnání residuálů modelu s fitovanými hodnotami pro transformaci pomocí třetí odmocniny.}
 	\label{fig:resvsfit_curt}
 \end{figure}
+
+Pro ilustraci důležitosti ARMA modelu na obrázku \ref{fig:acf_curtnoARMA} autokorelační funkci bez modelu ARMA a na \ref{fig:acf_curtARMA22} s modelem ARMA. Hodnota $\text{ACF}$ pro $\text{lag}=0$ je vyřazená pro větší přehlednost grafu, vždy nabývá hodnoty $1$.
 
 Vidíme, že přidání ARMA s hodnotami se výrazně zlepší autokorelační funkce a korelační strukturu jsme téměř odfiltrovali. Testovali jsme i jiné hodnoty $p$ a $q$, ale pro tyto nám vyšla autokorelační funkce nejlepší. S rostoucím $p$ a $q$ také roste výpočetní náročnost, pro $p=3$ a $q=3$ se ACF téměř nezmění, ale výpočet trvá až 4-krát déle (na počítači, který byl používán ke spracování šlo o více než 2 hodiny výpočetního času).
 
