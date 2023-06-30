@@ -8,8 +8,8 @@ library(MuMIn)
 setwd("/home/vojta/Desktop/mffuk/bakalarka/analyze/")
 source("functions_analyze.r")
 
-tim_c <- c("warmhalf") #all, winter, spring, summer, autumn, coldhalf, warmhalf
-height_c <- c("15cm", "0cm")
+tim_c <- c("all", "coldhalf") #all, winter, spring, summer, autumn, coldhalf, warmhalf
+height_c <- c("15cm")
 minmax_c <- c("min", "max")
 bayerischer_wald_c <- c(TRUE)
 dist_cutoff_c <- 0
@@ -40,7 +40,7 @@ all_loggers$curt_diff <- sign(all_loggers$diff)*abs(all_loggers$diff)^(1/3)
 all_loggers <- subset(all_loggers, select=-c(pr24)) #pr24 is not needed
 
 if (snow_categorical){
-    all_loggers$snowcm <- ifelse(all_loggers$snowcm == 0, 0, ifelse(all_loggers$snowcm < 15, 1, 2))
+    all_loggers$snowcm <- ifelse(all_loggers$snowcm == 0, 0, ifelse(all_loggers$snowcm <= 15, 1, 2))
 }
 
 if (tim == "warmhalf"){
@@ -52,7 +52,6 @@ if (tim == "warmhalf"){
         random = ~1 | station_name, data=all_loggers, na.action=na.exclude)
     mod_curt_corARMA <- update(mod_curt, correlation=corARMA(p=2, q=2))
 }
-
 
 #d_mod_curt <- data.frame(x=fitted(mod_curt_corARMA), y=resid(mod_curt_corARMA, type="n"))
 #mod_resid_vs_fitted_and_qq(d_mod_curt, minmax, height, "curt")
@@ -66,6 +65,6 @@ load(paste("ARMAmod_", minmax, height, tim, ".RData", sep=""))
 print(paste("Mean of $diff is ", round(mean(all_loggers$diff), 2),
     ". Median is ",
     median(all_loggers$diff), ". For temperature ", minmax,
-    " and height of ", height, ".", sep=""))
+    ", height of ", height, " and time ", tim, ".", sep=""))
 
 }}}}}

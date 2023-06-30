@@ -1,29 +1,19 @@
 \chapter{Výsledky a diskuze}\label{chap:ch3}
-V první části této kapitoly ukážeme řadu modelů, jejichž výpočet byl po teoretické stránce popsán v části \ref{chap:statistika} a následně v druhé kapitole \ref{chap:methods} bylo na jednom modelu ilustrováno zpracování dat a použité metody.
-
-V druhé části budeme diskutovat výsledky.
+V první části této kapitoly ukážeme řadu modelů, jejichž výpočet byl po teoretické stránce popsán v kapitole \ref{chap:statistika}. V druhé části budeme diskutovat výsledky.
 
 \section{Výsledky}
+Nyní budeme studovat pomocí lineárního smíšeného modelu vztah mezi rozdílem maximální resp. minimálních teplot poblíž země a ve $\SI{2}{m}$ a meteorologických podmínek: výšce sněhu, půdní vlhkosti, oblačnosti, insolaci, rychlosti větru a množství srážek.
 
-Nyní budeme studovat pomocí lineárního smíšeného modelu vztah mezi rozdílem maximální resp. minimálních teplot poblíž země a ve $\SI{2}{m}$ a meteorologických podmínek: výšce sněhu, vlhkosti, oblačnosti, insolaci, rychlosti větru a množství srážek.
-
-Budeme zde uvádět celou řadu modelů, nejdříve se budeme zabývat minimálními a maximálními denními teplotami naměřenými na čidlech blízko země a to ve výšce $\SI{15}{cm}$ nad zemí a $\SI{0}{cm}$ nad zemí. 
+Uvedeme zde celkově 16 modelů. Nejdříve se budeme zabývat minimálními a maximálními denními teplotami naměřenými na čidlech blízko země a to ve výšce $\SI{15}{cm}$ nad zemí a $\SI{0}{cm}$ nad zemí. 
 
 Dále rozdělíme data na dobu se sněhem a bez sněhu podle množství sněhu, které bylo naměřeno na stanici Churáňov \ref{fig:synop_snowcm}. Teplou sezónou (téměř bez sněhu) pak budeme nazývat období od začátku května do konce října a studená sezóna bude od začátku listopadu do konce dubna. Pro tyto dvě možnosti opět ukážeme modely pro maximální a minimální denní teploty naměřené v $\SI{15}{cm}$ a $\SI{0}{cm}$ nad zemí.
 
 Poslední varianta se bude týkat pouze teplot v $\SI{15}{cm}$, protože změníme prediktor sníh na kategorickou proměnnou. Hodnota $0$ bude odpovídat hodnotám bez sněhu, $1$ hodnotám se sněhem menším než $\SI{15}{cm}$ a $2$ hodnotám nad $\SI{15}{cm}$.
 
+Pro každý model uvedeme počet měření s kterými pracujeme, období z kterého data pochází, počet čidel, podmíněné a marginální $R^2$, koeficienty jednotlivých prediktorů v modelu, jejich chyba a označíme ty, které vyšly jako statisticky nevýznamné.
+
 \subsection{Celosezónní modely}
-Nyní se budeme zabývat postupně modely, kdy závislá proměnná bude
-
-\begin{itemize}
-	\item rozdíl maximální denní teploty naměřené v $\SI{15}{cm}$ a teploty v té době naměřené ve $\SI{2}{m}$,
-	\item rozdíl maximální denní teploty naměřené v $\SI{0}{cm}$ a teploty v té době naměřené ve $\SI{2}{m}$,
-	\item rozdíl minimální denní teploty naměřené v $\SI{15}{cm}$ a teploty v té době naměřené ve $\SI{2}{m}$,
-	\item rozdíl minimální denní teploty naměřené v $\SI{0}{cm}$ a teploty v té době naměřené ve $\SI{2}{m}$.
-\end{itemize}
-
-Pro každý model uvedeme počet měření s kterými pracujeme, období z kterého data pochází, počet čidel, koeficienty jednotlivých prediktorů v modelu, jejich chyba a označíme ty, které vyšly jako statisticky nevýznamné.
+V tabulce \ref{tab:basicmodels} jsou modely pro všechna dostupná data a kombinaci minimálních a maximálních denních teplot a výšky pozemního čidla $\SI{0}{cm}$ a $\SI{15}{cm}$.
 
 \begin{table}
 \centering\footnotesize\sf
@@ -34,25 +24,103 @@ Pro každý model uvedeme počet měření s kterými pracujeme, období z kter�
 	Počet měření & $76627$ & $76635$ & $74225$ & $74083$\\
 	Období & \multicolumn{4}{c}{12.10.2019 až 17.5.2021} \\
 	Počet čidel & \multicolumn{4}{c}{157} \\
+	$R_m^2$ & $0.031$ & $0.055$ & $0.14$ & $0.050$\\
+	$R_c^2$ & $0.20$ & $0.16$ & $0.42$ & $0.28$\\
 \midrule
 	Konstanta & $\SI{0.42(6)}{}$ & $\SI{-0.28(7)}{}$ & $\SI{-1.23(5)}{}$ & $\SI{0.30(6)}{}$\\
 	Výška sněhu & $\SI{0.0045(7)}{}$ & $\SI{0.0197(9)}{}$ & $\SI{0.0222(5)}{}$ & $\SI{0.0171(5)}{}$\\
 	Oblačnost & $\SI{-0.041(8)}{}$ & $\SI{0.09(1)}{}$ & $\SI{0.211(6)}{}$ & $\SI{0.053(8)}{}$\\
 	Vlhkost & $\SI{-0.6(1)}{}$ & $\SI{0.8(1)}{}$ & $\SI{1.9(1)}{}$ & $\SI{0.9(1)}{}$\\
-	Srážky & \textcolor{red}{$\SI{0.002(2)}{}$} & \textcolor{red}{$\SI{0.02(1)}{}$} & \textcolor{red}{$\SI{0.0006(6)}{}$} & $\SI{0.0008(4)}{}$\\
+	Srážky & \textcolor{gray}{$\SI{0.002(2)}{}$} & \textcolor{gray}{$\SI{0.02(1)}{}$} & \textcolor{gray}{$\SI{0.0006(6)}{}$} & $\SI{0.0008(4)}{}$\\
 	Rychlost větru & $\SI{-0.0072(4)}{}$ & $\SI{-0.0138(5)}{}$ & $\SI{-0.0018(4)}{}$ & $\SI{-0.0184(5)}{}$\\
 	Insolace & $\SI{0.00042(1)}{}$ & $\SI{-0.00026(1)}{}$ & $\SI{0.00006(2)}{}$ & $\SI{-0.00018(3)}{}$\\
 \bottomrule
 \end{tabular}
-	\caption{Srovnání jednotlivých modelů pro všechna dostupná data. Červeně označené jsou hodnoty pro které vyšla v F testu p hodnota $>0.05$ a nepovažujeme je statisticky významné od nuly (nezavrhli jsme nulovou hypotézu).}
+	\caption{Srovnání jednotlivých modelů pro všechna dostupná data. Šedě označené jsou hodnoty, pro které vyšla v F testu p hodnota $>0.05$, a nepovažujeme je statisticky významné od nuly (nezavrhli jsme nulovou hypotézu). Standartní chyba koeficientu je daná v závorce.}
 \label{tab:basicmodels}
 \end{table}
 
-\subsection{Modely pro období bez sněhu}
+\subsection{Sezónní modely}
+Podobně jako pro modely se všemi daty se nyní omezíme na období bez sněhu, tedy od května do října. Výsledky můžeme vidět v tabulce \ref{tab:warmhalfmodels}. Pro tyto modely jsme vyřadili prediktor výška sněhu.
 
-\subsection{Modely pro období se sněhem}
+\begin{table}
+\centering\footnotesize\sf
+\begin{tabular}{lrrrr}
+\toprule
+	& $\Delta t_{15cm,max}$ & $\Delta t_{0cm,max}$ & $\Delta t_{15cm,min}$ & $\Delta t_{0cm,min}$\\
+\midrule
+	Počet měření & $32062$ & $32108$ & $30716$ & $30651$\\
+	Období & \multicolumn{4}{c}{+++} \\
+	Počet čidel & \multicolumn{4}{c}{157} \\
+	$R_m^2$ & $0.098$ & $0.20$ & $0.24$ & $0.21$\\
+	$R_c^2$ & $0.51$ & $0.60$ & $0.71$ & $0.57$\\
+\midrule
+	Konstanta & $\SI{-0.55(7)}{}$ & \textcolor{gray}{$\SI{-2.5(1)}{}$} & $\SI{-2.44(7)}{}$ & $\SI{-1.60(8)}{}$\\
+	Oblačnost & $\SI{-0.16(1)}{}$ & $\SI{0.11(2)}{}$ & $\SI{0.265(7)}{}$ & $\SI{0.21(1)}{}$\\
+	Vlhkost & $\SI{2.2(1)}{}$ & $\SI{6.7(2)}{}$ & $\SI{4.5(1)}{}$ & $\SI{5.1(2)}{}$\\
+	Srážky & $\SI{-0.04(1)}{}$ & $\SI{0.05(1)}{}$ & \textcolor{gray}{$\SI{0.0005(6)}{}$} & $\SI{0.0059(9)}{}$\\
+	Rychlost větru & $\SI{-0.0034(7)}{}$ & $\SI{-0.0020(9)}{}$ & $\SI{0.0106(5)}{}$ & $\SI{-0.0065(7)}{}$\\
+	Insolace & $\SI{0.00065(1)}{}$ & $\SI{-0.00027(2)}{}$ & $\SI{0.00028(2)}{}$ & $\SI{0.00015(4)}{}$\\
+\bottomrule
+\end{tabular}
+	\caption{Srovnání jednotlivých modelů pro období bez sněhu. Šedě označené jsou hodnoty, pro které vyšla v F testu p hodnota $>0.05$, a nepovažujeme je statisticky významné od nuly (nezavrhli jsme nulovou hypotézu). Standartní chyba koeficientu je daná v závorce.}
+\label{tab:warmhalfmodels}
+\end{table}
+
+V tabulce \ref{tab:coldhalfmodels} jsou výsledky z modelování dat pro studenou část roku, od listopadu do dubna.
+
+\begin{table}
+\centering\footnotesize\sf
+\begin{tabular}{lrrrr}
+\toprule
+	& $\Delta t_{15cm,max}$ & $\Delta t_{0cm,max}$ & $\Delta t_{15cm,min}$ & $\Delta t_{0cm,min}$\\
+\midrule
+	Počet měření & $44563$ & $44528$ & $43505$ & $43429$\\
+	Období & \multicolumn{4}{c}{+++} \\
+	Počet čidel & \multicolumn{4}{c}{156} \\
+	$R_m^2$ & $0.066$ & $0.087$ & $0.12$ & $0.088$\\
+	$R_c^2$ & $0.19$ & $0.16$ & $0.29$ & $0.23$\\
+\midrule
+	Konstanta & $\SI{0.96(7)}{}$ & $\SI{0.99(7)}{}$ & $\SI{-0.11(6)}{}$ & $\SI{1.63(6)}{}$\\
+	Výška sněhu & $\SI{0.0031(7)}{}$ & $\SI{0.0158(8)}{}$ & $\SI{0.0214(6)}{}$ & $\SI{0.0152(6)}{}$\\
+	Oblačnost & $\SI{0.03(1)}{}$ & $\SI{0.09(1)}{}$ & $\SI{0.185(9)}{}$ & $\SI{-0.05(1)}{}$\\
+	Vlhkost & $\SI{-2.4(2)}{}$ & $\SI{-2.6(2)}{}$ & $\SI{-0.6(1)}{}$ & $\SI{-1.9(1)}{}$\\
+	Srážky & \textcolor{gray}{\SI{0.003(2)}{}} & $\SI{-0.04(2)}{}$ & \textcolor{gray}{$\SI{-0.001(1)}{}$} & \textcolor{gray}{$\SI{-0.0002(4)}{}$}\\
+	Rychlost větru & $\SI{-0.0098(6)}{}$ & $\SI{-0.0161(7)}{}$ & $\SI{-0.0073(5)}{}$ & $\SI{-0.0241(6)}{}$\\
+	Insolace & $\SI{0.00029(2)}{}$ & $\SI{-0.00030(2)}{}$ & $\SI{-0.00027(4)}{}$ & $\SI{-0.00033(5)}{}$\\
+\bottomrule
+\end{tabular}
+	\caption{Srovnání jednotlivých modelů pro období se sněhem. Šedě označené jsou hodnoty, pro které vyšla v F testu p hodnota $>0.05$, a nepovažujeme je statisticky významné od nuly (nezavrhli jsme nulovou hypotézu). Standartní chyba koeficientu je daná v závorce.}
+\label{tab:coldhalfmodels}
+\end{table}
 
 \subsection{Modely pro sníh jako kategorickou proměnnou}
+Jako poslední sadu modelů, ukážeme ty pro které, jsme výšku sněhu nahradili kategorickou proměnnou. Celkově spočítáme čtyři modely, které budou kombinací maximálních a minimálních teplot a období se sněhem a všech dat, abychom mohli modely lépe srovnávat.
+
+\begin{table}
+\centering\footnotesize\sf
+\begin{tabular}{lrrrr}
+\toprule
+	& $\Delta t_{all,max}$ & $\Delta t_{all,max}$ & $\Delta t_{cold,max}$ & $\Delta t_{cold,min}$\\
+\midrule
+	Počet měření &  & &  & \\
+	Období & \multicolumn{4}{c}{+++} \\
+	Počet čidel & \multicolumn{4}{c}{156} \\
+	%$R_m^2$ & $0.066$ & $0.087$ & $0.12$ & $0.088$\\
+	%$R_c^2$ & $0.19$ & $0.16$ & $0.29$ & $0.23$\\
+\midrule
+	Konstanta & $\SI{}{}$ & $\SI{}{}$ & $\SI{}{}$ & $\SI{}{}$\\
+	Výška sněhu & $\SI{}{}$ & $\SI{}{}$ & $\SI{}{}$ & $\SI{}{}$\\
+	Oblačnost & $\SI{}{}$ & $\SI{}{}$ & $\SI{}{}$ & $\SI{}{}$\\
+	Vlhkost & $\SI{}{}$ & $\SI{}{}$ & $\SI{}{}$ & $\SI{}{}$\\
+	Srážky & $\SI{}{}$ & $\SI{}{}$ & $\SI{}{}$ & $\SI{}{}$\\
+	Rychlost větru & $\SI{}{}$ & $\SI{}{}$ & $\SI{}{}$ & $\SI{}{}$\\
+	Insolace & $\SI{}{}$ & $\SI{}{}$ & $\SI{}{}$ & $\SI{}{}$\\
+\bottomrule
+\end{tabular}
+	\caption{Srovnání jednotlivých modelů, pro které nahradíme mocnost sněhu kategorickou proměnnou. Indexy $all$ a $cold$ označujeme, jestli jde o o model používající všechna data nebo pouze pro období roku se sněhem. Šedě označené jsou hodnoty, pro které vyšla v F testu p hodnota $>0.05$, a nepovažujeme je statisticky významné od nuly (nezavrhli jsme nulovou hypotézu). Standartní chyba koeficientu je daná v závorce.}
+	\label{tab:snowcategoricalmodels}
+\end{table}
 
 \section{Diskuze}
 

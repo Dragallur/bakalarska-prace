@@ -297,6 +297,13 @@ kde $\mathbf{y}$ je vektor pozorovaných hodnot, $\mathbf{\beta}$ je neznámý v
 
 U lineárního smíšeného modelu předpokládáme normální rozdělení residuí a očekáváme homoskedasticitu, tedy to, že rezidua nezávisí na hodnotě měřené veličiny \parencite{homoscedasticity}. Dále také předpokládáme data bez autokorelační a prostorové struktury a že máme normálně rozdělené náhodné efekty modelu \parencite{hefleytrevorj2017}. 
 
+Pro lineární smíšený model můžeme definovat marginální a podmíněné $R^2$. Tato hodnota nám ukazuje kolik variance model vysvětluje. Marginální $R_m^2$ udává varianci vysvětlenou pomocí fixních efektů a podmíněné $R_c^2$ celého modelu.
+\begin{gather}
+	R_m^2 = \frac{\sigma_f^2}{\sigma_f^2+\sigma_{\alpha}^2+\sigma_{\varepsilon}^2},\\
+	R_c^2 = \frac{\sigma_f^2+\sigma_{\alpha}^2}{\sigma_f^2+\sigma_{\alpha}^2+\sigma_{\varepsilon}^2},
+\end{gather}
+kde $\sigma_f^2$ je variance fixních efektů, $\sigma_{\alpha}$ je variance náhodných efektů a $\sigma_{\varepsilon}^2$ je variance pozorovaných hodnot \parencite{lmersquared}.
+
 \subsection{ARMA model}
 Pro modelování autokorelační struktury můžeme využít ARMA (autoregressive moving average) model. Ten je definován jako \parencite{wilsongranville2016}
 \begin{gather*}

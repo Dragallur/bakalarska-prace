@@ -2,9 +2,9 @@
 V první části druhé kapitoly se zaměříme na popis struktury použitých dat. V druhé části budeme analyzovat autokorelační a prostorovou složku dat, a hledat vhodný model pro vysvětlení rozdílů naměřených teplot.
 
 \section{Využitá data z ČHMÚ}
-Využili jsme data z řady nejvhodnější a nejbližších meteorologických stanic. Nejvíce informací můžeme získat ze synoptické stanice Churáňov. Z dostupných dat jsme pro další analýzu stáhli data o aktuální teplotě ve výšce $\SI{2}{m}$, rychlosti větru, výšce sněhové pokrývky, hodinových srážek a oblačnosti. Tyto data, měřená každou hodinu, jsme dále doplnili stanicemi v Borové Ladě, Kvildě, Horské Kvildě a Javoří Pile. Pro tyto stanice jsme měli k dispozici hodinová data o výšce sněhové pokrývky a pro Borovou Ladu informace ze srážkoměrů každých deset minut.
+Využili jsme data z meteorologických stanic Churáňov, Borová Lada, Kvilda, Horská Kvilda a Javoří pila. Nejvíce informací jsme získali ze synoptické stanice Churáňov. Z dostupných dat jsme pro další analýzu stáhli data o aktuální teplotě ve výšce $\SI{2}{m}$, rychlosti větru, výšce sněhové pokrývky, hodinových srážek a oblačnosti. Z ostatních stanic jsme měli k dispozici hodinová data o výšce sněhové pokrývky a pro Borovou Ladu informace ze srážkoměrů každých deset minut.
 
-Budeme pracovat maximálně na časovém intervalu od 12.10.2019 do 21.5.2021, ačkoliv meteorologické stanice mají dostupná data pro celý tento interval tak některá čidla měřila po kratší dobu (viz kapitola \ref{data_buav}).
+Budeme pracovat maximálně na časovém intervalu od 12.10.2019 do 21.5.2021, ačkoliv meteorologické stanice mají dostupná data pro celý tento interval tak některá čidla mají data dostupná po kratší dobu (viz kapitola \ref{chap:data_buav}).
 
 Na obrázku \ref{fig:chmuukazka} můžeme vidět ukázku dat z meteorologické stanice Churáňov. Maximální teplota ($\SI{27}{\degree C}$) za období 12.10.2019 až 20.5.2021 byla naměřena 21.8.2020 a minimální ($\SI{-16.1}{\degree C}$) byla naměřena 11.2.2021 a 13.2.2021. Nejsilnější sněhová pokrývka byla $\SI{48}{cm}$.
 
@@ -37,25 +37,14 @@ Na obrázku \ref{fig:chmuukazka} můžeme vidět ukázku dat z meteorologické s
 	\label{fig:chmuukazka}
 \end{figure}
 
-\subsection{Doplnění oblačnosti z ERA5}
-Meteorologická stanice Churáňov měřící podle principů popsaných v kapitole \ref{chap:meteostations} zaznamenává oblačnost každou hodinu. Data jsou zaznamenávána pouze přes den, v noci máme chybějící hodnoty. Maximální teploty jsou typicky dosažené během dne, kdy většinou oblačnost známe. Například v zimě pod sněhem může maximální denní teplota být dosažena i v noci. Minimální denní teploty na druhou stranu typicky nastávají během ranních hodin, po východu Slunce, ale ojediněle i před ním (viz kapitola \ref{chap:showingoffdata} a obrázek \ref{fig:hours}). Pro minimální teploty nám tedy často chybí odpovídající oblačnost. Vyřazení těchto hodnot by vložilo velké zkreslení do dat, tudíž byla zvolena cesta, kdy využijeme data z projektu ERA5.
+Meteorologická stanice Churáňov měřící podle principů popsaných v kapitole \ref{chap:meteostations}. Zaznamenává tedy oblačnost každou hodinu. Data jsou zaznamenávána pouze přes den, v noci máme chybějící hodnoty. Maximální teploty jsou typicky dosažené během dne, kdy většinou oblačnost známe. Například v zimě pod sněhem může maximální denní teplota být dosažena i v noci. Minimální denní teploty na druhou stranu typicky nastávají během ranních hodin, po východu Slunce, ale ojediněle i před ním (viz kapitola \ref{chap:showingoffdata} a obrázek \ref{fig:hours}). Pro minimální teploty nám tedy často chybí odpovídající oblačnost. Vyřazení těchto hodnot by vložilo velké zkreslení do dat, tudíž byla zvolena cesta, kdy využijeme data z projektu ERA5.
 
 Pro každou hodnotu, která chybí ze staničního měření použijeme nejbližší hodnotu z ERA5 a to konkrétně z $\SI{49}{\degree}$ severní šířky a $\SI{13.5}{\degree}$ východní délky. Tato data byla vzdálená od stanice Churáňov $\SI{14.8}{km}$. V kapitole \ref{chap:disc_era5} budeme diskutovat vliv nahrazení dat pomocí ERA5.
-
-\section{Insolace}
-Na obrázku \ref{fig:insolacelogger} můžeme vidět hodnoty insolace spočtené podle odstavce \ref{chap:insolation} pro čidlo, které je nejblíž stanici Churáňov. Všimněme si charakteristické sinusoidy, která nám určuje téměř hodnotu maximální denní insolace. Ve většině případů nejde o maximum, protože maximální denní teploty nastávají většinou později než maximum insolace. Také pracujeme na časovém měřítku 15 minut, a tedy je malá pravděpodobnost, že se maximální denní teplota trefí do maxima insolace. Dále si všimněme nulových hodnot, které jsou přítomny především v zimě. Jde o hodnoty, kdy nastalo denní maximum v noci (typicky kvůli přítomnosti sněhu), a tudíž má insolace nulovou hodnotu.
-
-\begin{figure}
-	\centering
-	\includegraphics[width=0.65\textwidth]{img/ch2/insolation_max15cmNPS_4311_D_TMS.png}
-	\caption{Hodnoty insolace na čidlu nejblíže Churáňovu v době dosažení maximální denní teploty ve výšce $\SI{15}{cm}$.}
-	\label{fig:insolacelogger}
-\end{figure}
 
 \section{Data z BÚ AV}\label{chap:data_buav}
 Data poskytnutá Botanickým ústavem Akademie věd České republiky byla naměřená dvěma typy čidel popsanými v kapitole \ref{chap:loggers}. Nadále se budeme zabývat pouze těmi plochami, které jsou opatřeny jak pozemními čidly, tak čidly ve standartní výšce $\SI{2}{m}$. Na obrázku \ref{fig:rozlozenicidel} můžeme vidět jejich prostorové rozložení, celkově jde o 157 čidel. 
 
-Umístění čidel bylo vybíráno tak aby pokryly gradienty nadmořské výšky (5 tříd), potenciální solární radiace (3 třídy) a topografického vlhkostního indexu (3 třídy). Plochy byly dále doplněny tak, aby bylo rovnoměrně pokryto území národních parků a aby se nevyskytovaly poblíž turistických stezek.
+Umístění čidel bylo vybíráno tak aby pokryly gradienty nadmořské výšky (5 tříd), potenciální solární radiace, určující množství záření, které dopadá na zem (3 třídy) a topografického vlhkostního indexu, který kombinuje svažitost a akumulaci vody v terénu (3 třídy). Plochy byly dále doplněny tak, aby bylo rovnoměrně pokryto území národních parků, a aby se nevyskytovaly poblíž turistických stezek.
 
 \begin{figure}
 	\centering
@@ -64,7 +53,7 @@ Umístění čidel bylo vybíráno tak aby pokryly gradienty nadmořské výšky
 	\label{fig:rozlozenicidel}
 \end{figure}
 
-Data vykazují malou chybovost, duplicitní a chybějící záznamy byly vyřazeny. Dále byla data vizuálně překontrolována a části, kdy byla čidla např. povytažená ze země (pozná se podle hodnot půdní vlhkosti), byly nahrazeny hodnotami NA. Podobně pokud čidlo T1 spadlo ze stromu tak jsou hodnoty nahrazeny NA. Toto čištění dat provedli RNDr. Josef Brůna, Ph.D., doc. Ing. Jan Wild, Ph.D. a další s jejichž svolením jsou data využitá v této práci. Ve velmi ojedinělých případech chyběly odpovídající hodnoty teplot ve $\SI{2}{m}$ v době kdy při zemi nastalo denní maximum nebo minimum. Pokud existovaly hodnoty až 30 minut starší tak jsme použily tyto, v opačném případě jsme čidlo pro daný den vyřadili, šlo o jednotky případů.
+Data vykazují malou chybovost, duplicitní a chybějící záznamy byly vyřazeny. Dále byla data vizuálně překontrolována. Části, kdy byla čidla např. povytažená ze země (pozná se podle hodnot půdní vlhkosti), byly nahrazeny hodnotami NA. Podobně pokud čidlo T1 spadlo ze stromu, tak jsou hodnoty nahrazeny NA. Toto čištění dat provedli RNDr. Josef Brůna, Ph.D., doc. Ing. Jan Wild, Ph.D. a další, s jejichž svolením jsou data využitá v této práci. Ve velmi ojedinělých případech chyběly odpovídající hodnoty teplot ve $\SI{2}{m}$, v době kdy při zemi nastalo denní maximum nebo minimum. Pokud existovaly hodnoty až 30 minut starší tak jsme použily tyto, v opačném případě jsme čidlo pro daný den vyřadili, šlo o jednotky případů.
 
 Dostupnost dat z čidel je vidět na obrázku \ref{fig:dostupnostdat}, vidíme zde dvě skupiny čidel, jedny, nacházející se v Národním parku Bavorský les mají dostupná data pro cca 400 dnů. Čidla z Národního parku Šumava mají dostupná data pro téměř 600 dnů. Na obrázku \ref{fig:dostupnostdnu} vidíme, na kolika čidlech jsou zastoupeny jednotlivé dny.
 
@@ -86,7 +75,17 @@ Dostupnost dat z čidel je vidět na obrázku \ref{fig:dostupnostdat}, vidíme z
 
 Pro samotné zpracování jsme vyřadili poslední 4 dny v květnu, protože mají menší počet čidel z kterých máme v té době měření. Tímto se dostáváme na interval dat od 12.10.2019 do 17.5.2021.
 
-\section{Ukázky použitých dat}\label{chap:showingoffdata}
+\section{Insolace}
+Na obrázku \ref{fig:insolacelogger} můžeme vidět hodnoty insolace spočtené podle odstavce \ref{chap:insolation} pro čidlo, které je nejblíž stanici Churáňov. Sinusoida nám téměř určuje hodnotu maximální denní insolace. Ve většině případů nejde o maximum, protože maximální denní teploty nastávají většinou později než maximum insolace. Také pracujeme na časovém měřítku 15 minut, a tedy je malá pravděpodobnost, že se maximální denní teplota trefí do maxima insolace. Nulové hodnoty odpovídají dennímu maximumu v noci (typicky kvůli přítomnosti sněhu), a tudíž má insolace nulovou hodnotu.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.65\textwidth]{img/ch2/insolation_max15cmNPS_4311_D_TMS.png}
+	\caption{Hodnoty insolace na čidlu nejblíže stanici Churáňov v době dosažení maximální denní teploty ve výšce $\SI{15}{cm}$.}
+	\label{fig:insolacelogger}
+\end{figure}
+
+\section{Explorace použitých dat}\label{chap:showingoffdata}
 Dále se podívejme na ukázku dat naměřených na čidlech. Na obrázcích \ref{fig:hours} můžeme vidět kdy nastávaly maximální a minimální teploty ve výškách $\SI{0}{cm}$ a $\SI{15}{cm}$ nad zemí, denní hodina je uvedená v UTC, nikoliv SEČ nebo SELČ. U maximálních teplot si můžeme všimnout kromě maxima v okolí 10 UTC také menšího maxima a odlehlých hodnot způsobených přítomností sněhu v zimě. Podobně měl sníh vliv i na dobu minimálních teplot v zimě.
 
 \begin{figure}
@@ -114,7 +113,7 @@ Dále se podívejme na ukázku dat naměřených na čidlech. Na obrázcích \re
 		\caption{}
 		\label{fig:hourmin0cm}
 	\end{subfigure}
-	\caption{Denní doba (UTC) dosažení maximální resp. minimální teploty v $\SI{15}{cm}$ resp. v $\SI{0}{cm}$ nad zemí na čidle nejblíže Churáňovu}
+	\caption{Denní doba (UTC) dosažení maximální resp. minimální teploty v $\SI{15}{cm}$ resp. v $\SI{0}{cm}$ nad zemí na čidle nejblíže stanici Churáňov}
 	\label{fig:hours}
 \end{figure}
 
@@ -145,7 +144,7 @@ Pro ilustraci se podívejme na konkrétní hodnoty teplot pozorované na nejbli�
 		\caption{}
 		\label{fig:maxtempmin0cm}
 	\end{subfigure}
-	\caption{Průběh denních maximální resp. minimálních teplot ve výšce $\SI{15}{cm}$ resp. $\SI{0}{cm}$ nad zemí na čidle nejblíže Churáňovu}
+	\caption{Průběh denních maximální resp. minimálních teplot ve výšce $\SI{15}{cm}$ resp. $\SI{0}{cm}$ nad zemí na čidle nejblíže stanici Churáňov}
 	\label{fig:maxtemp}
 \end{figure}
 
@@ -162,7 +161,7 @@ Pro ilustraci se podívejme na konkrétní hodnoty teplot pozorované na nejbli�
 		\caption{Teploty naměřené ve stejnou dobu jako minimální teploty v $\SI{15}{cm}$}
 		\label{fig:2mmaxtempmin15cm}
 	\end{subfigure}
-	\caption{Teploty ve výšce $\SI{2}{m}$ nad zemí na čidle nejblíže Churáňovu v době kdy nastalo maximum resp. minimum na čidle ve výšce $\SI{15}{cm}$}
+	\caption{Teploty ve výšce $\SI{2}{m}$ nad zemí na čidle nejblíže stanici Churáňov v době kdy nastalo maximum resp. minimum na čidle ve výšce $\SI{15}{cm}$}
 	\label{fig:2mhours}
 \end{figure}
 
@@ -201,7 +200,7 @@ Na obrázku \ref{fig:hist_diff} můžeme vidět histogramy rozdílů teplot pro 
 \section{Metody analýzy dat}\label{chap:methods}
 Cílem následující části je ukázat jakým způsobem byla data zpracována, proč byl vybrán daný model a ukázat ověření metody ověření předpokladů.
 
-\subsection{Autokorelace dat}
+\subsection{Korelace dat}
 Z povahy naměřených dat je zřejmé, že zde bude existovat autokorelace mezi naměřenými maximálními nebo minimálními teplotami. Autokorelace se pak projeví i u rozdílu teploty naměřené blízko země a ve $\SI{2}{m}$. Na obrázku \ref{fig:acf} vidíme autokorelační funkci pro jedno z čidel.
 
 \begin{figure}
@@ -213,7 +212,6 @@ Z povahy naměřených dat je zřejmé, že zde bude existovat autokorelace mezi
 
 Autokorelace není takto významná pro všechna čidla, ale i tak nám vylučuje možnost využít jednoduché mnohonásobné lineární regrese.
 
-\subsection{Prostorová korelace}
 Vzhledem k tomu, že pracujeme s daty rozloženými v prostoru, otestujeme jestli mezi nimi existuje prostorová korelace. Využijeme teorii popsanou v odstavci \ref{chap:variogram}. Na obrázcích \ref{fig:variograms} vidíme dvanáct semivariogramů pro každý první den měsíce v roce 2020. Kvůli lišícím se hodnotám semivariance nemůžeme semivariogramy zakreslit do jednoho grafu. Ze semivariogramů můžeme usoudit, že v datech neexistuje významná prostorová korelace, kterou bychom museli v modelu zohlednit.
 
 \begin{figure}
@@ -294,7 +292,7 @@ Vzhledem k tomu, že pracujeme s daty rozloženými v prostoru, otestujeme jestl
 \end{figure}
 
 \subsection{Lineární model se smíšenými efekty}
-Pro analýzu vlivu meteorologických proměnných je vhodný lineární model se smíšenými efekty popsaný v kapitole \ref{chap:lme}. Jako náhodný efekt, jehož reálná hodnota pro nás není důležitá, určíme název čidla. Pro všechna čidla a všechny dostupné dny máme kolem 78000 pozorování rozdílu maximální teploty při zemi a ve $\SI{2}{m}$ (konkrétní počet se může lišit, jestliže bereme teplotu v $\SI{0}{cm}$ nebo $\SI{15}{cm}$ nad zemí). Když vyřadíme měření pro která chybí některá data z meteorologický stanic (typicky oblačnost z Churáňova) a poslední čtyři dny měření, kdy máme data z menšího množství čidel, tak máme 63000 měření.
+Pro analýzu vlivu meteorologických proměnných je vhodný lineární model se smíšenými efekty popsaný v kapitole \ref{chap:lme}. Jako náhodný efekt, jehož reálná hodnota pro nás není důležitá, určíme název čidla. Pro všechna čidla a všechny dostupné dny máme kolem 78000 pozorování rozdílu maximální teploty při zemi a ve $\SI{2}{m}$ (konkrétní počet se může lišit, jestliže bereme teplotu v $\SI{0}{cm}$ nebo $\SI{15}{cm}$ nad zemí). Když vyřadíme měření pro která chybí některá data z meteorologický stanic (typicky oblačnost ze stanice Churáňov) a poslední čtyři dny měření, kdy máme data z menšího množství čidel, tak máme 63000 měření.
 
 Zpracovávaná data mají šest prediktorů: insolace, srážky za poslední hodinu, celková sněhová pokrývka, oblačnost, rychlost větru a půdní vlhkost. Oblačnost nabývá fixní hodnot, je vyjádřena v osminách celkové oblačnosti, nahrazená data z ERA5 jsou vyjádřena v procentech, všechny hodnoty tedy převedeme do intervalu $0$ až $1$. Rychlost větru je měřená v celočíselných násobcích $\SI{3.6}{m/s}$. Ostatní prediktory, stejně jako rozdíl mezi teplotami při povrchu země který se snažíme vysvětlit, jsou spojité proměnné. 
 
