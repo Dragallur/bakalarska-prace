@@ -118,13 +118,19 @@ Jako poslední sadu modelů, ukážeme ty pro které, jsme výšku sněhu nahrad
 	\label{tab:snowcategoricalmodels}
 \end{table}
 
+\clearpage
+
 \section{Diskuze}
-V první části diskuze se podíváme na jednotlivé modely s budeme je srovnávat mezi sebou. V druhé části se zaměříme na jednotlivé prediktory a budeme diskutovat jejich vliv na rozdíl teplot.
+V první části diskuze se podíváme na jednotlivé modely a budeme je srovnávat mezi sebou. V druhé části se zaměříme na to jakým způsobem by bylo možné výsledky zlepšit a kde mají největší mezery.
 
 \subsection{Srovnání modelů pro maximální teploty a výšku $\SI{15}{cm}$}
-V tabulce \ref{tab:max15cm_models} srovnáváme modely pro maximální denní teploty a výšku $\SI{15}{cm}$ mezi sebou. Když srovnáme kvalitu modelů jako množství vysvětlené variability tak model pro teplou sezónu vychází nejlépe s $R_c^2 = 0.51$. Z výsledků můžeme usuzovat, že přítomnost sněhu ovlivňuje výrazně vliv ostatních prediktorů. Pokud srovnáme druhý a třetí model, vidíme že oblačnost má opačný vliv na rozdíl teplot. Zatímco v teplé sezóně znamená přítomnost oblačnosti nižší míru ohřevu pozemního čidla a tedy menší rozdíl teplot tak v zimě se situace komplikuje. Jestliže je čidlo nad sněhovou pokrývkou tak opět ohřev během dne je menší, ale když je pod sněhem tak se téměř neohřívá a často nastávají maximální teploty v noci. Poté větší oblačnost způsobuje menší ztrátu tepla dlouhovlnným zářením pro čidlo ve $\SI{2}{m}$, ovšem ta je mitigovaná i tím, že se nacházíme v lese, kde je pokles teplot v noci menší než mimo něj. Oblačnost také souvisí v zimě s nárůstem sněhové pokrývky, která má kladný vliv na rozdíl teplot. Vliv těchto efektů způsobuje, že ve studeném období oblačnost zvyšuje rozdíl teplot. Všimněme si, že vliv je několika násobně menší než v teplém období a má vysokou relativní chybu ($\SI{30}{\%}$).
+V tabulce \ref{tab:max15cm_models} srovnáváme modely pro maximální denní teploty a výšku $\SI{15}{cm}$ mezi sebou. Když srovnáme kvalitu modelů jako množství vysvětlené variability tak model pro teplou sezónu vychází nejlépe s $R_c^2 = 0.51$. \textit{Sníh} má kladný vliv na rozdíl teplot, což je v souladu s teorií v kapitole \ref{chap:vlivmeteo}, protože čidlo nacházející se pod sněhem může mít výrazně rozdílné teploty od čidla ve standartní výšce. Důvod proč pro studené období se sněhem jako kategorickou proměnnou nevychází koeficient statistky významný nám není znám.
 
-Dále můžeme pozorovat, že vliv půdní vlhkosti na rozdíl teplot je v teplém období kladný a ve studeném záporný. Pro celou časovou řadu pak vychází lehce záporný, což je způsobeno, tím že studené období má celkově více měření. Opět pokud je na zemi přítomný sníh půdní vlhkost může rychle vzrůst, když stoupnou teploty a sníh začne tát. Pokud je čidlo stále pod sněhem (nebo hned nad ním a sníh ho stále ochlazuje) tak ovšem budou teploty blízké $\SI{0}{\celsius}$, zatímco ve výšce $\SI{2}{m}$ můžou teploty růst více. Oproti stavu, kdy sníh netál, protože teploty byly záporné se teploty ve $\SI{2}{m}$ prudce zvýší a tím dojde k poklesu rozdílu teplot, jak vidíme v tabulce pro studené období.
+Pokud srovnáme druhý a třetí model, vidíme že \textit{oblačnost} má opačný vliv na rozdíl teplot. Zatímco v teplé sezóně znamená přítomnost oblačnosti nižší míru ohřevu pozemního čidla a tedy menší rozdíl teplot tak v zimě se situace komplikuje. Jestliže je čidlo nad sněhovou pokrývkou tak ohřev během dne je menší, ale když je pod sněhem tak se téměř neohřívá a často nastávají maximální teploty v noci. Poté větší oblačnost způsobuje menší ztrátu tepla dlouhovlnným zářením pro čidlo ve $\SI{2}{m}$, ovšem ta je mitigovaná i tím, že se nacházíme v lese, kde je pokles teplot v noci menší než mimo něj. Oblačnost také souvisí v zimě s nárůstem sněhové pokrývky, která má kladný vliv na rozdíl teplot. Vliv těchto efektů způsobuje, že ve studeném období oblačnost zvyšuje rozdíl teplot. Všimněme si, že vliv je několika násobně menší než v teplém období a má vysokou relativní chybu ($\SI{30}{\%}$).
+
+Dále můžeme pozorovat, že vliv \textit{půdní vlhkosti} na rozdíl teplot je v teplém období kladný a ve studeném záporný. Pro celou časovou řadu pak vychází lehce záporný, což je způsobeno, tím že studené období má celkově více měření. Opět pokud je na zemi přítomný sníh, půdní vlhkost může rychle vzrůst, když stoupnou teploty a sníh začne tát. Pokud je čidlo stále pod sněhem tak budou teploty blízké $\SI{0}{\celsius}$, zatímco ve výšce $\SI{2}{m}$ můžou teploty růst více oproti stavu, kdy sníh netál. Teploty ve $\SI{2}{m}$ byly záporné a prudce se zvýší a tím dojde k poklesu rozdílu teplot, jak vidíme v tabulce pro studené období. V teplém období narůstá půdní vlhkost po dešti. Vzhledem k experimentálnímu uspořádání čidel (viz kapitola \ref{chap:loggers}) je čidlo ve $\SI{2}{m}$ lépe odstíněno od deště a tudíž jakmile po dešti začnou teploty stoupat, bude se tak dít rychleji než na čidle poblíž země, rozdíl teplot tedy bude růst, jak opět vidíme v tabulce.
+
+\textit{Rychlost větru} má napříč všemi modely záporný vliv na rozdíl teplot, což je ve shodě s teorií popsanou v \ref{chap:vlivmeteo}. To že je ve studeném období vliv silnější bude nejspíš způsobeno opět tím, že čidlo poblíž země je část zimy pod sněhem a vítr pak ovlivňuje výhradně čidlo ve standartní výšce. \textit{Insolace} je nejslabší ze všech prediktorů a má pro tuto sadu modelů vždy kladný vliv. Vyšší insolace znamená potenciálně větší množství záření dopadající na povrch a tedy ohřívající pozemní čidlo.
 
 \begin{table}
 \centering\footnotesize\sf
@@ -150,6 +156,44 @@ Dále můžeme pozorovat, že vliv půdní vlhkosti na rozdíl teplot je v tepl�
 	\caption{Srovnání modelů pro maximální denní teploty a výšku $\SI{15}{cm}$. Indexem $cat$ označujeme, že jsme výšku sněhu nahradili kategorickou proměnnou. Šedě označené jsou hodnoty, pro které vyšla v F testu p hodnota $>0.05$, a nepovažujeme je statisticky významné od nuly (nezavrhli jsme nulovou hypotézu). Standartní chyba koeficientu je daná v závorce.}
 	\label{tab:max15cm_models}
 \end{table}
+
+\subsection{Srovnání modelů pro maximální teploty a výšku $\SI{0}{cm}$}
+V tabulce \ref{tab:max0cm_models} obdobně předchozí kapitole máme srovnání modelů maximální denní teploty a výšky $\SI{0}{cm}$. Opět má \textit{výška sněhu} kladný vliv na rozdíl teplot. Vliv je také několikanásobně vyšší, srovnejme hodnotu $\SI{0.0031(7)}{}$ pro studené období a výšku $\SI{15}{cm}$ s hodnotou koeficientu $\SI{0.0158(8)}{}$ pro model $\SI{0}{cm}$ a studené období. To ovšem sedí s tím, že čidlo níže nad zemí bude pod sněhem delší dobu.
+
+Pro \textit{oblačnost} jsou narozdíl od hodnot v tabulce \ref{tab:max15cm_models} všechny hodnoty kladné. Není úplně zřejmé proč by tomu tak mělo být z pohledu fyzikální a meteorologické interpretace. Může jít o nějakou kombinaci interakcí s ostatními prediktory nebo dokonce s nezahrnutými veličinami. Také se nabízí možnost, že pokud se povrch ohřívá primárně díky difúznímu záření, tak pak teplo vzhůru stoupá pomaleji, otázka je jaký to má vliv na čidla uvnitř porostu.
+
+Pokud se podíváme na \textit{vlhkost půdy}, tak ta je pro teplé období nejsilnějším prediktorem ze všech prediktorů. Zřejmě je to způsobeno malou vzdáleností od měření vlhkosti půdy k povrchu, která více ovlivňuje čidlo ve výšce $\SI{0}{cm}$ než v $\SI{15}{cm}$, ovšem pro studené období už není rozdíl tak významný. Vliv na rozdíl teplot je v jednotlivých obdobích stejný jako pro $\SI{15}{cm}$, ale silnější vliv v teplém období způsobí, že výsledný vliv na rozdíl teplot pro všechna dostupná data je kladný.
+
+\textit{Srážky} jsou pro sezónní modely signifikantním prediktorem. V teplém období přítomnost srážek zvětšuje rozdíl teplot, což je zřejmě způsobeno prudkým ochlazením čidla blízko země, které není tak markantní ve výšce $\SI{2}{m}$, kde je čidlo lépe stíněno od srážek stromem na kterém je nainstalováno. Na druhou stranu pro model s výškou $\SI{15}{cm}$ (viz tabulka \ref{tab:max15cm_models}) je vliv záporný. Může to být způsobeno relativně velkou vzdáleností od povrchu země, kdy začne převládat souvislost srážek s oblačností nebo poryvy větru v bouřce (viz opět záporné koeficienty v tabulce \ref{tab:max15cm_models}). Ve studeném období pak srážky vyjadřují jak množství sněhu tak déště a jejich vliv na rozdíl teplot je záporný. Zřejmě ochlazení povrchu nevede vede ke snížení gradientu mezi zemí a $\SI{2}{m}$. Také může záporná hodnota souviset s korelací s nárůstem vlhkosti, která má záporný vliv, viz předchozí odstavec.
+
+\textit{Rychlost větru} má opět záporný vliv a opět platí, že ve studeném období je silnější než v teplém. Když srovnáme velikost koeficientů ve studeném období mezi modely pro $\SI{0}{cm}$ a $\SI{15}{cm}$, tak pro první z nich je v absolutní hodnotě vyšší. Čidlo blíže země je pravděpodobněji lépe stíněno od větru a tudíž jsou zde více rozdílné podmínky od čidla ve $\SI{2}{m}$. \textit{Insolace} má záporný vliv napříč všemi modely.
+
+\begin{table}
+\centering\footnotesize\sf
+\begin{tabular}{lrrr}
+\toprule
+	& $\Delta t$ & $\Delta t$ & $\Delta t$\\
+\midrule
+	Počet měření & $76635$ & $32108$ & $44528$\\
+	Období & vše & teplé & studené \\
+	Počet čidel & $157$ & $157$ & $156$ \\
+	$R_m^2$ & $0.055$ & $0.20$ & $0.087$ \\
+	$R_c^2$ & $0.16$ & $0.60$ & $0.16$ \\
+\midrule
+	Konstanta & $\SI{-0.28(7)}{}$ & \textcolor{gray}{$\SI{-2.5(1)}{}$} & $\SI{0.99(7)}{}$ \\
+	Výška sněhu & $\SI{0.0197(9)}{}$ & - & $\SI{0.0158(8)}{}$ \\
+	Oblačnost & $\SI{0.09(1)}{}$ & $\SI{0.11(2)}{}$ & $\SI{0.09(1)}{}$ \\
+	Vlhkost & $\SI{0.8(1)}{}$ & $\SI{6.7(2)}{}$ & $\SI{-2.6(2)}{}$ \\
+	Srážky & \textcolor{gray}{$\SI{0.02(1)}{}$} & $\SI{0.05(1)}{}$ & $\SI{-0.04(2)}{}$ \\
+	Rychlost větru & $\SI{-0.0138(5)}{}$ & $\SI{-0.0020(9)}{}$ & $\SI{-0.0161(7)}{}$ \\
+	Insolace & $\SI{-0.00026(1)}{}$ & $\SI{-0.00027(2)}{}$ & $\SI{-0.00030(2)}{}$ \\
+\bottomrule
+\end{tabular}
+	\caption{Srovnání modelů pro maximální denní teploty a výšku $\SI{0}{cm}$. Indexem $cat$ označujeme, že jsme výšku sněhu nahradili kategorickou proměnnou. Šedě označené jsou hodnoty, pro které vyšla v F testu p hodnota $>0.05$, a nepovažujeme je statisticky významné od nuly (nezavrhli jsme nulovou hypotézu). Standartní chyba koeficientu je daná v závorce.}
+	\label{tab:max0cm_models}
+\end{table}
+
+
 
 \subsection{Nahrazení oblačnosti pomocí reanalýzy ERA5}
 

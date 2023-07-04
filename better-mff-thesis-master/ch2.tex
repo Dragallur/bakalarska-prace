@@ -365,3 +365,36 @@ Vidíme, že přidání ARMA s hodnotami se výrazně zlepší autokorelační f
 	\caption{Srovnání autokorelační funkce modelu s a bez ARMA}
 	\label{fig:acf_curt}
 \end{figure}
+
+\subsection{Seznam modelů}
+Výše jsme ukázali jakým způsobem budeme zpracovávat jednotlivé modely. Pro přehlednost budeme modely označovat zkratkou, abychom nemuseli vždy vypisovat pro které období byl model počítán nebo jestli jde o maximálně nebo minimální denní teploty. Seznam modelů je v tabulce \ref{tab:seznammodelu}.
+
+\begin{table}
+\centering\footnotesize\sf
+\begin{tabular}{lrrrrr}
+\toprule
+	Název modelu & Teploty & Výška čidla & Období & Počet čidel & Počet měření \\
+\midrule
+	Max15all & max. & $\SI{15}{cm}$ & vše & $157$ & $76627$ \\
+	Max0all & max. & $\SI{0}{cm}$ & vše & $157$ & $76635$ \\
+	Min15all & min. & $\SI{15}{cm}$ & vše & $157$ & $74225$ \\
+	Min0all & min. & $\SI{0}{cm}$ & vše & $157$ & $74083$ \\
+	Max15warm & max. & $\SI{15}{cm}$ & teplé & $157$ & $32062$ \\
+	Max0warm & max. & $\SI{0}{cm}$ & teplé & $157$ & $32108$ \\
+	Min15warm & min. & $\SI{15}{cm}$ & teplé & $157$ & $30716$ \\
+	Min0warm & min. & $\SI{0}{cm}$ & teplé & $157$ & $30651$ \\
+	Max15cold & max. & $\SI{15}{cm}$ & studené & $156$ & $44563$ \\
+	Max0cold & max. & $\SI{0}{cm}$ & studené & $156$ & $44528$ \\
+	Min15cold & min. & $\SI{15}{cm}$ & studené & $156$ & $43505$ \\
+	Min0cold & min. & $\SI{0}{cm}$ & studené & $156$ & $43429$ \\
+	Max15allc & max. & $\SI{15}{cm}$ & vše & $157$ & $76627$ \\
+	Max15coldc & max. & $\SI{15}{cm}$ & studené & $156$ & $44563$ \\
+	Min15allc & min. & $\SI{15}{cm}$ & vše & $157$ & $74225$ \\
+	Min15coldc & min. & $\SI{15}{cm}$ & studené & $156$ & $43505$ \\
+\bottomrule
+\end{tabular}
+	\caption{Seznam lineární smíšených modelů pro vyhodnocení. "c" u posledních čtyř modelů znamená, že prediktor výšky sněhu je nahrazen kategoriemi (bez sněhu, nad sněhem a pod sněhem).}
+	\label{tab:seznammodelu}
+\end{table}
+
+
