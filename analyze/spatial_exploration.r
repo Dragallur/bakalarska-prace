@@ -50,6 +50,6 @@ for (i in 1:12){
     gg_variogram(vario_list[[i]], minmax, height, first_days_of_month[i])
 }
 
-#f_fvgm <- fit.variogram(vario_list[[1]], vgm(nugget=2, model="Mat", range=20, psill=3))
+f_fvgm <- fit.variogram(vario_list[[1]], vgm(nugget=2, model="Mat", range=20, psill=3))
 
 }}}}}
