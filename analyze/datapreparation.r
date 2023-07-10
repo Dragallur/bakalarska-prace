@@ -16,7 +16,7 @@ c1blad01 <- c(48.9904850, 13.6620817)
 c4japi01 <- c(49.0361536, 13.4212786)
 c1chur01 <- c(49.0682586, 13.6156192)
 
-tim_c <- c("all")
+tim_c <- c("warmhalf")
 minmax_c <- c("max", "min")
 height_c <- c("15cm", "0cm")
 bayerischer_wald_c <- c(TRUE)

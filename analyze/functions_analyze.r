@@ -91,7 +91,7 @@ autocorrelation <- function(logger){
 	setwd(wd)
 }
 
-mod_resid_vs_fitted_and_qq <- function(data, minmax, height, transformation){
+mod_resid_vs_fitted_and_qq <- function(data, minmax, height, tim, transformation){
 	plt <- ggplot(data, aes(x=x, y=y)) + geom_point() + 
 		labs(x="Fitované hodnoty", y="Residuály", title="") +
         theme(text=element_text(family="Latin Modern Math",size=20))
@@ -100,18 +100,18 @@ mod_resid_vs_fitted_and_qq <- function(data, minmax, height, transformation){
         theme(text=element_text(family="Latin Modern Math",size=20))
 	wd <- getwd()
 	setwd("/home/vojta/Desktop/mffuk/bakalarka/analyze/out/")
-	ggsave(paste("mod", minmax, height, "_", transformation, ".png", sep=""), plot = plt, width=8, height=8, dpi=343)
-	ggsave(paste("qq_mod", minmax, height, "_", transformation, ".png", sep=""), plot = plt2, width=8, height=8, dpi=343)
+	ggsave(paste("mod", tim, minmax, height, "_", transformation, ".png", sep=""), plot = plt, width=8, height=8, dpi=343)
+	ggsave(paste("qq_mod", tim, minmax, height, "_", transformation, ".png", sep=""), plot = plt2, width=8, height=8, dpi=343)
 	setwd(wd)
 }
 
-acf_for_model <- function(mod){
+acf_for_model <- function(mod, tim, minmax, height, p, q){
 	plt <- ggAcf(residuals(mod, type="n")) +
 	    labs(x="lag", y="ACF", title="Autokorelační funkce modelu") +
         theme(text=element_text(family="Latin Modern Math",size=24))
 	wd <- getwd()
 	setwd("/home/vojta/Desktop/mffuk/bakalarka/analyze/out/")
-	ggsave(paste("acf_curt", ".png", sep=""), plot = plt, width=8, height=8, dpi=343)
+	ggsave(paste("acf_curt_abs", p, q, tim, minmax, height,  ".png", sep=""), plot = plt, width=8, height=8, dpi=343)
 	setwd(wd)
 }
 

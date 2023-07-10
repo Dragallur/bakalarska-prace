@@ -367,7 +367,7 @@ Vidíme, že přidání ARMA s hodnotami se výrazně zlepší autokorelační f
 \end{figure}
 
 \subsection{Seznam modelů}
-Výše jsme ukázali jakým způsobem budeme zpracovávat jednotlivé modely. Pro přehlednost budeme modely označovat zkratkou, abychom nemuseli vždy vypisovat pro které období byl model počítán nebo jestli jde o maximálně nebo minimální denní teploty. Seznam modelů je v tabulce \ref{tab:seznammodelu}.
+Výše jsme ukázali jakým způsobem budeme zpracovávat jednotlivé modely. Pro přehlednost budeme modely označovat zkratkou, abychom nemuseli vždy vypisovat pro které období byl model počítán nebo jestli jde o maximálně nebo minimální denní teploty. Seznam modelů je v tabulce \ref{tab:seznammodelu}. K těmto 16 modelům jsme přidali ještě dalších 16 modelů, které mají stejné parametry, ale místo rozdílu teplot např. $\Delta t = t_{15cm} - t_{2m}$ jako závislou proměnnou bereme její absolutní hodnotu, jako např. $\Delta t_{abs} = \left|t_{15cm} - t_{2m}\right|$. Tyto modely budeme označovat písmenem "A" na začátku (např. AMax15all) a pomůžou nám v interpretaci výsledků.
 
 \begin{table}
 \centering\footnotesize\sf
@@ -393,7 +393,7 @@ Výše jsme ukázali jakým způsobem budeme zpracovávat jednotlivé modely. Pr
 	Min15coldc & min. & $\SI{15}{cm}$ & studené & $156$ & $43505$ \\
 \bottomrule
 \end{tabular}
-	\caption{Seznam lineární smíšených modelů pro vyhodnocení. "c" u posledních čtyř modelů znamená, že prediktor výšky sněhu je nahrazen kategoriemi (bez sněhu, nad sněhem a pod sněhem).}
+	\caption{Seznam lineární smíšených modelů pro vyhodnocení. "c" u posledních čtyř modelů znamená, že prediktor výšky sněhu je nahrazen kategoriemi (bez sněhu, nad sněhem a pod sněhem). Druhou sadu modelů, kdy bereme absolutní hodnotu závislé proměnné, tak budeme značit písmenem "A" na začátku názvu.}
 	\label{tab:seznammodelu}
 \end{table}
 
