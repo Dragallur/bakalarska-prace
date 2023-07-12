@@ -334,7 +334,7 @@ Pro každý model budeme ověřovat předpoklady, nyní krátce ilustrujeme prob
 	\label{fig:qq}
 \end{figure}
 
-Vidíme, že nejlépe normálnímu rozdělení odpovídá transformace třetí odmocniny a proto s ní budeme nadále pracovat. Transformace ovšem není dokonalá, stále jsme se úplně nezbavili šikmosti (skewness). Na obrázku \ref{fig:resvsfit_curt} můžeme vidět srovnání residuálů modelu s fitovanými hodnotami. Na obrázku můžeme vidět, že v takto transformovaných datech není výrazná heteroskedasticita.
+Vidíme, že nejlépe normálnímu rozdělení odpovídá transformace třetí odmocniny a proto s ní budeme nadále pracovat. Transformace ovšem není dokonalá, stále jsme se úplně nezbavili šikmosti (skewness). Formální testy normálity rozdělení jako například Shapiro-Wilkův test se zde nehodí, neboť jsou velmi náchylné na malé odchylky od normálního rozdělení \parencite{shapirowilk}. Na obrázku \ref{fig:resvsfit_curt} můžeme vidět srovnání residuálů modelu s fitovanými hodnotami. Na obrázku můžeme vidět, že v takto transformovaných datech není výrazná heteroskedasticita.
 
 Homoskedasticitu budeme ověřovat graficky, pomocí srovnání fitovaných hodnot a residuálů modelu. Pokud nebyl porušen předpoklad homoskedasticity tak nesmíme pozorovat závislost mezi fitovanými hodnotami a residuály, jak bylo popsáno v kapitole \ref{chap:lme}. Na obrázku \ref{fig:resvsfit_curt} vidíme srovnání residuálů modelu s fitovanými hodnotami a není zde žádná výrazná heteroskedasticita.
 
