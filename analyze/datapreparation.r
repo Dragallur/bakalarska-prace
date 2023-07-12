@@ -142,7 +142,6 @@ if (tim == "winter"){
 }
 dat <- str_split_fixed(synop$time,"\\:",3)
 synop$hour <- dat[,1]
-
 #Delete non complete last day, this can be different for da and db
 if (nrow(da[da$date==unique(da$date)[length(unique(da$date))],])!=96){
 	da <- da[-which(da$date==unique(da$date)[length(unique(da$date))]),]

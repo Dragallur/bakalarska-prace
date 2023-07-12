@@ -147,3 +147,27 @@ gg_insolation <- function(all_loggers, station_name, height, minmax){
 	setwd(wd)
 
 }
+
+gg_boxplot_snow_synop_bymonth <- function(synop){
+	plt <- ggplot(data=synop, aes(y=Snowcm, x=month)) + geom_boxplot() +
+	    labs(x=expression(paste("Měsíc")), y="Výška sněhu [cm]", title="Denní sněhová pokrývka\n na stanici Churáňov") +
+		theme(text=element_text(family="Latin Modern Math",size=28))
+	wd <- getwd()
+	setwd("/home/vojta/Desktop/mffuk/bakalarka/analyze/out/")
+	ggsave(paste("hist_snow_synop_bymonth.png", sep=""), plot = plt, width=8, height=8, dpi=343)
+	setwd(wd)
+}
+
+gg_boxplot_wind_synop_bymonth <- function(synop){
+	plt <- ggplot(data=synop, aes(y=ffkmh, x=month)) + geom_boxplot() +
+	    labs(x=expression(paste("Měsíc")), y="Rychlost větru [km/h]", title="Okamžitá rychlost větru") +
+		theme(text=element_text(family="Latin Modern Math",size=28))
+	wd <- getwd()
+	setwd("/home/vojta/Desktop/mffuk/bakalarka/analyze/out/")
+	ggsave(paste("hist_wind_synop_bymonth.png", sep=""), plot = plt, width=8, height=8, dpi=343)
+	setwd(wd)
+}
+gg_boxplot_snow_synop_bymonth(synop[961:15075,])
+gg_boxplot_wind_synop_bymonth(synop[961:15075,])
+#15075
+#961
