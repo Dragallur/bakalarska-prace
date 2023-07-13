@@ -167,7 +167,7 @@ gg_boxplot_wind_synop_bymonth <- function(synop){
 	ggsave(paste("hist_wind_synop_bymonth.png", sep=""), plot = plt, width=8, height=8, dpi=343)
 	setwd(wd)
 }
-gg_boxplot_snow_synop_bymonth(synop[961:15075,])
-gg_boxplot_wind_synop_bymonth(synop[961:15075,])
+#gg_boxplot_snow_synop_bymonth(synop[961:15075,])
+#gg_boxplot_wind_synop_bymonth(synop[961:15075,])
 #15075
 #961
