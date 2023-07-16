@@ -11,8 +11,8 @@ Na obrázku \ref{fig:chmuukazka} můžeme vidět ukázku dat z meteorologické s
 \begin{figure}
 	\centering
 	\begin{subfigure}{0.45\textwidth}
-  \includegraphics[width=\textwidth]{img/synop_temperature.png}
-		\caption{Okamžité denní teploty rozdělené podle měsíců v roce.}
+  \includegraphics[width=\textwidth]{img/ch2/hist_temp_synop_bymonth.png}
+		\caption{Okamžité denní teploty ve výšce $\SI{2}{m}$ nad zemí rozdělené podle měsíců v roce.}
 		\label{fig:synop_temperature}
 	\end{subfigure}
 	\hfill
@@ -23,13 +23,13 @@ Na obrázku \ref{fig:chmuukazka} můžeme vidět ukázku dat z meteorologické s
 	\end{subfigure}
 	\hfill
 	\begin{subfigure}{0.45\textwidth}
-  \includegraphics[width=\textwidth]{img/synop_prec.png}
+  \includegraphics[width=\textwidth]{img/ch2/hist_prec_synop_bymonth.png}
 		\caption{Denní suma srážek.}
 		\label{fig:synop_prec}
 	\end{subfigure}
 	\hfill
 	\begin{subfigure}{0.45\textwidth}
-  \includegraphics[width=\textwidth]{img/synop_ffkmh.png}
+  \includegraphics[width=\textwidth]{img/ch2/hist_wind_synop_bymonth.png}
 		\caption{Histogram pozorovaných okamžitých rychlostí větru.}
 		\label{fig:synop_ffkmh}
 	\end{subfigure}
@@ -39,7 +39,7 @@ Na obrázku \ref{fig:chmuukazka} můžeme vidět ukázku dat z meteorologické s
 
 Meteorologická stanice Churáňov měřící podle principů popsaných v kapitole \ref{chap:meteostations}. Stanice zaznamenává oblačnost každou hodinu od 6:00 do 20:00 UTC. Maximální teploty jsou typicky dosažené během dne, kdy většinou oblačnost známe. Například v zimě pod sněhem může ale maximální denní teplota být dosažena i v noci. Minimální denní teploty na druhou stranu typicky nastávají během ranních hodin, po východu Slunce, ale ojediněle i před ním (viz kapitola \ref{chap:showingoffdata} a obrázek \ref{fig:hours}). Pro minimální teploty nám tedy často chybí údaj o oblačnosti. Vyřazení těchto hodnot by vložilo velké zkreslení do dat, tudíž jsme se rozhodli využít data z projektu ERA5.
 
-Pro každou hodnotu, která chybí ze staničního měření použijeme nejbližší hodnotu z ERA5 a to konkrétně z $\SI{49}{\degree}$ severní šířky a $\SI{13.5}{\degree}$ východní délky. Tato data byla vzdálená od stanice Churáňov $\SI{14.8}{km}$. V kapitole \ref{chap:disc_era5} budeme diskutovat vliv nahrazení dat pomocí ERA5.
+Pro každou hodnotu, která chybí ze staničního měření použijeme nejbližší hodnotu z ERA5 a to konkrétně z $\SI{49}{\degree}$ severní šířky a $\SI{13.5}{\degree}$ východní délky. Tato data byla vzdálená od stanice Churáňov $\SI{14.8}{km}$. Tímto zavádíme do dat určitou nejistotu, ať už kvůli prostorovému skoku, ale také zkreslení, když používáme data z odlišných zdrojů, kdy jedním jsou měřená a druhým pouze modelována. Pro robustnější modely a interpretaci by bylo vhodné spočítat modely pouze s daty z ERA5 a porovnat výsledky. Pro sofistikovanější přístup bychom mohli také využít data z více bodů a provést prostorovou interpolaci na místa čidel. Toto jde ovšem za rámec této práce.
 
 \section{Data z Botanického ústavu Akademie věd}\label{chap:data_buav}
 Data poskytnutá Botanickým ústavem Akademie věd České republiky byla naměřená dvěma typy čidel popsanými v kapitole \ref{chap:loggers}. Nadále se budeme zabývat pouze těmi plochami, které jsou opatřeny jak pozemními čidly, tak čidly ve standartní výšce $\SI{2}{m}$. Na obrázku \ref{fig:rozlozenicidel} můžeme vidět jejich prostorové rozložení, celkově jde o 157 čidel. 
