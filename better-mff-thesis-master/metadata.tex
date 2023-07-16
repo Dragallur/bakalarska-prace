@@ -57,26 +57,28 @@ Dedication. \xxx{It is nice to say thanks to supervisors, friends, family, book 
 }
 
 \def\AbstractEN{%
-\xxx{Abstracts are an abstract form of art. Use the most precise, shortest sentences that state what problem the thesis addresses, how it is approached, pinpoint the exact result achieved, and describe the applications and significance of the results. Highlight anything novel that was discovered or improved by the thesis. Maximum length is 200 words, but try to fit into 120. Abstracts are often used for deciding if a reviewer will be suitable for the thesis; a well-written abstract thus increases the probability of getting a reviewer who will like the thesis.}
+The forest microclimate is different from the climate measured at weather stations. Vegetation and macroclimate influence conditions in the herbaceous layer. In this thesis, we investigate the relationship between the temperature difference at $\SI{2}{m}$ above and near the ground surface in forest stands in the Sumava and Bavarian Forest National Parks and meteorological conditions. We show that for selected meteorological conditions measured at the nearest stations there is a relationship with the temperature difference from the dataloggers, strongest for cloud cover and snow depth and weakest for precipitation and wind speed. We build on studies investigating the effect of vegetation on forest temperatures to complete the picture of forest microclimate functioning. This knowledge is key to understanding the impact of climate change and to further research using advanced modelling and generalisation to other habitats.
 % ABSTRACT IS NOT A COPY OF YOUR THESIS ASSIGNMENT!
 }
 
+\usepackage{siunitx}
+
 \def\AbstractCS{%
-\xxx{You will need to submit both Czech and English abstract to the SIS, no matter what language you use in the thesis. If writing in English, translate the contents of \texttt{\textbackslash{}AbstractEN} into this field. In case you do not speak czech, your supervisor should be able to help you with the translation.}
+Lesní mikroklima je odlišné od klimatu měřeného na meteorologických stanicích. Vegetace a makroklima ovlivňuje podmínky v bylinném patře. V práci se zabýváme vztahem mezi rozdílem teplot ve výšce $\SI{2}{m}$ nad zemí a poblíž zemského povrchu v lesním porostu v národních parcích Šumava a Bavorský les a meteorologickými podmínkami. Ukážeme, že pro vybrané meteorologické podmínky měřené ná nejbližších stanicích existuje vztah s rozdílem teplot z dataloggerů, nejsilnější pro oblačnost a výšku sněhu a nejslabší pro srážky a rychlost větru. Navazujeme na studie zkoumající vliv vegetace na teploty v lesním porostu a doplňujeme tím obrázek o fungování lesního mikroklimatu. Tyto znalosti jsou klíčové pro porozumění dopadu klimatické změny a k dalšímu výzkumu pomocí pokročilého modelování a zobecnění na jiné biotopy.
 }
 
 % 3 to 5 keywords (recommended), each enclosed in curly braces.
 % Keywords are useful for indexing and searching for the theses by topic.
 \def\Keywords{%
-\xxx{{key} {words}}
+{mikroklimatologie} {mikrometeorologie} {lesní klima}% {Národní park Šumava} {Národní park Bavorský les}
 }
 
 % If your abstracts are long and do not fit in the infopage, you can make the
 % fonts a bit smaller by this setting. (Also, you should try to compress your abstract more.)
 % Alternatively, consider increasing the size of the page by uncommenting the
 % geometry modification in thesis.tex.
-\def\InfoPageFont{}
-%\def\InfoPageFont{\small}  %uncomment to decrease font size
+%\def\InfoPageFont{}
+\def\InfoPageFont{\small}  %uncomment to decrease font size
 
 \ifEN\relax\else
 % If you are writing a czech thesis, you additionally need to fill in the
@@ -88,6 +90,6 @@ Dedication. \xxx{It is nice to say thanks to supervisors, friends, family, book 
 \def\StudyProgrammeEN{Physics}
 \def\StudyBranchEN{FP}
 \def\KeywordsEN{%
-\xxx{{key} {words}}
+{microclimatology} {micrometeorology} {forest climate}% {National park Šumava} {National park Bayerischer Wald}
 }
 \fi
