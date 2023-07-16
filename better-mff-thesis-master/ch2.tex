@@ -1,10 +1,10 @@
 \chapter{Analýza dat} \label{chap:analysis}
-V první části druhé kapitoly se zaměříme na popis struktury použitých dat. V druhé části budeme analyzovat autokorelační a prostorovou složku dat, a hledat vhodný model pro vysvětlení rozdílů naměřených teplot.
+V první části druhé kapitoly se zaměříme na popis struktury použitých dat. V druhé části analyzujeme autokorelační a prostorovou složku dat, a hledat vhodný model pro vysvětlení rozdílů naměřených teplot.
 
 \section{Využitá data z ČHMÚ}
 Pro hledání souvislosti mezi meteorologickými podmínkami a rozdílem teplot na čidlech poblíž země jsme využili data z meteorologických stanic Churáňov, Borová Lada, Kvilda, Horská Kvilda a Javoří pila. Nejvíce informací jsme získali ze synoptické stanice Churáňov. Z dostupných dat jsme pro další analýzu využili data o aktuální teplotě ve výšce $\SI{2}{m}$, rychlosti větru, výšce sněhové pokrývky, hodinových srážek a oblačnosti. Z ostatních stanic jsme měli k dispozici hodinová data o výšce sněhové pokrývky a pro Borovou Ladu informace o úhrnu srážek.
 
-Analýzu budeme provádět pro období od 12.10.2019 do 21.5.2021 i když v případě některých čidel kvůli výpadkům měření bude zpracovávaný interval kratší (viz kapitola \ref{chap:data_buav}).
+Analýzu provádíme pro období od 12.10.2019 do 21.5.2021 i když v případě některých čidel kvůli výpadkům měření bude zpracovávaný interval kratší (viz kapitola \ref{chap:data_buav}).
 
 Na obrázku \ref{fig:chmuukazka} můžeme vidět ukázku dat z meteorologické stanice Churáňov. Maximální teplota ($\SI{27}{\degree C}$) za období 12.10.2019 až 20.5.2021 byla naměřena 21.8.2020 a minimální ($\SI{-16.1}{\degree C}$) byla naměřena 11.2.2021 a 13.2.2021. Největší sněhová pokrývka byla $\SI{48}{cm}$ 31.1.2021.
 
@@ -37,7 +37,7 @@ Na obrázku \ref{fig:chmuukazka} můžeme vidět ukázku dat z meteorologické s
 	\label{fig:chmuukazka}
 \end{figure}
 
-Meteorologická stanice Churáňov měřící podle principů popsaných v kapitole \ref{chap:meteostations}. Stanice zaznamenává oblačnost každou hodinu od 6:00 do 20:00 UTC. Maximální teploty jsou typicky dosažené během dne, kdy většinou oblačnost známe. Například v zimě pod sněhem může ale maximální denní teplota být dosažena i v noci. Minimální denní teploty na druhou stranu typicky nastávají během ranních hodin, po východu Slunce, ale ojediněle i před ním (viz kapitola \ref{chap:showingoffdata} a obrázek \ref{fig:hours}). Pro minimální teploty nám tedy často chybí údaj o oblačnosti. Vyřazení těchto hodnot by vložilo velké zkreslení do dat, tudíž byla zvolena cesta, kdy využijeme data z projektu ERA5.
+Meteorologická stanice Churáňov měřící podle principů popsaných v kapitole \ref{chap:meteostations}. Stanice zaznamenává oblačnost každou hodinu od 6:00 do 20:00 UTC. Maximální teploty jsou typicky dosažené během dne, kdy většinou oblačnost známe. Například v zimě pod sněhem může ale maximální denní teplota být dosažena i v noci. Minimální denní teploty na druhou stranu typicky nastávají během ranních hodin, po východu Slunce, ale ojediněle i před ním (viz kapitola \ref{chap:showingoffdata} a obrázek \ref{fig:hours}). Pro minimální teploty nám tedy často chybí údaj o oblačnosti. Vyřazení těchto hodnot by vložilo velké zkreslení do dat, tudíž jsme se rozhodli využít data z projektu ERA5.
 
 Pro každou hodnotu, která chybí ze staničního měření použijeme nejbližší hodnotu z ERA5 a to konkrétně z $\SI{49}{\degree}$ severní šířky a $\SI{13.5}{\degree}$ východní délky. Tato data byla vzdálená od stanice Churáňov $\SI{14.8}{km}$. V kapitole \ref{chap:disc_era5} budeme diskutovat vliv nahrazení dat pomocí ERA5.
 
@@ -73,10 +73,10 @@ Dostupnost dat z čidel je vidět na obrázku \ref{fig:dostupnostdat}, vidíme z
 	\caption{Dostupnost dat z čidel}
 \end{figure}
 
-Pro samotné zpracování jsme vyřadili poslední 4 dny v květnu, protože mají menší počet čidel, z kterých máme v té době měření. Tímto se dostáváme na interval dat od 12.10.2019 do 17.5.2021.
+Pro samotné zpracování jsme vyřadili poslední 4 dny v květnu, kvůli nižšímu počtu aktivních čidel. Tímto se dostáváme na interval dat od 12.10.2019 do 17.5.2021.
 
 \section{Insolace}
-Na obrázku \ref{fig:insolacelogger} můžeme vidět hodnoty insolace spočtené podle odstavce \ref{chap:insolation} pro čidlo, které je nejblíž stanici Churáňov. Sinusoida nám téměř určuje hodnotu maximální denní insolace. Maximum insolace většinou nastává dříve než maximální teploty. Dále také pracujeme na časovém měřítku 15 minut a je tedy malá pravděpodobnost, že nastane maximální denní teplota ve stejnou dobu jako maximální denní insolace. Nulové hodnoty odpovídají tomu, že denní maximální teplota nastala v noci, to typicky způsobuje přítomnost sněhu v zimě.
+Na obrázku \ref{fig:insolacelogger} můžeme vidět hodnoty insolace spočtené podle odstavce \ref{chap:insolation} pro čidlo, které je nejblíž stanici Churáňov. Sinusoida nám téměř určuje hodnotu maximální denní insolace. Maximum insolace většinou nastává dříve než maximální teploty. Dále také pracujeme na časovém měřítku 15 minut a je tedy malá pravděpodobnost, že nastane maximální denní teplota ve stejnou dobu jako maximální denní insolace. Nulové hodnoty odpovídají tomu, že denní maximální teplota nastala v noci, to způsobuje přítomnost sněhu v zimě.
 
 \begin{figure}
 	\centering
@@ -86,7 +86,7 @@ Na obrázku \ref{fig:insolacelogger} můžeme vidět hodnoty insolace spočtené
 \end{figure}
 
 \section{Ukázka použitých dat}\label{chap:showingoffdata}
-Dále se podívejme na ukázku dat naměřených na čidlech. Na obrázcích \ref{fig:hours} můžeme vidět, kdy nastávaly maximální a minimální teploty ve výškách $\SI{0}{cm}$ a $\SI{15}{cm}$ nad zemí, denní hodina je uvedená v UTC, nikoliv SEČ nebo SELČ. U maximálních teplot si můžeme všimnout kromě maxima v době kolem 10 UTC také menšího maxima a odlehlých hodnot způsobených přítomností sněhu v zimě. Podobně měl sníh vliv i na dobu minimálních teplot v zimě.
+Dále se podíváme na ukázku dat naměřených na čidlech. Na obrázcích \ref{fig:hours} můžeme vidět, kdy nastávaly maximální a minimální teploty ve výškách $\SI{0}{cm}$ a $\SI{15}{cm}$ nad zemí, denní hodina je uvedená v UTC, nikoliv SEČ nebo SELČ. U maximálních teplot si můžeme všimnout kromě maxima v době kolem 10 UTC také menšího maxima a odlehlých hodnot způsobených přítomností sněhu v zimě. Podobně měl sníh vliv i na dobu minimálních teplot v zimě.
 
 \begin{figure}
 	\centering
@@ -117,7 +117,7 @@ Dále se podívejme na ukázku dat naměřených na čidlech. Na obrázcích \re
 	\label{fig:hours}
 \end{figure}
 
-Pro ilustraci se podívejme na konkrétní hodnoty teplot pozorované na nejbližším čidlu meteorologické stanice Churáňov. Na obrázcích \ref{fig:maxtemp} můžeme vidět průběh denních minim a maxim na jednom z čidel, celkově jde o období od 12.10.2019 do 20.5.2021 tedy 587 dnů. Na obrázcích \ref{fig:2mhours} můžeme vidět obrázkům \ref{fig:hourmax15cm} a \ref{fig:hourmin15cm} odpovídající hodnoty teplot naměřených ve výšce $\SI{2}{m}$ na čidle zavěšeném na stromě poblíž pozemním čidlům.
+Pro ilustraci se podívejme na konkrétní hodnoty teplot pozorované na nejbližším čidlu meteorologické stanice Churáňov. Na obrázcích \ref{fig:maxtemp} můžeme vidět průběh denních minim a maxim na jednom z čidel, celkově jde o 587 dní, období od 12.10.2019 do 20.5.2021. Na obrázcích \ref{fig:2mhours} můžeme vidět hodnoty teplot naměřených ve výšce $\SI{2}{m}$ na čidle zavěšeném na stromě poblíž pozemním čidlům, jde o hodnoty naměřené v době denního teplotního maxima a minima ve výšce $\SI{15}{cm}$.
 
 \begin{figure}
 	\centering
@@ -201,7 +201,7 @@ Na obrázku \ref{fig:hist_diff} můžeme vidět histogramy rozdílů teplot pro 
 Cílem následující části je ukázat jakým způsobem byla data zpracována, proč byl vybrán daný model a ukázat ověření metody ověření předpokladů.
 
 \subsection{Korelace dat}
-Z povahy naměřených dat je zřejmé, že zde bude existovat autokorelace mezi naměřenými maximálními nebo minimálními teplotami. Autokorelace se pak projeví i u rozdílu teploty naměřené blízko země a ve $\SI{2}{m}$. Na obrázku \ref{fig:acf} vidíme autokorelační funkci pro jedno z čidel.
+Z povahy naměřených dat je zřejmé, že zde existuje autokorelace mezi naměřenými maximálními nebo minimálními teplotami. Autokorelace se pak projevuje i u rozdílu teploty naměřené blízko země a ve $\SI{2}{m}$. Na obrázku \ref{fig:acf} vidíme autokorelační funkci pro jedno z čidel.
 
 \begin{figure}
 	\centering
@@ -212,7 +212,7 @@ Z povahy naměřených dat je zřejmé, že zde bude existovat autokorelace mezi
 
 Autokorelace není takto významná pro všechna čidla, ale i tak nám vylučuje možnost využít jednoduché mnohonásobné lineární regrese.
 
-Vzhledem k tomu, že pracujeme s daty rozloženými v prostoru, otestujeme, jestli mezi nimi existuje prostorová korelace. Využijeme teorii popsanou v kapitole \ref{chap:variogram}. Na obrázcích \ref{fig:variograms} vidíme dvanáct semivariogramů pro každý první den měsíce v roce 2020. Kvůli lišícím se hodnotám semivariance nemůžeme semivariogramy zakreslit do jednoho grafu. Ze semivariogramů můžeme usoudit, že v datech neexistuje významná prostorová korelace, kterou bychom museli v modelu zohlednit (prostorovou korelaci, bychom očekávali hlavně v prvních deseti kilometrech viz kapitola \ref{chap:variogram}).
+Kvůli prostorové struktuře dat musíme otestovat prostorovou korelaci. Využijeme teorii popsanou v kapitole \ref{chap:variogram}. Na obrázcích \ref{fig:variograms} vidíme dvanáct semivariogramů pro každý první den měsíce v roce 2020. Kvůli lišícím se hodnotám semivariance nemůžeme semivariogramy zakreslit do jednoho grafu. Ze semivariogramů můžeme usoudit, že v datech neexistuje významná prostorová korelace, kterou bychom museli v modelu zohlednit (prostorovou korelaci, bychom očekávali hlavně v prvních deseti kilometrech viz kapitola \ref{chap:variogram}).
 
 \begin{figure}
 	\centering
@@ -298,7 +298,7 @@ Zpracovávaná data mají šest prediktorů: insolace, srážky za poslední hod
 
 Pro výpočet lineárního modelu se smíšenými efekty použijeme funkci \texttt{lme} z balíčku \texttt{nlme} programovacího jazyka \texttt{R}.
 
-Pro každý model budeme ověřovat předpoklady lineární modelu se smíšenými efekty, nyní krátce ilustrujeme problémy, s kterými se budeme v kapitole \ref{chap:ch3} potýkat, na jednom modelu. Pracujme tedy s maximální denní teplotou ve výšce $\SI{15}{cm}$ a jejím rozdílem od teploty naměřené ve $\SI{2}{m}$. Porovnáme mezi sebou transformace proměnné, kterou se snažíme vysvětlit, a to bez transformace, s logaritmem, odmocninou a třetí odmocninou. Zároveň data mají silnou autokorelaci a tudíž, jak bylo popsáno v kapitole \ref{chap:lme}, použijeme pro autokorelační strukturu model ARMA s parametry $p=2$ a $q=1$ (tyto hodnoty byly vybrány vyzkoušením několika kombinací). Na obrázcích \ref{fig:qq} vidíme kvantil-kvantilový graf pro jednotlivé transformace. Hodnoty rozdílu teplot jsou ovšem i záporné, tudíž místo jednoduchého logaritmu použijeme transformaci \eqref{eq:logtrans}. Podobně ošetříme záporné hodnoty i pro ostatní transformace, jako například 3. odmocninu \eqref{eq:curttrans}. V datech se objevují i hodnoty rozdílu teplot $\Delta t=0$ pro které nemůžeme spočítat logaritmus. Jde ovšem o hodnoty pouze blízké nule, způsobené konečnou přesností čidel, tudíž na tyto hodnoty aplikujeme funkci \texttt{jitter} a tím je odlišíme od nuly a následně provedeme transformaci.
+Pro každý model budeme ověřovat předpoklady lineární modelu se smíšenými efekty, nyní krátce ilustrujeme problémy, s kterými se budeme v kapitole \ref{chap:ch3} potýkat, na jednom modelu. Pracujme tedy s maximální denní teplotou ve výšce $\SI{15}{cm}$ a jejím rozdílem od teploty naměřené ve $\SI{2}{m}$. Porovnáme mezi sebou transformace proměnné, kterou se snažíme vysvětlit, a to bez transformace, s logaritmem, odmocninou a třetí odmocninou. Zároveň data mají silnou autokorelaci a tudíž, použijeme pro autokorelační strukturu model ARMA s parametry $p=2$ a $q=1$ (tyto hodnoty byly vybrány vyzkoušením několika kombinací). Na obrázcích \ref{fig:qq} vidíme kvantil-kvantilový graf pro jednotlivé transformace. Hodnoty rozdílu teplot jsou ovšem i záporné, tudíž místo jednoduchého logaritmu použijeme transformaci \eqref{eq:logtrans}. Podobně ošetříme záporné hodnoty i pro ostatní transformace, jako například 3. odmocninu \eqref{eq:curttrans}. V datech se objevují i hodnoty rozdílu teplot $\Delta t=0$ pro které nemůžeme spočítat logaritmus. Jde ovšem o hodnoty pouze blízké nule, způsobené konečnou přesností čidel, tudíž na tyto hodnoty aplikujeme funkci \texttt{jitter} a tím je odlišíme od nuly a následně provedeme transformaci.
 
 \begin{gather*}
 	T \mapsto \mathrm{sign}(T)\cdot \ln\left|T\right| \label{eq:logtrans}\\
@@ -347,7 +347,7 @@ Homoskedasticitu budeme ověřovat graficky, pomocí srovnání fitovaných hodn
 
 Pro ilustraci důležitosti ARMA modelu na obrázku \ref{fig:acf_curtnoARMA} autokorelační funkci bez modelu ARMA a na \ref{fig:acf_curtARMA22} s modelem ARMA. Hodnota $\text{ACF}$ pro $\text{lag}=0$ je vyřazená pro větší přehlednost grafu, vždy nabývá hodnoty $1$.
 
-Vidíme, že přidání ARMA s hodnotami ($p=2$ a $q=1$) se výrazně zlepší autokorelační funkce a korelační strukturu jsme téměř odfiltrovali. Testovali jsme i jiné hodnoty $p$ a $q$, ale pro $p=2$ a $q=1$ nám vyšla autokorelační funkce nejlepší. S rostoucím $p$ a $q$ také roste výpočetní náročnost, pro $p=3$ a $q=3$ se ACF téměř nezmění, ale výpočet trvá až 4-krát déle (na počítači, který byl používán ke spracování, šlo o více než 3 hodiny výpočetního času).
+Vidíme, že přidání ARMA s hodnotami ($p=2$ a $q=1$) se výrazně zlepší autokorelační funkce a korelační strukturu jsme téměř odfiltrovali. Testovali jsme i jiné hodnoty $p$ a $q$, ale pro $p=2$ a $q=1$ nám vyšla autokorelační funkce nejlepší. S rostoucím $p$ a $q$ také roste výpočetní náročnost, pro $p=3$ a $q=3$ se ACF téměř nezmění, ale výpočet trvá až 4-krát déle (na počítači, který byl používán ke zpracování, šlo o více než 3 hodiny výpočetního času).
 
 \begin{figure}
 	\centering
@@ -367,7 +367,7 @@ Vidíme, že přidání ARMA s hodnotami ($p=2$ a $q=1$) se výrazně zlepší a
 \end{figure}
 
 \subsection{Seznam modelů}
-Výše jsme ukázali jakým způsobem budeme zpracovávat jednotlivé modely. Pro přehlednost budeme modely označovat zkratkou, abychom nemuseli vždy vypisovat pro které období byl model počítán nebo jestli jde o maximálně nebo minimální denní teploty. Seznam modelů je v tabulce \ref{tab:seznammodelu}. K těmto 16 modelům jsme přidali ještě dalších 16 modelů, které mají stejné parametry, ale místo rozdílu teplot např. $\Delta t = t_{15cm} - t_{2m}$ jako závislou proměnnou bereme její absolutní hodnotu, jako např. $\Delta t_{abs} = \left|t_{15cm} - t_{2m}\right|$. Tyto modely budeme označovat písmenem "A" na začátku (např. AMax15all) a pomůžou nám v interpretaci výsledků.
+Výše jsme ukázali, jakým způsobem zpracováváme jednotlivé modely. Pro přehlednost označujeme modely zkratkou, abychom nemuseli vždy vypisovat pro které období byl model počítán nebo jestli jde o maximálně nebo minimální denní teploty. Seznam modelů je v tabulce \ref{tab:seznammodelu}. K těmto 16 modelům jsme přidali ještě dalších 16 modelů, které mají stejné parametry, ale místo rozdílu teplot např. $\Delta t = t_{15cm} - t_{2m}$ jako závislou proměnnou bereme její absolutní hodnotu, jako např. $\Delta t_{abs} = \left|t_{15cm} - t_{2m}\right|$. Tyto modely budeme označovat písmenem "A" na začátku (např. AMax15all) a pomůžou nám v interpretaci výsledků.
 
 \begin{table}
 \centering\footnotesize\sf
@@ -397,4 +397,5 @@ Výše jsme ukázali jakým způsobem budeme zpracovávat jednotlivé modely. Pr
 	\label{tab:seznammodelu}
 \end{table}
 
-
+\subsection{Použitý software}
+Pro zpracování dat jsme využívali primárně programovací jazyk \texttt{R} \parencite{Rlanguage} a jeho verzi \texttt{4.1.3}. Použili jsme následující baličky a knihovny pro přípravu a analýzu dat: \texttt{stringr} \parencite{stringr}, \texttt{e1071} \parencite{e1071}, \texttt{xlsx} \parencite{xlsx}, \texttt{geosphere} \parencite{geosphere}, \texttt{ggplot2} \parencite{ggplot2}, \texttt{lmtest} \parencite{lmtest}, \texttt{data.table} \parencite{data.table}, \texttt{lubridate} \parencite{lubridate}, \texttt{nlme} \parencite{nlme}, \texttt{forecast} \parencite{forecast}, \texttt{moments} \parencite{moments}, \texttt{profvis} \parencite{profvis} a \texttt{climate} \parencite{climate}. Pro otevření dat formátu \texttt{grib} a jejich transformaci z reanalýzy ERA5 jsme použili programovací jazyk \texttt{Python}, verzi \texttt{3.8.13} \parencite{python} a knihovny \texttt{xarray} \parencite{xarray}, \texttt{numpy} \parencite{numpy}, \texttt{pandas} \parencite{pandas}, \texttt{cfgrib} \parencite{cfgrib} a \texttt{eccodes} \parencite{eccodes}. Pro vykreslení obrázku \ref{fig:rozlozenicidel} byl použit software \texttt{QGIS}, verze \texttt{3.10} \parencite{qgis}
