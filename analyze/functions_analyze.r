@@ -46,13 +46,29 @@ gg_plot_minmax_temp <- function(d, minmax, height){
 	if (minmax=="min") {minmax_text <- "minimálních"}
 	if (height=="0cm") {height_text <- "0 cm"}
 	if (height=="15cm") {height_text <- "15 cm"}
-	plt <- ggplot(data=d, aes(x=as.Date(date, format="%d.%m.%Y"), y=as.numeric(maxtemp2m))) + geom_point() +
-        #labs(x="Datum", y="Teplota [°C]", title=paste("Průběh ", minmax_text, " teplot v ", height_text, sep="")) +
-        labs(x="Datum", y="Teplota [°C]", title=paste("Průběh ", minmax_text, " teplot ve 2 m", sep="")) +
+	plt <- ggplot(data=d, aes(x=as.Date(date, format="%d.%m.%Y"), y=as.numeric(maxtemp15cm))) + geom_point() +
+		geom_line(aes(y=rollmean(as.numeric(maxtemp15cm), 7, na.pad=TRUE))) +
+        labs(x="Datum", y="Teplota [°C]", title=paste("Průběh ", minmax_text, " teplot v ", height_text, sep="")) +
+        #labs(x="Datum", y="Teplota [°C]", title=paste("Průběh ", minmax_text, " teplot ve 2 m", sep="")) +
         theme(text=element_text(family="Latin Modern Math",size=20))
 	wd <- getwd()
-	setwd("/home/vojta/Desktop/mffuk/bakalarka/out_fit/pics/")
+	setwd("/home/vojta/Desktop/mffuk/bakalarka/analyze/out/")
 	ggsave(paste("maxtemp", minmax, height, ".png", sep=""), plot = plt)
+	setwd(wd)
+
+}
+
+gg_plot_rollmean <- function(d, minmax, height){
+	plt <- ggplot(data=d, aes(x=as.Date(date, format="%d.%m.%Y"))) +
+		geom_line(aes(y=rollmean(as.numeric(maxtemp15cm), 7, na.pad=TRUE)), color="red") +
+		geom_line(aes(y=rollmean(as.numeric(maxtemp0cm), 7, na.pad=TRUE)), color="blue") +
+		geom_line(aes(y=rollmean(as.numeric(mintemp15cm), 7, na.pad=TRUE)), color="green") +
+		geom_line(aes(y=rollmean(as.numeric(mintemp0cm), 7, na.pad=TRUE)), color="black") +
+        labs(x="Datum", y="Teplota [°C]", title=paste("Klouzavý průměr průběhu teplot", sep="")) +
+        theme(text=element_text(family="Latin Modern Math",size=20))
+	wd <- getwd()
+	setwd("/home/vojta/Desktop/mffuk/bakalarka/analyze/out/")
+	ggsave(paste("rollmean.png", sep=""), plot = plt)
 	setwd(wd)
 
 }
@@ -187,9 +203,9 @@ gg_boxplot_wind_synop_bymonth <- function(synop){
 	ggsave(paste("hist_wind_synop_bymonth.png", sep=""), plot = plt, width=8, height=8, dpi=343)
 	setwd(wd)
 }
-gg_boxplot_snow_synop_bymonth(synop[961:15075,])
-gg_boxplot_temp_synop_bymonth(synop[961:15075,])
-gg_boxplot_prec_synop_bymonth(synop[961:15075,])
-gg_boxplot_wind_synop_bymonth(synop[961:15075,])
+#gg_boxplot_snow_synop_bymonth(synop[961:15075,])
+#gg_boxplot_temp_synop_bymonth(synop[961:15075,])
+#gg_boxplot_prec_synop_bymonth(synop[961:15075,])
+#gg_boxplot_wind_synop_bymonth(synop[961:15075,])
 #15075
 #961

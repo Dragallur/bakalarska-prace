@@ -33,7 +33,7 @@ Na obrázku \ref{fig:chmuukazka} můžeme vidět ukázku dat z meteorologické s
 		\caption{Histogram pozorovaných okamžitých rychlostí větru.}
 		\label{fig:synop_ffkmh}
 	\end{subfigure}
-	\caption{Data ze synoptické stanice Churáňov za období 12.10.2019 až 20.5.2021. Rychlost větru zobrazujeme jako obyčejný histogram, protože jde o informativnější graf než dělení podle měsíců v roce.}
+	\caption{Data ze synoptické stanice Churáňov za období 12.10.2019 až 20.5.2021. Rychlost větru zobrazujeme jako obyčejný histogram, protože jde o informativnější graf než dělení podle měsíců v roce. Horizontální čára označuje medián, hodnoty uvnitř krabičky jsou mezi 25 ($Q_1$) a 75 percentilem ($Q_3$) a odlehlé body jsou ty, které mají hodnotu větší nebo menší o 1.5násobek velikosti krabičky $Q_3-Q_1$.}
 	\label{fig:chmuukazka}
 \end{figure}
 
@@ -144,7 +144,13 @@ Pro ilustraci se podívejme na konkrétní hodnoty teplot pozorované na nejbli�
 		\caption{}
 		\label{fig:maxtempmin0cm}
 	\end{subfigure}
-	\caption{Průběh denních maximální resp. minimálních teplot ve výšce $\SI{15}{cm}$ resp. $\SI{0}{cm}$ nad zemí na čidle nejblíže stanici Churáňov}
+	\hfill
+	\begin{subfigure}{0.45\textwidth}
+  \includegraphics[width=\textwidth]{img/ch2/rollmean.png}
+		\caption{}
+		\label{fig:rollmean}
+	\end{subfigure}
+	\caption{Průběh denních maximální resp. minimálních teplot ve výšce $\SI{15}{cm}$ resp. $\SI{0}{cm}$ nad zemí na čidle nejblíže stanici Churáňov (a-d). Klouzavý týdenní průměr (e) pro grafy (a-d) s barvami, kde (a) červená, (b) modrá, (c) zelená a (d) černá.}
 	\label{fig:maxtemp}
 \end{figure}
 
@@ -171,25 +177,25 @@ Na obrázku \ref{fig:hist_diff} můžeme vidět histogramy rozdílů teplot pro 
 	\centering
 	\begin{subfigure}{0.45\textwidth}
   \includegraphics[width=\textwidth]{img/ch2/hist_diff_max15cm.png}
-		\caption{Histogram rozdílu maximálních teplot v $\SI{15}{cm}$ a $\SI{2}{m}$. $\text{M} = 0.69$, $\text{MD} = 0.25$.}
+		\caption{Rozdíl maximálních teplot v $\SI{15}{cm}$ a $\SI{2}{m}$. $\text{M} = 0.69$, $\text{MD} = 0.25$.}
 		\label{fig:hist_diff_max15cm}
 	\end{subfigure}
 	\hfill
 	\begin{subfigure}{0.45\textwidth}
   \includegraphics[width=\textwidth]{img/ch2/hist_diff_max0cm.png}
-		\caption{Histogram rozdílu maximálních teplot v $\SI{0}{cm}$ a $\SI{2}{m}$. $\text{M} = -0.24$, $\text{MD} = -0.25$.}
+		\caption{Rozdíl maximálních teplot v $\SI{0}{cm}$ a $\SI{2}{m}$. $\text{M} = -0.24$, $\text{MD} = -0.25$.}
 		\label{fig:hist_diff_max0cm}
 	\end{subfigure}
 	\hfill
 	\begin{subfigure}{0.45\textwidth}
   \includegraphics[width=\textwidth]{img/ch2/hist_diff_min15cm.png}
-		\caption{Histogram rozdílu minimálních teplot v $\SI{15}{cm}$ a $\SI{2}{m}$. $\text{M} = -0.36$, $\text{MD} = -0.125$.}
+		\caption{Rozdíl minimálních teplot v $\SI{15}{cm}$ a $\SI{2}{m}$. $\text{M} = -0.36$, $\text{MD} = -0.125$.}
 		\label{fig:hist_diff_min15cm}
 	\end{subfigure}
 	\hfill
 	\begin{subfigure}{0.45\textwidth}
   \includegraphics[width=\textwidth]{img/ch2/hist_diff_min0cm.png}
-		\caption{Histogram rozdílu miniálních teplot v $\SI{0}{cm}$ a $\SI{2}{m}$. $\text{M} = 1.14$, $\text{MD} = 0.9375$.}
+		\caption{Rozdíl miniálních teplot v $\SI{0}{cm}$ a $\SI{2}{m}$. $\text{M} = 1.14$, $\text{MD} = 0.9375$.}
 		\label{fig:hist_diff_min0cm}
 	\end{subfigure}
 	\caption{Histogramy rozdílů maximální, resp. minimální teploty v $\SI{15}{cm}$, resp. v $\SI{0}{cm}$ a ve $\SI{2}{m}$. Ke každému histogramu uvádíme odpovídající hodnotu průměru $\text{M}$ a mediánu $\text{MD}$.}
@@ -198,15 +204,15 @@ Na obrázku \ref{fig:hist_diff} můžeme vidět histogramy rozdílů teplot pro 
 
 
 \section{Metody analýzy dat}\label{chap:methods}
-Cílem následující části je ukázat jakým způsobem byla data zpracována, proč byl vybrán daný model a ukázat ověření metody ověření předpokladů.
+Cílem následující části je ukázat jakým způsobem byla data zpracována, proč byl vybrán daný model a ukázat metody ověření předpokladů.
 
 \subsection{Korelace dat}
-Z povahy naměřených dat je zřejmé, že zde existuje autokorelace mezi naměřenými maximálními nebo minimálními teplotami. Autokorelace se pak projevuje i u rozdílu teploty naměřené blízko země a ve $\SI{2}{m}$. Na obrázku \ref{fig:acf} vidíme autokorelační funkci pro jedno z čidel.
+Z povahy naměřených dat je zřejmé, že zde existuje časová autokorelace mezi naměřenými maximálními nebo minimálními teplotami. Autokorelace se pak projevuje i u rozdílu teploty naměřené blízko země a ve $\SI{2}{m}$. Na obrázku \ref{fig:acf} vidíme autokorelační funkci pro jedno z čidel.
 
 \begin{figure}
 	\centering
 	\includegraphics[width=0.55\textwidth]{img/ch2/acfNPS_4311_D_TMS.png}
-	\caption{Autokorelační funkce pro rozdíl teplot mezi maximální teplotou v $\SI{15}{cm}$ a teplotou ve $\SI{2}{m}$ na páru čidel nejblíže meteorologické stanici Churáňov.}
+	\caption{Časová autokorelační funkce pro rozdíl teplot mezi maximální teplotou v $\SI{15}{cm}$ a teplotou ve $\SI{2}{m}$ na páru čidel nejblíže meteorologické stanici Churáňov.}
 	\label{fig:acf}
 \end{figure}
 
@@ -292,18 +298,18 @@ Kvůli prostorové struktuře dat musíme otestovat prostorovou korelaci. Využi
 \end{figure}
 
 \subsection{Lineární model se smíšenými efekty}
-Pro analýzu vlivu meteorologických proměnných je vhodný lineární model se smíšenými efekty popsaný v kapitole \ref{chap:lme}. Jako náhodný efekt, jehož reálná hodnota pro nás není důležitá, určíme název čidla. Pro všechna čidla a všechny dostupné dny máme kolem 78000 pozorování rozdílu maximální teploty při zemi a ve $\SI{2}{m}$ (konkrétní počet se může lišit, jestliže bereme teplotu v $\SI{0}{cm}$ nebo $\SI{15}{cm}$ nad zemí). Když vyřadíme měření, pro která chybí některá data z meteorologických stanic, a poslední čtyři dny měření, kdy máme data z menšího množství čidel, tak máme 63000 měření.
+Pro analýzu vlivu meteorologických proměnných je vhodný lineární model se smíšenými efekty popsaný v kapitole \ref{chap:lme}. Jako náhodný efekt, jehož reálná hodnota pro nás není důležitá, určíme identitu (název) páru pozemního čidla a čidla ve výšce $\SI{2}{m}$. Vybereme identitu čidla jako náhodný efekt, protože nás ve výsledném modelu nezajímají koefienty každého čidla, nejde pro nás o důležitý prediktor. Také předpokládáme, že díky tomu, že jsou čidla rovnoměrně rozložená po ploše národních parků tak jde o výběr s normálním rozdělením z možných pozic čidel. Když vyřadíme měření, pro která chybí některá data z meteorologických stanic, a poslední čtyři dny měření, kdy máme data z menšího množství čidel, tak máme $76627$ měření, hodnoty pro jiné kombinace čidel a maximálních/minimálních teplot jsou v tabulce \ref{tab:seznammodelu}.
 
-Zpracovávaná data mají šest prediktorů: insolace, srážky za poslední hodinu, celková sněhová pokrývka, oblačnost, rychlost větru a půdní vlhkost. Oblačnost nabývá diskrétních hodnot, je vyjádřena v osminách celkové oblohy, nahrazená data z ERA5 jsou vyjádřena v procentech, všechny hodnoty tedy převedeme do intervalu $0$ až $1$. Rychlost větru je měřená v diskrétních násobcích $\SI{1}{km/h}$. Ostatní prediktory, stejně jako rozdíl mezi teplotami při povrchu země, který se snažíme vysvětlit, jsou spojité proměnné. 
+Zpracovávaná data mají šest prediktorů: insolace, srážky za poslední hodinu, celková sněhová pokrývka, oblačnost, rychlost větru a půdní vlhkost. Oblačnost nabývá diskrétních hodnot, je vyjádřena v osminách celkové oblohy. Data z reanalýzy ERA5 jsou vyjádřena v procentech, všechny hodnoty tedy převedeme do intervalu $0$ až $1$. Rychlost větru je měřená v diskrétních násobcích $\SI{1}{km/h}$. Ostatní prediktory, stejně jako rozdíl mezi teplotami při povrchu země, který se snažíme vysvětlit, jsou spojité proměnné. 
 
 Pro výpočet lineárního modelu se smíšenými efekty použijeme funkci \texttt{lme} z balíčku \texttt{nlme} programovacího jazyka \texttt{R}.
 
-Pro každý model budeme ověřovat předpoklady lineární modelu se smíšenými efekty, nyní krátce ilustrujeme problémy, s kterými se budeme v kapitole \ref{chap:ch3} potýkat, na jednom modelu. Pracujme tedy s maximální denní teplotou ve výšce $\SI{15}{cm}$ a jejím rozdílem od teploty naměřené ve $\SI{2}{m}$. Porovnáme mezi sebou transformace proměnné, kterou se snažíme vysvětlit, a to bez transformace, s logaritmem, odmocninou a třetí odmocninou. Zároveň data mají silnou autokorelaci a tudíž, použijeme pro autokorelační strukturu model ARMA s parametry $p=2$ a $q=1$ (tyto hodnoty byly vybrány vyzkoušením několika kombinací). Na obrázcích \ref{fig:qq} vidíme kvantil-kvantilový graf pro jednotlivé transformace. Hodnoty rozdílu teplot jsou ovšem i záporné, tudíž místo jednoduchého logaritmu použijeme transformaci \eqref{eq:logtrans}. Podobně ošetříme záporné hodnoty i pro ostatní transformace, jako například 3. odmocninu \eqref{eq:curttrans}. V datech se objevují i hodnoty rozdílu teplot $\Delta t=0$ pro které nemůžeme spočítat logaritmus. Jde ovšem o hodnoty pouze blízké nule, způsobené konečnou přesností čidel, tudíž na tyto hodnoty aplikujeme funkci \texttt{jitter} a tím je odlišíme od nuly a následně provedeme transformaci.
+Pro každý model budeme ověřovat předpoklady lineární modelu se smíšenými efekty. Krátce ilustrujeme problémy na jednom modelu, s kterými se budeme v kapitole \ref{chap:ch3} potýkat. Pracujme tedy s maximální denní teplotou ve výšce $\SI{15}{cm}$ a jejím rozdílem od teploty naměřené ve $\SI{2}{m}$. Porovnáme mezi sebou residuály transformované proměnné, kterou se snažíme vysvětlit, a to bez transformace, s logaritmem, odmocninou a třetí odmocninou. Zároveň data mají silnou autokorelaci a tudíž, použijeme pro autokorelační strukturu model ARMA s parametry $p=2$ a $q=1$ (tyto hodnoty byly vybrány vyzkoušením několika kombinací). Na obrázcích \ref{fig:qq} vidíme kvantil-kvantilový graf pro jednotlivé transformace. Hodnoty rozdílu teplot jsou ovšem i záporné, tudíž místo jednoduchého logaritmu použijeme transformaci \eqref{eq:logtrans}. Podobně ošetříme záporné hodnoty i pro ostatní transformace, jako například 3. odmocninu \eqref{eq:curttrans}. V datech se objevují i hodnoty rozdílu teplot $\Delta t=0$ pro které nemůžeme spočítat logaritmus. Jde ovšem o hodnoty pouze blízké nule, způsobené konečnou přesností čidel, tudíž na tyto hodnoty aplikujeme funkci \texttt{jitter}. Tato funkce přidá k hodnotám šum a používáme defaultní parametr $\text{factor}=0$. Tímto je odlišíme od nuly a následně provedeme transformaci.
 
-\begin{gather*}
+\begin{gather}
 	T \mapsto \mathrm{sign}(T)\cdot \ln\left|T\right| \label{eq:logtrans}\\
 	T \mapsto \mathrm{sign}(T)\cdot \sqrt[3]{\left|T\right|} \label{eq:curttrans}
-\end{gather*}
+\end{gather}
 
 \begin{figure}
 	\centering
@@ -334,9 +340,9 @@ Pro každý model budeme ověřovat předpoklady lineární modelu se smíšený
 	\label{fig:qq}
 \end{figure}
 
-Vidíme, že nejlépe normálnímu rozdělení odpovídá transformace třetí odmocniny a proto s ní budeme nadále pracovat. Transformace ovšem není dokonalá, stále jsme se úplně nezbavili šikmosti (skewness). Formální testy normálity rozdělení jako například Shapiro-Wilkův test se zde nehodí, neboť jsou velmi náchylné na malé odchylky od normálního rozdělení \parencite{shapirowilk}. Na obrázku \ref{fig:resvsfit_curt} můžeme vidět srovnání residuálů modelu s fitovanými hodnotami. Na obrázku můžeme vidět, že v takto transformovaných datech není výrazná heteroskedasticita.
+Vidíme, že nejlépe normálnímu rozdělení odpovídá transformace pomocí třetí odmocniny, a proto s ní budeme nadále pracovat. Transformace ovšem není dokonalá, stále jsme se úplně nezbavili šikmosti (skewness). Formální testy normálity rozdělení jako například Shapiro-Wilkův test se zde nehodí, neboť jsou velmi náchylné na malé odchylky od normálního rozdělení \parencite{shapirowilk}.
 
-Homoskedasticitu budeme ověřovat graficky, pomocí srovnání fitovaných hodnot a residuálů modelu. Pokud nebyl porušen předpoklad homoskedasticity, tak nesmíme pozorovat závislost mezi fitovanými hodnotami a residuály, jak bylo popsáno v kapitole \ref{chap:lme}. Na obrázku \ref{fig:resvsfit_curt} vidíme srovnání residuálů modelu s fitovanými hodnotami a není zde žádná výrazná heteroskedasticita.
+Homoskedasticitu budeme ověřovat graficky, pomocí srovnání fitovaných hodnot a residuálů modelu. Pokud nebyl porušen předpoklad homoskedasticity, tak nesmíme pozorovat závislost mezi fitovanými hodnotami a residuály, jak bylo popsáno v kapitole \ref{chap:lme}. V našem modelu není žádná výrazná heteroskedasticita, tedy není zde zřejmý vztah mezi residuály modelu a fitovanými hodnotami, viz obrázek \ref{fig:resvsfit_curt}.
 
 \begin{figure}
 	\centering
@@ -347,7 +353,7 @@ Homoskedasticitu budeme ověřovat graficky, pomocí srovnání fitovaných hodn
 
 Pro ilustraci důležitosti ARMA modelu na obrázku \ref{fig:acf_curtnoARMA} autokorelační funkci bez modelu ARMA a na \ref{fig:acf_curtARMA22} s modelem ARMA. Hodnota $\text{ACF}$ pro $\text{lag}=0$ je vyřazená pro větší přehlednost grafu, vždy nabývá hodnoty $1$.
 
-Vidíme, že přidání ARMA s hodnotami ($p=2$ a $q=1$) se výrazně zlepší autokorelační funkce a korelační strukturu jsme téměř odfiltrovali. Testovali jsme i jiné hodnoty $p$ a $q$, ale pro $p=2$ a $q=1$ nám vyšla autokorelační funkce nejlepší. S rostoucím $p$ a $q$ také roste výpočetní náročnost, pro $p=3$ a $q=3$ se ACF téměř nezmění, ale výpočet trvá až 4-krát déle (na počítači, který byl používán ke zpracování, šlo o více než 3 hodiny výpočetního času).
+Vidíme, že přidání ARMA s hodnotami ($p=2$ a $q=1$) se výrazně zlepší autokorelační funkce a korelační strukturu jsme téměř odfiltrovali. Testovali jsme i jiné hodnoty $p$ a $q$, ale pro $p=2$ a $q=1$ nám vyšla autokorelační funkce s nejmenšími hodnotami. S rostoucím $p$ a $q$ také roste výpočetní náročnost, pro $p=3$ a $q=3$ se ACF téměř nezmění, ale výpočet trvá až 4-krát déle (na počítači, který byl používán ke zpracování, šlo o více než 3 hodiny výpočetního času).
 
 \begin{figure}
 	\centering
@@ -367,7 +373,7 @@ Vidíme, že přidání ARMA s hodnotami ($p=2$ a $q=1$) se výrazně zlepší a
 \end{figure}
 
 \subsection{Seznam modelů}
-Výše jsme ukázali, jakým způsobem zpracováváme jednotlivé modely. Pro přehlednost označujeme modely zkratkou, abychom nemuseli vždy vypisovat pro které období byl model počítán nebo jestli jde o maximálně nebo minimální denní teploty. Seznam modelů je v tabulce \ref{tab:seznammodelu}. K těmto 16 modelům jsme přidali ještě dalších 16 modelů, které mají stejné parametry, ale místo rozdílu teplot např. $\Delta t = t_{15cm} - t_{2m}$ jako závislou proměnnou bereme její absolutní hodnotu, jako např. $\Delta t_{abs} = \left|t_{15cm} - t_{2m}\right|$. Tyto modely budeme označovat písmenem "A" na začátku (např. AMax15all) a pomůžou nám v interpretaci výsledků.
+Výše jsme ukázali, jakým způsobem zpracováváme jednotlivé modely. Pro přehlednost označujeme modely zkratkou. Seznam modelů je v tabulce \ref{tab:seznammodelu}. Kromě již zmiňovaných modelů pro maximální a minimální denní teploty a výšku $\SI{15}{cm}$ a $\SI{0}{cm}$ jsme počítali modely pouze pro období od začátku května do konce října (teplé období) a pro období od začátku listopadu do konce dubna (studené období). Pro modely s čidlem ve výšce $\SI{15}{cm}$ ve studeném období jsme spočetli modely, kdy jsme výšku sněhu nahradili kategorickou proměnou ($0$ odpovídá hodnotám bez sněhu, $1$ čidlo je nad sněhem, $2$ čidlo je pod sněhem). K těmto 16 modelům jsme přidali ještě dalších 16 modelů, které mají stejné parametry, ale místo rozdílu teplot např. $\Delta t = t_{15cm} - t_{2m}$ jako závislou proměnnou bereme její absolutní hodnotu, jako např. $\Delta t_{abs} = \left|t_{15cm} - t_{2m}\right|$. Tyto modely budeme označovat písmenem "A" na začátku (např. AMax15all) a pomůžou nám v interpretaci výsledků.
 
 \begin{table}
 \centering\footnotesize\sf
@@ -393,7 +399,7 @@ Výše jsme ukázali, jakým způsobem zpracováváme jednotlivé modely. Pro p�
 	Min15coldc & min. & $\SI{15}{cm}$ & studené & $156$ & $43505$ \\
 \bottomrule
 \end{tabular}
-	\caption{Seznam lineární smíšených modelů pro vyhodnocení. "c" u posledních čtyř modelů znamená, že prediktor výšky sněhu je nahrazen kategoriemi (bez sněhu, nad sněhem a pod sněhem). Druhou sadu modelů, kdy bereme absolutní hodnotu závislé proměnné, tak budeme značit písmenem "A" na začátku názvu.}
+	\caption{Seznam lineárních smíšených modelů pro vyhodnocení vlivu meteorologických podmínek na rozdíl teplot. "c" u posledních čtyř modelů znamená, že prediktor výšky sněhu je nahrazen kategoriemi (bez sněhu, nad sněhem a pod sněhem). Druhou sadu modelů, kdy bereme absolutní hodnotu závislé proměnné, tak budeme značit písmenem "A" na začátku názvu.}
 	\label{tab:seznammodelu}
 \end{table}
 

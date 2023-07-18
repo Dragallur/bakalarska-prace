@@ -6,6 +6,7 @@ library(ggplot2)
 library(lmtest)
 library(data.table)
 library(lubridate)
+library(zoo)
 
 setwd("/home/vojta/Desktop/mffuk/bakalarka/analyze/")
 source("functions_analyze.r")
@@ -16,15 +17,14 @@ c1blad01 <- c(48.9904850, 13.6620817)
 c4japi01 <- c(49.0361536, 13.4212786)
 c1chur01 <- c(49.0682586, 13.6156192)
 
-tim_c <- c("warmhalf")
-minmax_c <- c("max", "min")
-height_c <- c("15cm", "0cm")
+tim_c <- c("all")
+minmax_c <- c("min")
+height_c <- c("0cm")
 bayerischer_wald_c <- c(TRUE)
 dist_cutoff_c <- 0 #closest logger is NPS_4311_D_TMS
 station_cutoff <- c(c1chur01, deparse(substitute(c1chur01)))
 insol <- TRUE
 size_nrow <- 228
-
 setwd("~/Desktop/mffuk/bakalarka/ZETA_Klimes")
 load("zeta.RData")
 
@@ -82,6 +82,9 @@ if (dist_f2(c(lok$Lat_WGS84,lok$Lon_WGS84), as.numeric(station_cutoff[1:2])) > d
 	#print(paste(station_name," skipped for being too far.", sep=""))
 	next
 }
+}
+if (station_name != "NPS_4311_D_TMS"){
+	next
 }
 da <- da[,1:9]
 colnames(da) <-  c("n","name","b","date","temp-6cm","temp2cm","temp15cm","humraw","hum")

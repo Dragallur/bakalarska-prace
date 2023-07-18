@@ -186,14 +186,14 @@ Při větší \textit{oblačnosti} dopadá na zem více rozptýleného záření
 \begin{figure}
 	\centering
 	\includegraphics[width=0.95\textwidth]{img/ch1/snowtempaltai.png}
-	\caption{V grafu a) je výška sněhové pokrývky. V grafu b) je průběh teplot pod sněhovou pokrývkou pro $\SI{10}{cm}$, $\SI{15}{cm}$, $\SI{20}{cm}$, $\SI{30}{cm}$, $\SI{40}{cm}$ nad rozhraním půda-sníh a na povrchu sněhu na Altaji během zimní sezóny 2016/2017. Převzato z \parencite{zhangwei2021}.}
+	\caption{Výška sněhové pokrývky (a), průběh teplot pod sněhovou pokrývkou pro $\SI{10}{cm}$, $\SI{15}{cm}$, $\SI{20}{cm}$, $\SI{30}{cm}$, $\SI{40}{cm}$ nad rozhraním půda-sníh a na povrchu sněhu (b) na Altaji během zimní sezóny 2016/2017. Převzato z \cite{zhangwei2021}.}
 	\label{fig:snowtempaltai}
 \end{figure}
 
 \begin{figure}
 	\centering
 	\includegraphics[width=0.95\textwidth]{img/ch1/snowlapserate.png}
-	\caption{Teplotní gradient uvnitř sněhové pokrývky v závislosti na její mocnosti. Měřeno na Altaji od listopadu 2011 do dubna 2018. Převzato z \parencite{zhangwei2021}.}
+	\caption{Teplotní gradient uvnitř sněhové pokrývky v závislosti na její mocnosti. Měřeno na Altaji od listopadu 2011 do dubna 2018. Chybové úsečky jsou standardní odchylka měření. Převzato z \cite{zhangwei2021}.}
 	\label{fig:snowlapserate}
 \end{figure}
 
@@ -270,7 +270,7 @@ Průměrná teplota na Šumavě v období 1961 až 2018 se pohybuje od $\SI{4.2}
 \begin{figure}
 	\centering
 	\includegraphics[width=0.95\textwidth]{img/ch1/srazkovepomerysumava.png}
-	\caption{Srážkové poměry Šumavy \parencite{srazkovepomerysumava}, důležitá je pak hodnota $\SI{1058}{mm/rok}$ pro meteorologickou stanici Churáňov.}
+	\caption{Srážkové poměry Šumavy \parencite{srazkovepomerysumava}, důležitá je hodnota $\SI{1058}{mm/rok}$ pro meteorologickou stanici Churáňov.}
 	\label{fig:srazkovepomerysumava}
 \end{figure}
 
@@ -287,7 +287,7 @@ Průměrná teplota na Šumavě v období 1961 až 2018 se pohybuje od $\SI{4.2}
 %V kapitole \ref{chap:analysis} je vysvětleno jakým způsobem byla data zpracována. Zde nastíníme relevantní teorii.
 
 \subsection{Lineární smíšený model}\label{chap:lme}
-V maticovém zápisu je lineární smíšený model definován následovně: \parencite{mcleanrobert1991}
+V maticovém zápisu je lineární smíšený model definován následovně \parencite{mcleanrobert1991}:
 $$\boldsymbol{y} = \boldsymbol{X}\boldsymbol{\beta} + \boldsymbol{Z}\boldsymbol{u} + \boldsymbol{\epsilon},$$ \label{eq:linearmixedeffectmodel}
 kde $\mathbf{y}$ je vektor pozorovaných hodnot, $\mathbf{\beta}$ je neznámý vektor hledaných fixních efektů, $\mathbf{u}$ je neznámý vektor náhodných efektů $\mathbf{\epsilon}$, je neznámý vektor náhodných chyb a matice $\mathbf{X}$ a $\mathbf{Z}$ jsou známé matice udávající vztah mezi pozorovanými hodnotami a fixními, resp. náhodnými efekty, jejichž velikost je daná počtem prediktorů a pozorování \parencite{mcleanrobert1991}.
 
@@ -298,22 +298,22 @@ Pro lineární smíšený model můžeme definovat marginální a podmíněné $
 	R_m^2 = \frac{\sigma_f^2}{\sigma_f^2+\sigma_{\alpha}^2+\sigma_{\varepsilon}^2},\\
 	R_c^2 = \frac{\sigma_f^2+\sigma_{\alpha}^2}{\sigma_f^2+\sigma_{\alpha}^2+\sigma_{\varepsilon}^2},
 \end{gather}
-kde $\sigma_f^2$ je variance fixních efektů, $\sigma_{\alpha}$ je variance náhodných efektů a $\sigma_{\varepsilon}^2$ je variance pozorovaných hodnot \parencite{lmersquared}.
+kde $\sigma_f^2$ je variance fixních efektů, $\sigma_{\alpha}^2$ je variance náhodných efektů a $\sigma_{\varepsilon}^2$ je variance pozorovaných hodnot \parencite{lmersquared}.
 
 \subsection{ARMA model}
-Pro modelování autokorelační struktury můžeme využít ARMA (autoregressive moving average) model. Ten je definován jako \parencite{wilsongranville2016}
+Pro modelování autokorelační struktury můžeme využít ARMA (autoregressive moving average) model. Ten je definován jako \parencite{wilsongranville2016}:
 \begin{gather*}
 y_T = \epsilon_T + \sum_{i=1}^{p}u_i y_{T-i} + \sum_{i=1}^{q}\beta_i\varepsilon_{T-i},
 \end{gather*}
 kde $y_T$ časová řada, $\epsilon$ je náhodná chyba, $u_i$ jsou parametry náhodné proměnné a $\beta_i$ jsou parametry fixní proměnné. 
 
 \subsection{F-test}
-F-test může sloužit k testování statistické významnosti koeficientů lineárního (smíšeného) modelu. Máme-li nulovou hypotézu, že všechny koeficienty modelu $\beta_i = 0\, \forall i$. Dále máme-li alternativní hypotézu $\exists j, \beta_j\neq 0$. Spočteme $F$ statistiku jako podíl vysvětlené a nevysvětlené variance. Následně spočteme pomocí statistického softwaru konfidenční interval $I$ a zavrhneme nulovou hypotézu, pokud $F\notin I$ a určíme p-hodnotu. V programovacím jazyce \texttt{R} můžeme použít například funkci \texttt{anova} \parencite{ftest}.
+F-test může sloužit k testování statistické významnosti koeficientů lineárního (smíšeného) modelu. Máme-li nulovou hypotézu, že všechny koeficienty modelu $\beta_i = 0\, \forall\ i$. Dále máme-li alternativní hypotézu $\exists\ j, \beta_j\neq 0$. Spočteme $F$ statistiku jako podíl vysvětlené a nevysvětlené variance. Následně spočteme pomocí statistického softwaru konfidenční interval $I$, jako $(1-\alpha)\cdot\SI{100}{\%}$, kde $\alpha = 0.05$. Zavrhneme nulovou hypotézu, pokud $F\notin I$ a určíme p-hodnotu. V programovacím jazyce \texttt{R} můžeme použít například funkci \texttt{anova} \parencite{ftest}.
 
 \subsection{Kvantil-kvantilový graf}
 Pro srovnání dvou statistických rozdělení používáme kvantil-kvantilový graf. Na ose $x$ jsou kvantily jednoho rozdělení a na ose $y$ druhého. Pokud chceme zjistit, jestli datový soubor je blízký normálnímu rozdělení, vykreslíme proti sobě kvantily normálního rozdělení a kvantily datového souboru, čím blíže jsou hodnoty přímce $y(x)=x$, tím lépe odpovídá rozdělení normálnímu (až na násobek a konstantu rozdělení). Z kvantil-kvantilového grafu můžeme také například odhalit, jestli jsou hodnoty zešikmené nebo jestli lépe odpovídají bimodálnímu rozdělení \parencite{interpretqqplot}.
 
-K testování normality nějakého rozdělení můžeme také použít formální testy jako například Shapiro-Wilkův test.%\parencite{shapirowilk}. 
+K testování normality nějakého rozdělení můžeme také použít formální testy jako například Shapiro-Wilkův test \parencite{KozakM2018WnaR}.%\parencite{shapirowilk}. 
 
 \subsection{Semivariogram}\label{chap:variogram}
 Pro posouzení prostorové korelace dat využijeme metodu variogramu. Experimentální variogram nám určuje prostorovou závislost naměřených hodnot. V našem případě jde o hodnoty naměřených teplot neboli jejich rozdíl. Experimentální semivariogram může být definován například následovně
