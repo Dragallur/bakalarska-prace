@@ -11,7 +11,7 @@ kde $R_N$ je celková bilance záření, $H$ je tok zjevného tepla z/do atmosf�
 \begin{figure}
 	\centering
 	\includegraphics[width=0.95\textwidth]{img/ch1/energy_drylakebed.png}
-	\caption{Pozorovaný tok tepla nad vyschlým jezerem El Mirage v Kalifornii 10.-11.6.1950 převzato z \parencite{arya2001}}
+	\caption{Pozorovaný tok tepla nad vyschlým jezerem El Mirage v Kalifornii 10.-11.6.1950 převzato z \parencite{arya2001}.}
 	\label{fig:energy_drylakebed}
 \end{figure}
 
@@ -44,7 +44,7 @@ Výše jsme analyzovali situaci, kdy šlo o suchý povrch. Pro vlhký povrch se 
     \node at (2,-2) {(b) Situace v noci};
   \end{scope}
 	\end{tikzpicture}
-\caption{Schéma energetické bilance ve dne a v noci}
+\caption{Schéma energetické bilance ve dne a v noci.}
 \label{fig:schema}
 \end{figure}
 
@@ -71,7 +71,7 @@ Opadavý les & 0.1-0.2\\
 Neopadavý les & 0.05-0.15\\
 \bottomrule
 \end{tabular}
-	\caption{Výběr různých typů povrchů a odpovídajících hodnot albeda. Převzato z \parencite{arya2001}.}
+	\caption{Výběr různých typů povrchů a odpovídajících hodnot albeda. Převzato z \cite{arya2001}.}
 \label{tab:albedo}
 \end{table}
 
@@ -175,7 +175,7 @@ Při větší \textit{oblačnosti} dopadá na zem více rozptýleného záření
 \begin{figure}
 	\centering
 	\includegraphics[width=0.95\textwidth]{img/ch1/diurnaltemp.png}
-	\caption{Denní vývoj teploty ve třech výškách (plná čára $\SI{1.2}{m}$, čárkovaná $\SI{7}{m}$ a tečkovaná $\SI{17}{m}$) v jižní Anglii pro jasnou a zataženou oblohu a pro červnové a prosincové teploty. Pro každou hodinu je uvedená i rychlost větru ve výšce $\SI{12}{m}$. Převzato z \parencite{arya2001}}
+	\caption{Denní vývoj teploty ve třech výškách (plná čára $\SI{1.2}{m}$, čárkovaná $\SI{7}{m}$ a tečkovaná $\SI{17}{m}$) v jižní Anglii pro jasnou a zataženou oblohu a pro červnové a prosincové teploty. Pro každou hodinu je uvedená i rychlost větru ve výšce $\SI{12}{m}$. Převzato z \cite{arya2001}.}
 	\label{fig:diurnaltemp}
 \end{figure}
 
@@ -231,11 +231,11 @@ Data měřená při povrchu země jsou na některých místech doplněna stejný
 Chybějící hodnoty oblačnosti ze staničních měření doplníme pomocí dat z reanalýzy ERA5. Copernicus Climate Change and Atmosphere Monitoring Services provádí atmosférickou reanalýzu ERA5, která je pátou verzí této reanalýzy s daty od roku 1940 \parencite{era5}. Data s desítkami veličin jsou dostupná pro každou hodinu s rozlišením $\SI{0.5}{\degree}$, konkrétně budeme používat produkt "ERA5 hourly data on single levels from 1940 to present".
 
 \subsection{Výpočet insolace}\label{chap:insolation}
-Insolace je množství slunečního záření dopadajícího na jednotku vodorovné plochy za jednotku času. Insolace záleží na denní době, roční době a zeměpisné šířce. Okamžitá insolace je dána následujícím vztahem \parencite{insolace}
+Insolace je množství slunečního záření dopadajícího na jednotku vodorovné plochy za jednotku času. Insolace záleží na denní době, roční době a zeměpisné šířce. Okamžitá insolace je dána následujícím vztahem \parencite{insolace}:
 \begin{gather}\label{eq:insolace}
 Q = S_0\left(\frac{d_0}{d}\right)^2\left(\sin\phi\sin\delta + \cos\phi\cos\delta\cos h\right),
 \end{gather}
-kde $S_0$ solární konstanta, $d_0$ je průměrná vzdálenost Země od Slunce, $d$ je aktuální vzdálenost Země od Slunce, $\phi$ je zeměpisná šířka, $\delta$ je deklinační úhel Slunce, $h$ je hodinový úhel Slunce. Tento vzoreček platí pouze pro den, nikoliv v noci, kdy je $Q=0$. Hodinový úhel Slunce spočteme následovně: \parencite{hourangle}
+kde $S_0$ solární konstanta, $d_0$ je průměrná vzdálenost Země od Slunce, $d$ je aktuální vzdálenost Země od Slunce, $\phi$ je zeměpisná šířka, $\delta$ je deklinační úhel Slunce, $h$ je hodinový úhel Slunce. Tento vzoreček platí pouze pro den, nikoliv v noci, kdy je $Q=0$. Hodinový úhel Slunce spočteme následovně \parencite{hourangle}:
 \begin{equation}
 	\begin{split}
 		h &= 15^{\circ}\left(\text{LST}+\text{offset}/60-12\right)\\
@@ -246,11 +246,11 @@ kde $S_0$ solární konstanta, $d_0$ je průměrná vzdálenost Země od Slunce,
 	\end{split}
 \end{equation}
 $\text{LST}$ je místní sluneční čas, ke kterému přičteme korekci způsobenou eliptickou dráhou okolo země a skloněním zemského osy a korekci zahrnující to na jaké zeměpisné šířce se nacházíme. Faktor $\gamma$ je část roku vyjádřena ve zlomku.
-Deklinační úhel s předpokladem, že Země obíhá po kružnici: \parencite{declinationangle}
+Deklinační úhel s předpokladem, že Země obíhá po kružnici \parencite{declinationangle}:
 \begin{gather*}
 \delta = \SI{-23.45}{\degree} \cdot \cos\left(\frac{360}{365}\cdot(t+10)\right),
 \end{gather*}
-$t$ je den v roce, tedy pro 1. leden $t=1$. Vzdálenost Země od Slunce pro \eqref{eq:insolace} je daná vztahem \parencite{sunearthdist}
+$t$ je den v roce, tedy pro 1. leden $t=1$. Vzdálenost Země od Slunce pro \eqref{eq:insolace} je daná vztahem \parencite{sunearthdist}:
 \begin{gather*}
 d = 1-0.01672\cdot \cos\left(0.9856\cdot(t-4)\right)
 \end{gather*}
@@ -277,7 +277,7 @@ Průměrná teplota na Šumavě v období 1961 až 2018 se pohybuje od $\SI{4.2}
 \begin{figure}
 	\centering
 	\includegraphics[width=0.95\textwidth]{img/ch1/srazkovepomerybavorskyles.png}
-	\caption{Srážkové poměry v Bavorsku \parencite{srazkovepomerybavorskyles}}
+	\caption{Srážkové poměry v Bavorsku \parencite{srazkovepomerybavorskyles}.}
 	\label{fig:srazkovepomerybavorskyles}
 \end{figure}
 
@@ -317,11 +317,9 @@ K testování normality nějakého rozdělení můžeme také použít formáln�
 
 \subsection{Semivariogram}\label{chap:variogram}
 Pro posouzení prostorové korelace dat využijeme metodu variogramu. Experimentální variogram nám určuje prostorovou závislost naměřených hodnot. V našem případě jde o hodnoty naměřených teplot neboli jejich rozdíl. Experimentální semivariogram může být definován například následovně
-
 \begin{gather*}
 	\gamma(\mathbf{h}) = \frac{1}{2m(\mathbf{h})}\sum_{i=1}^{m(\mathbf{h})}\left(t(\mathbf{x}_i) - t(\mathbf{x}_i+\mathbf{h})\right)^2,
 \end{gather*}
-
 kde v našem případě $t(\mathbf{x}_i)$ a $t(\mathbf{x}_i+\mathbf{h})$ jsou pozorované hodnoty (rozdílů) teplot na jednotlivých čidlech a $m(\mathbf{h})$ je počet párů teplot vzdálených od sebe o $\mathbf{h}$. Hodnota vzdálenosti $\mathbf{h}$ se tedy pohybuje od vzdálenosti dvou nejbližších čidel až po vzdálenost dvou nejvzdálenějších čidel. Variogram je typicky dvojnásobek semivariogramu tedy $2\gamma(\mathbf{h})$ \parencite{variogram}.
 
 Podle článku \parencite{predictingforestmicroclimate} prostorová korelace průměrný denních teplot v heterogenním lese v severní Kalifornii přestává být významná ve vzdálenosti $\SI{4}{km}$ až $\SI{6}{km}$.
