@@ -1,7 +1,7 @@
 \chapter{Analýza dat} \label{chap:analysis}
 V první části druhé kapitoly se zaměříme na popis struktury použitých dat. V druhé části analyzujeme autokorelační a prostorovou složku dat, a hledat vhodný model pro vysvětlení rozdílů naměřených teplot.
 
-\section{Využitá data z ČHMÚ}
+\section{Data z ČHMÚ}
 Pro hledání souvislosti mezi meteorologickými podmínkami a rozdílem teplot na čidlech poblíž země jsme využili data z meteorologických stanic Churáňov, Borová Lada, Kvilda, Horská Kvilda a Javoří pila. Nejvíce informací jsme získali ze synoptické stanice Churáňov. Z dostupných dat jsme pro další analýzu využili data o aktuální teplotě ve výšce $\SI{2}{m}$, rychlosti větru, výšce sněhové pokrývky, hodinových srážek a oblačnosti. Z ostatních stanic jsme měli k dispozici hodinová data o výšce sněhové pokrývky a pro Borovou Ladu informace o úhrnu srážek.
 
 Analýzu provádíme pro období od 12.10.2019 do 21.5.2021 i když v případě některých čidel kvůli výpadkům měření bude zpracovávaný interval kratší (viz kapitola \ref{chap:data_buav}).
@@ -372,7 +372,7 @@ Vidíme, že přidání ARMA s hodnotami ($p=2$ a $q=1$) se výrazně zlepší a
 	\label{fig:acf_curt}
 \end{figure}
 
-\subsection{Seznam modelů}
+\subsection{Přehled statistických modelů}
 Výše jsme ukázali, jakým způsobem zpracováváme jednotlivé modely. Pro přehlednost označujeme modely zkratkou. Seznam modelů je v tabulce \ref{tab:seznammodelu}. Kromě již zmiňovaných modelů pro maximální a minimální denní teploty a výšku $\SI{15}{cm}$ a $\SI{0}{cm}$ jsme počítali modely pouze pro období od začátku května do konce října (teplé období) a pro období od začátku listopadu do konce dubna (studené období). Pro modely s čidlem ve výšce $\SI{15}{cm}$ ve studeném období jsme spočetli modely, kdy jsme výšku sněhu nahradili kategorickou proměnou ($0$ odpovídá hodnotám bez sněhu, $1$ čidlo je nad sněhem, $2$ čidlo je pod sněhem). K těmto 16 modelům jsme přidali ještě dalších 16 modelů, které mají stejné parametry, ale místo rozdílu teplot např. $\Delta t = t_{15cm} - t_{2m}$ jako závislou proměnnou bereme její absolutní hodnotu, jako např. $\Delta t_{abs} = \left|t_{15cm} - t_{2m}\right|$. Tyto modely budeme označovat písmenem "A" na začátku (např. AMax15all) a pomůžou nám v interpretaci výsledků.
 
 \begin{table}
