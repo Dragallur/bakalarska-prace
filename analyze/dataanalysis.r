@@ -55,8 +55,9 @@ if (tim == "warmhalf"){
         random = ~1 | station_name, data=all_loggers, na.action=na.exclude)
     mod_curt_corARMA <- update(mod_curt, correlation=corARMA(p=2, q=1))
 } else {
-    mod_curt <- lme(curt_diff ~ snowcm + nt + hum + precmm + ffkmh + month,
-        random = ~1 | station_name, data=all_loggers, na.action=na.exclude, control=ctrl)
+    #mod_curt <- lme(curt_diff ~ snowcm + nt + hum + precmm + ffkmh + month,
+    mod_curt <- lme(curt_diff ~ precmm + month + snowcm + nt + hum + ffkmh,
+        random = ~1 | station_name, data=all_loggers, na.action=na.exclude)
     mod_curt_corARMA <- update(mod_curt, correlation=corARMA(p=2, q=1))
 }
 

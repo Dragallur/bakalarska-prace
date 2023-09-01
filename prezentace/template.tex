@@ -38,33 +38,7 @@
 
 % Beamer comes with a number of default layout themes which change the colors and layouts of slides. Below is a list of all themes available, uncomment each in turn to see what they look like.
 
-%\usetheme{default}
-%\usetheme{AnnArbor}
-%\usetheme{Antibes}
-%\usetheme{Bergen}
-%\usetheme{Berkeley}
-%\usetheme{Berlin}
-%\usetheme{Boadilla}
-%\usetheme{CambridgeUS}
-%\usetheme{Copenhagen}
-%\usetheme{Darmstadt}
-%\usetheme{Dresden}
-%\usetheme{Frankfurt}
-%\usetheme{Goettingen}
-%\usetheme{Hannover}
-%\usetheme{Ilmenau}
-%\usetheme{JuanLesPins}
-%\usetheme{Luebeck}
 \usetheme{Madrid}
-%\usetheme{Malmoe}
-%\usetheme{Marburg}
-%\usetheme{Montpellier}
-%\usetheme{PaloAlto}
-%\usetheme{Pittsburgh}
-%\usetheme{Rochester}
-%\usetheme{Singapore}
-%\usetheme{Szeged}
-%\usetheme{Warsaw}
 
 %----------------------------------------------------------------------------------------
 %	SELECT COLOR THEME
@@ -152,7 +126,7 @@
 
 \institute[MFF UK]{Univerzita Karlova} % Your institution, the optional parameter can be used for the institution shorthand and will appear on the bottom of every slide after author names, while the required parameter is used on the title slide and can include your email address or additional information on separate lines
 
-\date[12.4.2023]{Seminář KFA} % Presentation date or conference/meeting name, the optional parameter can contain a shortened version to appear on the bottom of every slide, while the required parameter value is output to the title slide
+\date[5.9.2023]{Obhajoba bakalářské práce} % Presentation date or conference/meeting name, the optional parameter can contain a shortened version to appear on the bottom of every slide, while the required parameter value is output to the title slide
 
 %----------------------------------------------------------------------------------------
 
@@ -173,7 +147,7 @@
 % The table of contents outputs the sections and subsections that appear in your presentation, specified with the standard \section and \subsection commands. You may either display all sections and subsections on one slide with \tableofcontents, or display each section at a time on subsequent slides with \tableofcontents[pausesections]. The latter is useful if you want to step through each section and mention what you will discuss.
 
 \begin{frame}
-	\frametitle{Obsah prezentace} % Slide title, remove this command for no title
+	\frametitle{Obsah} % Slide title, remove this command for no title
 	
 	\tableofcontents % Output the table of contents (all sections on one slide)
 	%\tableofcontents[pausesections] % Output the table of contents (break sections up across separate slides)
@@ -193,25 +167,14 @@
 	\frametitle{Problematika}
 	\begin{itemize}
 		\item Teplota a jiné meteorologické podmínky jsou typicky měřeny standardizovanými meteorologickými stanicemi.
-		\item Teploty v $\SI{2}{m}$ nereflektují podmínky, v kterých žije většina organismů
+		\item Teploty ve $\SI{2}{m}$ nereflektují podmínky, v kterých žije většina organismů
 		\item Lesní mikroklima je velmi odlišné od klimatu v okolí meteorologické stanice.
 	\end{itemize}
 \end{frame}
 
 \begin{frame}
 	\frametitle{Problematika}
-	\begin{figure}
-		\includegraphics[width=0.6\linewidth]{meteo_station.png}
-		\caption{Příklad automatické stanice}
-	\end{figure}
-\end{frame}
-
-\begin{frame}
-	\frametitle{Problematika}
-	Cílem této bakalářské práce je prozkoumat a vysvětlit rozdíl mezi teplotou naměřenou v lese v Šumavském Národním parku ve $\SI{2}{m}$ a teplotou při zemi pomocí meteorologických podmínek naměřených na nejbližších stanicích.
-	\bigskip
-
-	Faktory, které mají vliv na naměřené teploty rozdělíme do následujících skupin: topografické a vegetační.
+Cílem této práce je analyzovat rozdíl mezi teplotami naměřenými v lesním porostu ve výšce $\SI{2}{m}$ nad zemí a v $\SI{15}{cm}$, resp. $\SI{0}{cm}$ nad zemí.
 \end{frame}
 
 \subsection{Klima nízko nad zemí}
@@ -250,75 +213,62 @@
 	\frametitle{Klima nízko nad zemí}
 	\begin{itemize}
 		\item Teplota dosahuje maxima 1 až 2 hodiny po maximální insolaci, minima v brzkých ranních hodinách.
-		\item Teplotní gradienty v blízkosti vyhřátého povrchu může dosáhnout až hodnot $\SI{20}{K\ mm^{-1}}$. Teplotní rozdíly mezi dnem a nocí jsou v blízkosti povrchu větší.
+		\item Teplotní gradienty v blízkosti vyhřátého povrchu můžou dosahovat vysokých hodnot ($\si{}{K/mm}$).
 	\end{itemize}
 \end{frame}
 
-\subsection{Topografie a vegetace}
+\subsection{Analýza faktorů ovlivňující teplotu vzduchu v lesním porostu}
 %------------------------------------------------
 
 \begin{frame}
 	\frametitle{Topografie a struktura krajiny}
-	
+	Topografie ovlivňuje teploty v lesním porostu
 	\begin{itemize}
 		\item Okraj lesa
 		\item Sklon svahu
 		\item Nadmořská výška
 		\item Údolí/hřeben
 	\end{itemize}
-	
-	\bigskip % Vertical whitespace
-	
 \end{frame}
 
 \begin{frame}
 	\frametitle{Vegetace}
+	Vegetační faktory ovlivňující teploty v lesním porostu
 	\begin{itemize}
-		\item Albedo
-		\item Tok tepla
-		\item Rychlost větru
-		\item Vlhkost vzduchu
+		\item Zápoj (otevřenost porostu)
+		\item Plocha koruny stromů
+		\item Procento plochy pokryté dřevinami
+		\item Typ dřeviny
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Meteorologické podmínky}
+	Vybrané sledované meteorologické podmínky
+	\begin{itemize}
+		\item Výška sněhu
+		\item Oblačnost
+		\item Půdní vlhkost
 		\item Srážky
+		\item Rychlost větru
+		\item Insolace
 	\end{itemize}
 \end{frame}
 
 %------------------------------------------------
 
-\subsection{Data z ČHMÚ}
+\subsection{Použitá data}
 
 \begin{frame}
 	\frametitle{Data z ČHMÚ}
-	Stanice: Kvilda, Horská Kvilda, Churáňov, Borová Lada, Javoří Pila
+	Stanice: Kvilda, Horská Kvilda, Churáňov, Borová Lada, Javoří Pila\\
+	Celkově 157 čidel
 
 	Maximální časový interval: 12.10.2019 - 19.5.2021
 	\begin{figure}
-		\includegraphics[width=0.6\linewidth]{chmu_stations.png}
-		\caption{Mapa Šumavského NP}
+		\includegraphics[width=0.7\linewidth]{rozlozenicidel.pdf}
 	\end{figure}
 \end{frame}
-%%který stanice mají který veličiny
-%------------------------------------------------
-
-\subsection{Data z BÚ AV}
-
-\begin{frame}
-	\frametitle{Data z BÚ AV}
-	Celkově $\sim$150 čidel.
-	\begin{figure}
-		\includegraphics[width=0.7\linewidth]{forest_sensors.png}
-		\caption{Rozmístění senzorů}
-	\end{figure}
-\end{frame}
-
-\begin{frame}
-	\frametitle{Data from BÚ AV}
-	\begin{figure}
-		\includegraphics[width=0.8\linewidth]{sensor_closeup.png}
-		\caption{Poloha senzoru}
-	\end{figure}
-\end{frame}
-
-
 
 %------------------------------------------------
 
@@ -328,131 +278,58 @@
 
 \begin{frame}
 	\begin{itemize}
-		\item Z dat ČHMÚ máme prediktory: výška sněhu, oblačnost, 10 minutové srážky, rychlost větru
-	
-\item K tomu: měsíc v roce, vhlkost
-
-\item Použijeme mnohonásobnou lineární regresi pro každé čidlo (minimální, maximální teplota)
-	\end{itemize}
-\end{frame}
-
-\begin{frame}
-	\begin{figure}
-		\includegraphics[width=0.8\linewidth,height=0.6\textwidth]{hist.png}
-		\caption{Histogram průměrného rozdílu maximálních teplot mezi $\SI{15}{cm}$ a $\SI{2}{m}$}
-	\end{figure}
-\end{frame}
-
-\begin{frame}
-	\begin{figure}
-		\includegraphics[width=0.8\linewidth,height=0.6\textwidth]{hist2.png}
-		\caption{Histogram průměrného rozdílu minimálních teplot mezi $\SI{15}{cm}$ a $\SI{2}{m}$}
-	\end{figure}
-\end{frame}
-%------------------------------------------------
-
-\subsection{Výsledky}
-
-\begin{frame}
-	\frametitle{Závislost na vzdálenosti}
-	\begin{figure}
-		\includegraphics[width=0.8\linewidth,height=0.6\textwidth]{all151minTall0cm_BWyes.png}
-		\caption{Všechna čidla, minimální denní teplota v $\SI{0}{cm}$}
-	\end{figure}
-\end{frame}
-
-\begin{frame}
-	\frametitle{Závislost na vzdálenosti}
-	\begin{figure}
-		\includegraphics[width=0.8\linewidth,height=0.6\textwidth]{all111minTall0cm_BWno.png}
-		\caption{Čidla v NP Šumava, minimální denní teplota v $\SI{0}{cm}$}
-	\end{figure}
-\end{frame}
-
-\begin{frame}
-	\frametitle{Závislost na vzdálenosti}
-	\begin{figure}
-		\includegraphics[width=0.8\linewidth,height=0.6\textwidth]{all100minTall0cm_BWyesc4japi0120000.png}
-		\caption{Čidla ve vzdálenosti $\SI{20}{km}$ od Javoří Pily, minimální denní teplota v $\SI{0}{cm}$}
-	\end{figure}
-\end{frame}
-
-\begin{frame}
-	\frametitle{Závislost na vzdálenosti}
-	\begin{figure}
-		\includegraphics[width=0.8\linewidth,height=0.6\textwidth]{all60minTall0cm_BWyesc1chur0120000.png}
-		\caption{Čidla ve vzdálenosti $\SI{20}{km}$ od Churáňova, minimální denní teplota v $\SI{0}{cm}$}
-	\end{figure}
-\end{frame}
-
-\begin{frame}
-	\frametitle{Maximální teploty}
-	\begin{figure}
-		\includegraphics[width=0.8\linewidth,height=0.6\textwidth]{all156maxTall0cm_BWyes.png}
-		\caption{Maximální denní teplota v $\SI{0}{cm}$}
-	\end{figure}
-\end{frame}
-
-\begin{frame}
-	\frametitle{Maximální teploty}
-	\begin{figure}
-		\includegraphics[width=0.8\linewidth,height=0.6\textwidth]{all156maxTall15cm_BWyes.png}
-		\caption{Maximální denní teplota v $\SI{15}{cm}$}
-	\end{figure}
-\end{frame}
-
-\begin{frame}
-	\frametitle{Maximální teploty}
-	\begin{itemize}
-		\item Sníh: pro $\SI{15}{cm}$ má záporný vliv.
-		\item Oblačnost: pro $\SI{0}{cm}$ má kladný vliv.
-		\item Srážky: signifikantní pro málo čidel.
-		\item Měsíc: záporný vliv.
-		\item Vlhkost: záporný vliv.
-		\item Vítr: záporný vliv (málo čidel).
-	\end{itemize}
-\end{frame}
-
-\begin{frame}
-	\frametitle{Minimální teploty}
-	\begin{figure}
-		\includegraphics[width=0.8\linewidth,height=0.6\textwidth]{all151minTall0cm_BWyes.png}
-		\caption{Minimální denní teplota v $\SI{0}{cm}$}
-	\end{figure}
-\end{frame}
-
-\begin{frame}
-	\frametitle{Minimální teploty}
-	\begin{figure}
-		\includegraphics[width=0.8\linewidth,height=0.6\textwidth]{all152minTall15cm_BWyes.png}
-		\caption{Minimální denní teplota v $\SI{15}{cm}$}
-	\end{figure}
-\end{frame}
-
-\begin{frame}
-	\frametitle{Minimální teploty}
-	\begin{itemize}
-		\item Sníh: kladný vliv.
-		\item Oblačnost: pro $\SI{15}{cm}$ má kladný vliv.
-		\item Srážky: signifikantní pro málo čidel.
-		\item Měsíc: signifikantní pro málo čidel.
-		\item Vlhkost: pro $\SI{0}{cm}$ má záporný vliv.
-		\item Vítr: pro $\SI{0}{cm}$ má záporný vliv.
-	\end{itemize}
-\end{frame}
-%------------------------------------------------
-
-\section{Diskuze}
-
-\begin{frame}
-	\frametitle{Diskuze}
-	\begin{itemize}
-		\item Prediktor insolace místo měsíce?
-		\item Sofistikovanější metody vyhodnocení?
+		\item Použijeme lineární modely se smíšenými efekty
+		\begin{itemize}
+			\item Náhodný efekt: identita čidla
+			\item Fixní efekt: výška sněhu, oblačnost, vlhkost, srážky, rychlost větru, insolace
+		\end{itemize}
+	\item Celkově spočteme 32 modelů 
+		\begin{itemize}
+				\item Maximální/minimální teploty
+				\item $\SI{0}{cm}$/$\SI{15}{cm}$
+				\item Celé období/teplé období/studené období
+				\item Sníh jako kategorická proměnná
+				\item $\Delta T_1 = T_{\text{zem}}-T_{2m}$ nebo $\Delta T_2 = \left|T_{\text{zem}}-T_{2m}\right|$
+		\end{itemize}
 	\end{itemize}
 \end{frame}
 
 %------------------------------------------------
+
+\subsection{Výsledky a diskuze}
+
+\begin{frame}
+\begin{table}
+\centering\footnotesize\sf
+\begin{tabular}{lrrrrr}
+\toprule
+	Model & Max15all & Max15warm & Max15cold & Max15allc & Max15coldc \\
+\midrule
+	$R_m^2$ & $0.031$ & $0.098$ & $0.066$ & $0.032$ & $0.067$\\
+	$R_c^2$ & $0.20$ & $0.51$ & $0.19$ & $0.20$ & $0.19$\\
+\midrule
+	Konstanta & $\SI{0.42(6)}{}$ & $\SI{-0.55(7)}{}$ & $\SI{0.96(7)}{}$ & $\SI{0.43(6)}{}$ & $\SI{0.99(7)}{}$\\
+	Výška sněhu & $\SI{0.0045(7)}{}$ & - & $\SI{0.0031(7)}{}$ & $\SI{0.040(9)}{}$ & \textcolor{gray}{$\SI{0.005(9)}{}$}\\
+	Oblačnost & $\SI{-0.041(8)}{}$ & $\SI{-0.16(1)}{}$ & $\SI{0.03(1)}{}$ & $\SI{-0.040(8)}{}$ & $\SI{0.03(1)}{}$\\
+	Vlhkost & $\SI{-0.6(1)}{}$ & $\SI{2.2(1)}{}$ & $\SI{-2.4(2)}{}$ & $\SI{-0.6(1)}{}$ & $\SI{-2.4(2)}{}$\\
+	Srážky & \textcolor{gray}{$\SI{0.002(2)}{}$} & $\SI{-0.04(1)}{}$ & \textcolor{gray}{$\SI{0.003(2)}{}$} & \textcolor{gray}{$\SI{0.002(2)}{}$} & \textcolor{gray}{$\SI{0.003(2)}{}$}\\
+	Rychlost větru & $\SI{-0.0072(4)}{}$ & $\SI{-0.0034(7)}{}$ & $\SI{-0.0098(6)}{}$ & $\SI{-0.0072(4)}{}$ &$\SI{-0.0098(6)}{}$\\
+	Insolace & $\SI{0.00042(1)}{}$ & $\SI{0.00065(1)}{}$ & $\SI{0.00029(2)}{}$ & $\SI{0.00042(1)}{}$ & $\SI{0.00028(2)}{}$\\
+\bottomrule
+\end{tabular}
+\end{table}
+\end{frame}
+
+\begin{frame}
+Hlavní závěry
+	\begin{itemize}
+		\item Výška sněhu má kladný vliv na rozdíl teplot
+		\item Oblačnost a rychlost větru má záporný vliv
+		\item Insolace má slabý kladný vliv, množství srážek je nejméně průkazný prediktor
+		\item Půdní vlhkost má složitější vztah s rozdílem teplot
+	\end{itemize}
+\end{frame}
+
 
 %----------------------------------------------------------------------------------------
 %	CLOSING SLIDE
@@ -460,14 +337,70 @@
 
 \begin{frame}[plain] % The optional argument 'plain' hides the headline and footline
 	\begin{center}
-		{\Huge Konec}
-		
-		\bigskip\bigskip % Vertical whitespace
-		
-		{\LARGE Otázky?}
+		{\Huge Konec prezentace}
 	\end{center}
 \end{frame}
 
 %----------------------------------------------------------------------------------------
+
+\begin{frame}[plain] % The optional argument 'plain' hides the headline and footline
+1. otázka oponenta
+
+Statistická významnost regresních koeficientů (tabulky 3.1 až 3.8) je podle textu odhadována na základě F-testu; F-test zavedený v kapitole 1.5.3 je nicméně určen pro test nulové hypotézy předpokládající nulovost všech koeficientů. Jak byla stanovena významnost pro individuální prediktory?
+
+%Postupně byly testovaný prediktory ve stejném pořadí, což dělá funkce anova(). Byla použita ANOVA typu I, kde první prediktor bere všechnu variabilitu kterou mu může náležet. Píšeme to jako SS - sum of squares SS(A) pro prediktor A, SS(B|A) pro prediktor B. SS je jinak s^2 = 1/(n-1) \sum (y_i-\bar{y})^2. Snažíme se minimalizovat SSE - sum of squared estimate of errors, což je kvadrát residuálů modelu neboli nevysvětlených hodnot. 
+
+%F statistika je podíl vysvětlené a nevysvětlené variance. Vysvětlená se vypočítá jako sum of squares of model (ještě něco se stupněma volnosti). Nevysvětlená variance je pak daná sum of squares of error tj to s těmi residuály a opět něco se stupněma volnosti. Takto otestuji první prediktor a pokračuju na další přičemž množství nevysvětlené variability mi postupně klesá. Nejlépe je to vysvětlené tady: http://facweb.cs.depaul.edu/sjost/csc423/documents/f-test-reg.htm (to je to původní vysvětlení ale snadno se to dá převést na to sequential sum of squares).
+\end{frame}
+
+\begin{frame}[plain] % The optional argument 'plain' hides the headline and footline
+2. otázka oponenta
+
+Jakám metoda byla použita pro kalibraci modelů? (a konkrétně, bylo by možné volbou odlišné techniky neúspěšnou kalibraci jedné z modelových konfigurací, zmiňovanou na straně 42?)
+
+%Jde o otázku na nastavení modelu při jeho výpočtu. Optimalizační funkce (optim v Rku?) methods() getAnywhere(), BFGS, quasi Newton method, zkusit změnit optimatlizační funkci a fungovalo/nefungovalo to
+
+%Používám funkce lme balíčku nlme. Následně používám defaultní nastavení. Hodnoty jsou nalezené aby splňovaly maximalizaci "restricted log likelihood" tj REML. Hodnoty jsou hledány pomocí základní funkce optim() a defaultním parametrem neboli metodou BFGS což je kvazi-Newtonovská metoda k hledání vhodných hodnot.
+
+%REML -> MLE neboli maximum likelihood estimation je hledání parametrů tak aby byla maximalizovaná likelihood function což je funkce parametru který se snažíme zjistit v závislosti na pozorování, která nám dává pravděpodobnost naměření našich dat při daném parametru. REML je modifikace která bere v potaz množství fixních efekt lme a ztrácí jeden stupeň volnosti za každý fixní efekt.
+
+%BFGS je O(n^2) metoda. Obyčejná Newtonova metoda hledá minimum diferencovatelné funkce pomocí Taylorova rozvoje do druhého řádu v nějakém bodě a pak posouváním se do minima toho Taylorova rozvoje a tak dále pokračováním. BFGS je vylepšení kde hledáme řešení rovnice $B_k\vec{p}_k=-\nabla f(\vec{x}_k)$, kde $B_k$ je Hessián v bodě $\vec{x}_k$, napravo je gradient funkce a $\vec{p}_k$ je 
+\end{frame}
+
+\begin{frame}[plain] % The optional argument 'plain' hides the headline and footline
+3. otázka oponenta
+
+V rešeršní části práce je diskutován vliv charakteru vegetace a specifik terénu, tyto nicméně nejsou přímo použity v rámci datové analýzy, pouze zmíněny v kap. 3.1.7. Jaký je autorův názor na možnost jejich kvantitativního zahrnutí do aplikovaného regresního modelu?
+
+%V první řadě by bylo možné rozdělit čidla do kategorií a dělat regresní modely na jednotlivých kategoriích. To ovšem obecně jde jenom na kategoriální proměnné nebo proměnné které mají například bimodální rozdělení.
+
+%Dále bych mohl prediktory přidat jako fixní efekt do modelu, ale musím si dát pozor na pseudoreplikaci. Díky náhodnému efektu idenity čidla to takhle můžu udělat. Je ovšem rozdíl pozorování na úrovni čidel a pozorování na úrovni jednotlivých hodin. 
+\end{frame}
+
+\begin{frame}[plain] % The optional argument 'plain' hides the headline and footline
+1. otázka vedoucího
+
+V rešeršní části autor příliš nezmiňuje studie zabývající se mikroklimatem lesa v Česku (případně Československu), a vlastně ani v regionu střední Evropy. Znamená to, že takové studie nejsou k dispozici nebo nebyly relevantní pro tuto práci?
+
+%Typicky jde o studie, kdy se zabývají vegetací a topografií a jde o studie nějakých ekologů. Tolik je nezajímá časově proměnné počasí a spíše chtějí generalizovat vlastnosti lesa na různé části světa.
+\end{frame}
+
+\begin{frame}[plain] % The optional argument 'plain' hides the headline and footline
+2. otázka vedoucího
+
+V závěru autor konstantuje, že nebral v úvahu rozdílný vliv topografie a vegetace na každé čidlo, což mohlo být příčinou určité části nevysvětlené variability rozdílu teplot. Mohl by uvést, jaké konkrétně by tyto vlivy mohly pozorovanou variabilitu ovlivnit a za jakých meteorologických situací nejvíce?
+
+%Topografie - sklon svahu, údolí/kopec, blízkost k okraji lesa,
+%Vegetace - leaf area, množství dřeva okolo, typ dřevin, výška dřevin
+
+%Například velmi lokální prohlubeň, kde stéká velmi studený vzduch
+%Sklon svahu ovlivňuje dopadající záření. (??)
+%Dále události kdy je velký rozdíl od stanice. Tj fouká vítr, ale v lese to není tolik poznat.
+
+\end{frame}
+
+
+
+
 
 \end{document} 

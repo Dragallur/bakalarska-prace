@@ -1,0 +1,266 @@
+function (fixed, data = sys.frame(sys.parent()), random, correlation = NULL, 
+    weights = NULL, subset, method = c("REML", "ML"), na.action = na.fail, 
+    control = list(), contrasts = NULL, keep.data = TRUE) 
+UseMethod("lme")
+<bytecode: 0x559227ac3cc0>
+<environment: namespace:nlme>
+> getAnywhere(lme.formula)
+A single object matching ‘lme.formula’ was found
+It was found in the following places
+  package:nlme
+  registered S3 method for lme from namespace nlme
+  namespace:nlme
+with value
+
+function (fixed, data = sys.frame(sys.parent()), random = pdSymm(eval(as.call(fixed[-2]))), 
+    correlation = NULL, weights = NULL, subset, method = c("REML", 
+        "ML"), na.action = na.fail, control = list(), contrasts = NULL, 
+    keep.data = TRUE) 
+{
+    Call <- match.call()
+    miss.data <- missing(data) || !is.data.frame(data)
+    controlvals <- lmeControl()
+    if (!missing(control)) {
+        controlvals[names(control)] <- control
+    }
+    fixedSigma <- controlvals$sigma > 0
+    if (!inherits(fixed, "formula") || length(fixed) != 3) {
+        stop("fixed-effects model must be a formula of the form \"resp ~ pred\"")
+    }
+    method <- match.arg(method)
+    REML <- method == "REML"
+    reSt <- reStruct(random, REML = REML, data = NULL)
+    groups <- getGroupsFormula(reSt)
+    if (is.null(groups)) {
+        if (inherits(data, "groupedData")) {
+            groups <- getGroupsFormula(data)
+            namGrp <- rev(names(getGroupsFormula(data, asList = TRUE)))
+            Q <- length(namGrp)
+            if (length(reSt) != Q) {
+                if (length(reSt) != 1) {
+                  stop("incompatible lengths for 'random' and grouping factors")
+                }
+                randL <- vector("list", Q)
+                names(randL) <- rev(namGrp)
+                for (i in 1:Q) randL[[i]] <- random
+                reSt <- reStruct(as.list(randL), REML = REML, 
+                  data = NULL)
+            }
+            else {
+                names(reSt) <- namGrp
+            }
+        }
+        else {
+            groups <- ~1
+            names(reSt) <- "1"
+        }
+    }
+    if (!is.null(correlation)) {
+        add.form <- FALSE
+        if (!is.null(corGrpsForm <- getGroupsFormula(correlation, 
+            asList = TRUE))) {
+            corGrpsForm <- unlist(lapply(corGrpsForm, function(el) deparse(el[[2L]])))
+            lmeGrpsForm <- unlist(lapply(splitFormula(groups), 
+                function(el) deparse(el[[2L]])))
+            corQ <- length(corGrpsForm)
+            lmeQ <- length(lmeGrpsForm)
+            if (corQ <= lmeQ) {
+                if (any(corGrpsForm != lmeGrpsForm[1:corQ])) {
+                  stop("incompatible formulas for groups in 'random' and 'correlation'")
+                }
+                if (corQ < lmeQ) {
+                  warning("cannot use smaller level of grouping for 'correlation' than for 'random'. Replacing the former with the latter.")
+                  add.form <- TRUE
+                }
+            }
+            else if (any(lmeGrpsForm != corGrpsForm[1:lmeQ])) {
+                stop("incompatible formulas for groups in 'random' and 'correlation'")
+            }
+        }
+        else {
+            add.form <- TRUE
+            corQ <- lmeQ <- 1
+        }
+        if (add.form) 
+            attr(correlation, "formula") <- eval(substitute(~COV | 
+                GRP, list(COV = getCovariateFormula(formula(correlation))[[2L]], 
+                GRP = groups[[2L]])))
+    }
+    else {
+        corQ <- lmeQ <- 1
+    }
+    lmeSt <- lmeStruct(reStruct = reSt, corStruct = correlation, 
+        varStruct = varFunc(weights))
+    mfArgs <- list(formula = asOneFormula(formula(lmeSt), fixed, 
+        groups), data = data, na.action = na.action)
+    if (!missing(subset)) {
+        mfArgs[["subset"]] <- asOneSidedFormula(Call[["subset"]])[[2L]]
+    }
+    mfArgs$drop.unused.levels <- TRUE
+    dataMix <- do.call(model.frame, mfArgs)
+    origOrder <- row.names(dataMix)
+    for (i in names(contrasts)) contrasts(dataMix[[i]]) <- contrasts[[i]]
+    grps <- getGroups(dataMix, groups)
+    if (inherits(grps, "factor")) {
+        ord <- order(grps)
+        grps <- data.frame(grps)
+        row.names(grps) <- origOrder
+        names(grps) <- as.character(deparse((groups[[2L]])))
+    }
+    else {
+        ord <- do.call(order, grps)
+        for (i in 2:ncol(grps)) {
+            grps[, i] <- as.factor(paste(as.character(grps[, 
+                i - 1]), as.character(grps[, i]), sep = "/"))
+        }
+    }
+    if (corQ > lmeQ) {
+        ord <- do.call(order, getGroups(dataMix, getGroupsFormula(correlation)))
+    }
+    grps <- grps[ord, , drop = FALSE]
+    dataMix <- dataMix[ord, , drop = FALSE]
+    revOrder <- match(origOrder, row.names(dataMix))
+    N <- nrow(grps)
+    Z <- model.matrix(reSt, dataMix)
+    ncols <- attr(Z, "ncols")
+    Names(lmeSt$reStruct) <- attr(Z, "nams")
+    contr <- attr(Z, "contr")
+    X <- model.frame(fixed, dataMix)
+    Terms <- attr(X, "terms")
+    if (length(attr(Terms, "offset"))) 
+        stop("offset() terms are not supported")
+    auxContr <- lapply(X, function(el) if (inherits(el, "factor") && 
+        length(levels(el)) > 1) 
+        contrasts(el))
+    contr <- c(contr, auxContr[is.na(match(names(auxContr), names(contr)))])
+    contr <- contr[!unlist(lapply(contr, is.null))]
+    X <- model.matrix(fixed, data = X)
+    y <- eval(fixed[[2L]], dataMix)
+    ncols <- c(ncols, dim(X)[2L], 1)
+    Q <- ncol(grps)
+    dims <- MEdims(grps, ncols)
+    attr(lmeSt, "conLin") <- list(Xy = array(c(Z, X, y), c(N, 
+        sum(ncols)), list(row.names(dataMix), c(colnames(Z), 
+        colnames(X), deparse(fixed[[2L]])))), dims = dims, logLik = 0, 
+        sigma = controlvals$sigma, auxSigma = 0)
+    if (max(dims$ZXlen[[1L]]) < dims$qvec[1L] && !isTRUE(allow <- controlvals$allow.n.lt.q)) {
+        msg <- gettextf("fewer observations than random effects in all level %s groups", 
+            Q)
+        if (isFALSE(allow)) 
+            stop(msg, domain = NA)
+        else warning(msg, domain = NA)
+    }
+    fixDF <- getFixDF(X, grps, dims$ngrps, terms = Terms)
+    lmeSt <- Initialize(lmeSt, dataMix, grps, control = controlvals)
+    parMap <- attr(lmeSt, "pmap")
+    if (length(lmeSt) == 1) {
+        oldConLin <- attr(lmeSt, "conLin")
+        decomp <- TRUE
+        attr(lmeSt, "conLin") <- MEdecomp(attr(lmeSt, "conLin"))
+    }
+    else decomp <- FALSE
+    if (controlvals$opt == "nlminb") {
+        control <- list(iter.max = controlvals$msMaxIter, eval.max = controlvals$msMaxEval, 
+            trace = controlvals$msVerbose)
+        keep <- c("abs.tol", "rel.tol", "x.tol", "xf.tol", "step.min", 
+            "step.max", "sing.tol", "scale.init", "diff.g")
+    }
+    else {
+        control <- list(maxit = controlvals$msMaxIter, reltol = controlvals$msTol, 
+            trace = controlvals$msVerbose)
+        keep <- c("fnscale", "parscale", "ndeps", "abstol", "alpha", 
+            "beta", "gamma", "REPORT", "type", "lmm", "factr", 
+            "pgtol", "temp", "tmax")
+    }
+    control <- c(control, controlvals[names(controlvals) %in% 
+        keep])
+    numIter <- 0L
+    repeat {
+        oldPars <- coef(lmeSt)
+        optRes <- if (controlvals$opt == "nlminb") {
+            nlminb(c(oldPars), function(lmePars) -logLik(lmeSt, 
+                lmePars), control = control)
+        }
+        else {
+            if (numIter == 1L) {
+                reltol <- controlvals$reltol
+                if (is.null(reltol)) 
+                  reltol <- 100 * .Machine$double.eps
+                control$reltol <- reltol
+            }
+            optim(c(oldPars), function(lmePars) -logLik(lmeSt, 
+                lmePars), control = control, method = controlvals$optimMethod)
+        }
+        coef(lmeSt) <- optRes$par
+        attr(lmeSt, "lmeFit") <- MEestimate(lmeSt, grps)
+        if (!needUpdate(lmeSt)) {
+            if (optRes$convergence) {
+                msg <- gettextf("%s problem, convergence error code = %s\n  message = %s", 
+                  controlvals$opt, optRes$convergence, paste(optRes$message, 
+                    collapse = ""))
+                if (!controlvals$returnObject) 
+                  stop(msg, domain = NA)
+                else warning(msg, domain = NA)
+            }
+            break
+        }
+        numIter <- numIter + 1L
+        lmeSt <- update(lmeSt, dataMix)
+        aConv <- coef(lmeSt)
+        conv <- abs((oldPars - aConv)/ifelse(aConv == 0, 1, aConv))
+        aConv <- NULL
+        for (i in names(lmeSt)) {
+            if (any(parMap[, i])) {
+                aConv <- c(aConv, max(conv[parMap[, i]]))
+                names(aConv)[length(aConv)] <- i
+            }
+        }
+        if (max(aConv) <= controlvals$tolerance) {
+            break
+        }
+        if (numIter > controlvals$maxIter) {
+            msg <- gettext("maximum number of iterations (lmeControl(maxIter)) reached without convergence")
+            if (controlvals$returnObject) {
+                warning(msg, domain = NA)
+                break
+            }
+            else stop(msg, domain = NA)
+        }
+    }
+    lmeFit <- attr(lmeSt, "lmeFit")
+    names(lmeFit$beta) <- namBeta <- colnames(X)
+    attr(fixDF, "varFixFact") <- varFix <- lmeFit$sigma * lmeFit$varFix
+    varFix <- crossprod(varFix)
+    dimnames(varFix) <- list(namBeta, namBeta)
+    Fitted <- fitted(lmeSt, level = 0:Q, conLin = if (decomp) 
+        oldConLin
+    else attr(lmeSt, "conLin"))[revOrder, , drop = FALSE]
+    Resid <- y[revOrder] - Fitted
+    rownames(Resid) <- rownames(Fitted) <- origOrder
+    attr(Resid, "std") <- lmeFit$sigma/(varWeights(lmeSt)[revOrder])
+    grps <- grps[revOrder, , drop = FALSE]
+    lmeSt$reStruct <- solve(lmeSt$reStruct)
+    dims <- attr(lmeSt, "conLin")$dims[c("N", "Q", "qvec", "ngrps", 
+        "ncol")]
+    attr(lmeSt, "fixedSigma") <- fixedSigma
+    apVar <- if (controlvals$apVar) {
+        lmeApVar(lmeSt, lmeFit$sigma, .relStep = controlvals[[".relStep"]], 
+            minAbsPar = controlvals[["minAbsParApVar"]], natural = controlvals[["natural"]])
+    }
+    else {
+        "Approximate variance-covariance matrix not available"
+    }
+    attr(lmeSt, "conLin") <- NULL
+    attr(lmeSt, "lmeFit") <- NULL
+    grpDta <- inherits(data, "groupedData")
+    structure(class = "lme", list(modelStruct = lmeSt, dims = dims, 
+        contrasts = contr, coefficients = list(fixed = lmeFit$beta, 
+            random = lmeFit$b), varFix = varFix, sigma = lmeFit$sigma, 
+        apVar = apVar, logLik = lmeFit$logLik, numIter = if (needUpdate(lmeSt)) numIter, 
+        groups = grps, call = Call, terms = Terms, method = method, 
+        fitted = Fitted, residuals = Resid, fixDF = fixDF, na.action = attr(dataMix, 
+            "na.action"), data = if (keep.data && !miss.data) data), 
+        units = if (grpDta) 
+            attr(data, "units"), labels = if (grpDta) 
+            attr(data, "labels"))
+}

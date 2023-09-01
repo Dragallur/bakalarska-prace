@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2023.3.7)  12 APR 2023 11:00
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2023.6.12)  31 AUG 2023 14:08
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -874,40 +874,40 @@ File: xkeyval.tex 2014/12/03 v2.7a key=value parser (HA)
 
 Package hyperref Warning: Composite letter `\textasciicaron+e'
 (hyperref)                not defined in PD1 encoding,
-(hyperref)                removing `\textasciicaron' on input line 151.
+(hyperref)                removing `\textasciicaron' on input line 125.
 
 
 Package hyperref Warning: Composite letter `\textasciicaron+e'
 (hyperref)                not defined in PD1 encoding,
-(hyperref)                removing `\textasciicaron' on input line 159.
+(hyperref)                removing `\textasciicaron' on input line 133.
 
 (./template.aux)
 \openout1 = `template.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 159.
-LaTeX Font Info:    ... okay on input line 159.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 159.
-LaTeX Font Info:    ... okay on input line 159.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 159.
-LaTeX Font Info:    ... okay on input line 159.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 159.
-LaTeX Font Info:    ... okay on input line 159.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 159.
-LaTeX Font Info:    ... okay on input line 159.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 159.
-LaTeX Font Info:    ... okay on input line 159.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 159.
-LaTeX Font Info:    ... okay on input line 159.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 159.
-LaTeX Font Info:    ... okay on input line 159.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 133.
+LaTeX Font Info:    ... okay on input line 133.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 133.
+LaTeX Font Info:    ... okay on input line 133.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 133.
+LaTeX Font Info:    ... okay on input line 133.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 133.
+LaTeX Font Info:    ... okay on input line 133.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 133.
+LaTeX Font Info:    ... okay on input line 133.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 133.
+LaTeX Font Info:    ... okay on input line 133.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 133.
+LaTeX Font Info:    ... okay on input line 133.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 133.
+LaTeX Font Info:    ... okay on input line 133.
 LaTeX Font Info:    Trying to load font information for OT1+opensans-TLF on inp
-ut line 159.
+ut line 133.
 
 (/usr/share/texlive/texmf-dist/tex/latex/opensans/OT1opensans-TLF.fd
 File: OT1opensans-TLF.fd 2019/06/24 Font definitions for OT1/opensans-TLF.
 )
 LaTeX Font Info:    Font shape `OT1/opensans-TLF/m/n' will be
-(Font)              scaled to size 10.95pt on input line 159.
+(Font)              scaled to size 10.95pt on input line 133.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -967,7 +967,7 @@ e
 ))
 ABD: EveryShipout initializing macros
 \AtBeginShipoutBox=\box89
-Package hyperref Info: Link coloring OFF on input line 159.
+Package hyperref Info: Link coloring OFF on input line 133.
 
 (/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2019/09/16 v2.46 Cross-referencing by name of section
@@ -980,56 +980,56 @@ Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
 \c@section@level=\count353
 )
-LaTeX Info: Redefining \ref on input line 159.
-LaTeX Info: Redefining \pageref on input line 159.
-LaTeX Info: Redefining \nameref on input line 159.
+LaTeX Info: Redefining \ref on input line 133.
+LaTeX Info: Redefining \pageref on input line 133.
+LaTeX Info: Redefining \nameref on input line 133.
 
 (./template.out) (./template.out)
 \@outlinefile=\write5
 \openout5 = `template.out'.
 
 LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
-(Font)                  OT1/cmr/m/n --> OT1/cmss/m/n on input line 159.
+(Font)                  OT1/cmr/m/n --> OT1/cmss/m/n on input line 133.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
-(Font)                  OT1/cmr/bx/n --> OT1/cmss/b/n on input line 159.
+(Font)                  OT1/cmr/bx/n --> OT1/cmss/b/n on input line 133.
 \symnumbers=\mathgroup6
 \sympureletters=\mathgroup7
 LaTeX Font Info:    Overwriting math alphabet `\mathrm' in version `normal'
-(Font)                  OT1/cmss/m/n --> OT1/ppl/m/n on input line 159.
-LaTeX Font Info:    Redeclaring math alphabet \mathbf on input line 159.
+(Font)                  OT1/cmss/m/n --> OT1/ppl/m/n on input line 133.
+LaTeX Font Info:    Redeclaring math alphabet \mathbf on input line 133.
 LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `normal'
-(Font)                  OT1/cmr/bx/n --> OT1/phv/b/n on input line 159.
+(Font)                  OT1/cmr/bx/n --> OT1/phv/b/n on input line 133.
 LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `bold'
-(Font)                  OT1/cmr/bx/n --> OT1/phv/b/n on input line 159.
-LaTeX Font Info:    Redeclaring math alphabet \mathsf on input line 159.
+(Font)                  OT1/cmr/bx/n --> OT1/phv/b/n on input line 133.
+LaTeX Font Info:    Redeclaring math alphabet \mathsf on input line 133.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `normal'
-(Font)                  OT1/cmss/m/n --> OT1/phv/m/n on input line 159.
+(Font)                  OT1/cmss/m/n --> OT1/phv/m/n on input line 133.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
-(Font)                  OT1/cmss/bx/n --> OT1/phv/m/n on input line 159.
-LaTeX Font Info:    Redeclaring math alphabet \mathit on input line 159.
+(Font)                  OT1/cmss/bx/n --> OT1/phv/m/n on input line 133.
+LaTeX Font Info:    Redeclaring math alphabet \mathit on input line 133.
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `normal'
-(Font)                  OT1/cmr/m/it --> OT1/phv/m/it on input line 159.
+(Font)                  OT1/cmr/m/it --> OT1/phv/m/it on input line 133.
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
-(Font)                  OT1/cmr/bx/it --> OT1/phv/m/it on input line 159.
-LaTeX Font Info:    Redeclaring math alphabet \mathtt on input line 159.
+(Font)                  OT1/cmr/bx/it --> OT1/phv/m/it on input line 133.
+LaTeX Font Info:    Redeclaring math alphabet \mathtt on input line 133.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `normal'
-(Font)                  OT1/cmtt/m/n --> OT1/pcr/m/n on input line 159.
+(Font)                  OT1/cmtt/m/n --> OT1/pcr/m/n on input line 133.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
-(Font)                  OT1/cmtt/m/n --> OT1/pcr/m/n on input line 159.
+(Font)                  OT1/cmtt/m/n --> OT1/pcr/m/n on input line 133.
 LaTeX Font Info:    Overwriting symbol font `numbers' in version `bold'
-(Font)                  OT1/phv/m/n --> OT1/phv/b/n on input line 159.
+(Font)                  OT1/phv/m/n --> OT1/phv/b/n on input line 133.
 LaTeX Font Info:    Overwriting symbol font `pureletters' in version `bold'
-(Font)                  OT1/phv/m/it --> OT1/phv/b/it on input line 159.
+(Font)                  OT1/phv/m/it --> OT1/phv/b/it on input line 133.
 LaTeX Font Info:    Overwriting math alphabet `\mathrm' in version `bold'
-(Font)                  OT1/cmss/b/n --> OT1/ppl/b/n on input line 159.
+(Font)                  OT1/cmss/b/n --> OT1/ppl/b/n on input line 133.
 LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `bold'
-(Font)                  OT1/phv/b/n --> OT1/phv/b/n on input line 159.
+(Font)                  OT1/phv/b/n --> OT1/phv/b/n on input line 133.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
-(Font)                  OT1/phv/m/n --> OT1/phv/b/n on input line 159.
+(Font)                  OT1/phv/m/n --> OT1/phv/b/n on input line 133.
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
-(Font)                  OT1/phv/m/it --> OT1/phv/b/it on input line 159.
+(Font)                  OT1/phv/m/it --> OT1/phv/b/it on input line 133.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
-(Font)                  OT1/pcr/m/n --> OT1/pcr/b/n on input line 159.
+(Font)                  OT1/pcr/m/n --> OT1/pcr/b/n on input line 133.
 
 (/usr/share/texlive/texmf-dist/tex/latex/translator/translator-basic-dictionary
 -English.dict
@@ -1063,257 +1063,128 @@ File: siunitx-abbreviations.cfg 2017/11/26 v2.7k siunitx: Abbreviated units
 
 (./template.nav)
 LaTeX Font Info:    Font shape `OT1/opensans-TLF/m/n' will be
-(Font)              scaled to size 6.0pt on input line 159.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 159
+(Font)              scaled to size 6.0pt on input line 133.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 133
 .
  (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 159
+LaTeX Font Info:    Trying to load font information for U+msb on input line 133
 .
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
 LaTeX Font Info:    Trying to load font information for OT1+phv on input line 1
-59.
+33.
 
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1phv.fd
 File: ot1phv.fd 2001/06/04 scalable font definitions for OT1/phv.
 )
 LaTeX Font Info:    Font shape `OT1/phv/m/it' in size <10.95> not available
-(Font)              Font shape `OT1/phv/m/sl' tried instead on input line 159.
+(Font)              Font shape `OT1/phv/m/sl' tried instead on input line 133.
 LaTeX Font Info:    Font shape `OT1/phv/m/it' in size <8> not available
-(Font)              Font shape `OT1/phv/m/sl' tried instead on input line 159.
+(Font)              Font shape `OT1/phv/m/sl' tried instead on input line 133.
 LaTeX Font Info:    Font shape `OT1/phv/m/it' in size <6> not available
-(Font)              Font shape `OT1/phv/m/sl' tried instead on input line 159.
+(Font)              Font shape `OT1/phv/m/sl' tried instead on input line 133.
 LaTeX Font Info:    Trying to load font information for OT1+pcr on input line 1
-59.
+33.
 
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1pcr.fd
 File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
 )
 LaTeX Font Info:    Font shape `OT1/opensans-TLF/m/n' will be
-(Font)              scaled to size 14.4pt on input line 167.
+(Font)              scaled to size 14.4pt on input line 141.
 LaTeX Font Info:    Font shape `OT1/opensans-TLF/m/n' will be
-(Font)              scaled to size 8.0pt on input line 167.
+(Font)              scaled to size 8.0pt on input line 141.
 LaTeX Font Info:    Font shape `OT1/opensans-TLF/m/n' will be
-(Font)              scaled to size 4.0pt on input line 167.
+(Font)              scaled to size 4.0pt on input line 141.
  [1
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] (./template.toc) [2
 
 ]
 LaTeX Font Info:    Trying to load font information for OT1+ppl on input line 1
-99.
+73.
 
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1ppl.fd
 File: ot1ppl.fd 2001/06/04 font definitions for OT1/ppl.
 )
 LaTeX Font Info:    Font shape `OT1/opensans-TLF/m/n' will be
-(Font)              scaled to size 5.0pt on input line 199.
+(Font)              scaled to size 5.0pt on input line 173.
  [3
 
-]
-<Images/meteo_station.png, id=164, 413.545pt x 438.63875pt>
-File: Images/meteo_station.png Graphic file (type png)
-<use Images/meteo_station.png>
-Package pdftex.def Info: Images/meteo_station.png  used on input line 207.
-(pdftex.def)             Requested size: 205.37926pt x 217.84634pt.
-LaTeX Font Info:    Font shape `OT1/opensans-TLF/m/n' will be
-(Font)              scaled to size 10.0pt on input line 207.
-
-Overfull \vbox (25.93373pt too high) detected at line 207
- []
-
-[4
-
- <./Images/meteo_station.png>] [5
+] [4
 
 ]
 LaTeX Font Info:    Font shape `OT1/opensans-TLF/m/it' will be
-(Font)              scaled to size 10.95pt on input line 247.
- [6
+(Font)              scaled to size 10.95pt on input line 210.
+LaTeX Font Info:    Font shape `OT1/opensans-TLF/m/n' will be
+(Font)              scaled to size 10.0pt on input line 210.
+ [5
 
-] [7
+] [6
+
+]
+
+Package hyperref Warning: Composite letter `\textring+u'
+(hyperref)                not defined in PD1 encoding,
+(hyperref)                removing `\textring' on input line 220.
+
+
+Package hyperref Warning: Composite letter `\textasciicaron+n'
+(hyperref)                not defined in PD1 encoding,
+(hyperref)                removing `\textasciicaron' on input line 220.
+
+[7
 
 ] [8
 
 ] [9
 
 ]
+<Images/rozlozenicidel.pdf, id=310, 845.1575pt x 597.23125pt>
+File: Images/rozlozenicidel.pdf Graphic file (type pdf)
+<use Images/rozlozenicidel.pdf>
+Package pdftex.def Info: Images/rozlozenicidel.pdf  used on input line 271.
+(pdftex.def)             Requested size: 239.60567pt x 169.3196pt.
+ [10
 
-Package hyperref Warning: Composite letter `\textasciicaron+C'
-(hyperref)                not defined in PD1 encoding,
-(hyperref)                removing `\textasciicaron' on input line 287.
-
-<Images/chmu_stations.png, id=325, 405.76593pt x 317.68687pt>
-File: Images/chmu_stations.png Graphic file (type png)
-<use Images/chmu_stations.png>
-Package pdftex.def Info: Images/chmu_stations.png  used on input line 298.
-(pdftex.def)             Requested size: 205.37926pt x 160.80142pt.
-[10
-
- <./Images/chmu_stations.png>]
-<Images/forest_sensors.png, id=353, 506.6428pt x 490.83376pt>
-File: Images/forest_sensors.png Graphic file (type png)
-<use Images/forest_sensors.png>
-Package pdftex.def Info: Images/forest_sensors.png  used on input line 311.
-(pdftex.def)             Requested size: 239.60567pt x 232.12239pt.
-
-Overfull \vbox (53.96527pt too high) detected at line 311
- []
-
-[11
-
- <./Images/forest_sensors.png>]
-<Images/sensor_closeup.png, id=381, 485.56406pt x 219.82124pt>
-File: Images/sensor_closeup.png Graphic file (type png)
-<use Images/sensor_closeup.png>
-Package pdftex.def Info: Images/sensor_closeup.png  used on input line 319.
-(pdftex.def)             Requested size: 273.83728pt x 123.96779pt.
- [12
-
- <./Images/sensor_closeup.png>] [13
-
-]
-<Images/hist.png, id=437, 649.2255pt x 471.6822pt>
-File: Images/hist.png Graphic file (type png)
-<use Images/hist.png>
-Package pdftex.def Info: Images/hist.png  used on input line 344.
-(pdftex.def)             Requested size: 273.8319pt x 205.38162pt.
+ <./Images/rozlozenicidel.pdf>]
 LaTeX Font Info:    Font shape `OT1/phv/m/it' in size <10> not available
-(Font)              Font shape `OT1/phv/m/sl' tried instead on input line 344.
+(Font)              Font shape `OT1/phv/m/sl' tried instead on input line 295.
 LaTeX Font Info:    Font shape `OT1/phv/m/it' in size <7> not available
-(Font)              Font shape `OT1/phv/m/sl' tried instead on input line 344.
+(Font)              Font shape `OT1/phv/m/sl' tried instead on input line 295.
 LaTeX Font Info:    Font shape `OT1/opensans-TLF/m/n' will be
-(Font)              scaled to size 7.0pt on input line 344.
-
-[14
-
- <./Images/hist.png>]
-<Images/hist2.png, id=464, 649.2255pt x 471.6822pt>
-File: Images/hist2.png Graphic file (type png)
-<use Images/hist2.png>
-Package pdftex.def Info: Images/hist2.png  used on input line 351.
-(pdftex.def)             Requested size: 273.8319pt x 205.38162pt.
- [15
-
- <./Images/hist2.png>]
-<Images/all151minTall0cm_BWyes.png, id=492, 505.89pt x 505.89pt>
-File: Images/all151minTall0cm_BWyes.png Graphic file (type png)
-<use Images/all151minTall0cm_BWyes.png>
-Package pdftex.def Info: Images/all151minTall0cm_BWyes.png  used on input line 
-362.
-(pdftex.def)             Requested size: 273.84038pt x 205.37836pt.
-
-Overfull \vbox (13.46574pt too high) detected at line 362
- []
-
-[16
-
- <./Images/all151minTall0cm_BWyes.png (PNG copy)>]
-<Images/all111minTall0cm_BWno.png, id=519, 505.89pt x 505.89pt>
-File: Images/all111minTall0cm_BWno.png Graphic file (type png)
-<use Images/all111minTall0cm_BWno.png>
-Package pdftex.def Info: Images/all111minTall0cm_BWno.png  used on input line 3
-70.
-(pdftex.def)             Requested size: 273.84038pt x 205.37836pt.
-
-Overfull \vbox (13.46574pt too high) detected at line 370
- []
-
-[17
-
- <./Images/all111minTall0cm_BWno.png (PNG copy)>]
-<Images/all100minTall0cm_BWyesc4japi0120000.png, id=546, 505.89pt x 505.89pt>
-File: Images/all100minTall0cm_BWyesc4japi0120000.png Graphic file (type png)
-<use Images/all100minTall0cm_BWyesc4japi0120000.png>
-Package pdftex.def Info: Images/all100minTall0cm_BWyesc4japi0120000.png  used o
-n input line 378.
-(pdftex.def)             Requested size: 273.84038pt x 205.37836pt.
-
-Overfull \vbox (21.62372pt too high) detected at line 378
- []
-
-[18
-
- <./Images/all100minTall0cm_BWyesc4japi0120000.png (PNG copy)>]
-<Images/all60minTall0cm_BWyesc1chur0120000.png, id=573, 505.89pt x 505.89pt>
-File: Images/all60minTall0cm_BWyesc1chur0120000.png Graphic file (type png)
-<use Images/all60minTall0cm_BWyesc1chur0120000.png>
-Package pdftex.def Info: Images/all60minTall0cm_BWyesc1chur0120000.png  used on
- input line 386.
-(pdftex.def)             Requested size: 273.84038pt x 205.37836pt.
-
-Overfull \vbox (21.62372pt too high) detected at line 386
- []
-
-[19
-
- <./Images/all60minTall0cm_BWyesc1chur0120000.png (PNG copy)>]
-<Images/all156maxTall0cm_BWyes.png, id=602, 505.89pt x 505.89pt>
-File: Images/all156maxTall0cm_BWyes.png Graphic file (type png)
-<use Images/all156maxTall0cm_BWyes.png>
-Package pdftex.def Info: Images/all156maxTall0cm_BWyes.png  used on input line 
-394.
-(pdftex.def)             Requested size: 273.84038pt x 205.37836pt.
-
-Overfull \vbox (13.46574pt too high) detected at line 394
- []
-
-[20
-
- <./Images/all156maxTall0cm_BWyes.png (PNG copy)>]
-<Images/all156maxTall15cm_BWyes.png, id=629, 505.89pt x 505.89pt>
-File: Images/all156maxTall15cm_BWyes.png Graphic file (type png)
-<use Images/all156maxTall15cm_BWyes.png>
-Package pdftex.def Info: Images/all156maxTall15cm_BWyes.png  used on input line
- 402.
-(pdftex.def)             Requested size: 273.84038pt x 205.37836pt.
-
-Overfull \vbox (13.46574pt too high) detected at line 402
- []
-
-[21
-
- <./Images/all156maxTall15cm_BWyes.png (PNG copy)>] [22
-
-]
-File: Images/all151minTall0cm_BWyes.png Graphic file (type png)
-<use Images/all151minTall0cm_BWyes.png>
-Package pdftex.def Info: Images/all151minTall0cm_BWyes.png  used on input line 
-422.
-(pdftex.def)             Requested size: 273.84038pt x 205.37836pt.
-
-Overfull \vbox (13.46574pt too high) detected at line 422
- []
-
-[23
-
-]
-<Images/all152minTall15cm_BWyes.png, id=709, 505.89pt x 505.89pt>
-File: Images/all152minTall15cm_BWyes.png Graphic file (type png)
-<use Images/all152minTall15cm_BWyes.png>
-Package pdftex.def Info: Images/all152minTall15cm_BWyes.png  used on input line
- 430.
-(pdftex.def)             Requested size: 273.84038pt x 205.37836pt.
-
-Overfull \vbox (13.46574pt too high) detected at line 430
- []
-
-[24
-
- <./Images/all152minTall15cm_BWyes.png (PNG copy)>] [25
-
-] [26
+(Font)              scaled to size 7.0pt on input line 295.
+ [11
 
 ]
 LaTeX Font Info:    Font shape `OT1/opensans-TLF/m/n' will be
-(Font)              scaled to size 24.88pt on input line 469.
+(Font)              scaled to size 9.0pt on input line 321.
+LaTeX Font Info:    Font shape `OT1/phv/m/it' in size <9> not available
+(Font)              Font shape `OT1/phv/m/sl' tried instead on input line 321.
+
+Overfull \hbox (15.83803pt too wide) in paragraph at lines 321--321
+ [] 
+ []
+
+[12
+
+]
 LaTeX Font Info:    Font shape `OT1/opensans-TLF/m/n' will be
-(Font)              scaled to size 17.28pt on input line 469.
- [27
+(Font)              scaled to size 24.88pt on input line 333.
+ [13
+
+] [14
+
+] [15
+
+] [16
+
+] [17
+
+] [18
 
 ]
 \tf@nav=\write6
@@ -1325,36 +1196,39 @@ LaTeX Font Info:    Font shape `OT1/opensans-TLF/m/n' will be
 \tf@snm=\write8
 \openout8 = `template.snm'.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 473.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 473.
-
-(./template.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 473.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 473.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 397.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 397.
+ (./template.aux)
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 397.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 397.
 Package rerunfilecheck Info: File `template.out' has not changed.
-(rerunfilecheck)             Checksum: 199BD3CCC397A33A95A8D8728DB265AA;592.
+(rerunfilecheck)             Checksum: F727483C741BC747729C5974407D86E1;549.
  ) 
 Here is how much of TeX's memory you used:
- 24976 strings out of 481239
- 522056 string characters out of 5920378
- 748298 words of memory out of 5000000
- 39575 multiletter control sequences out of 15000+600000
- 561595 words of font info for 102 fonts, out of 8000000 for 9000
+ 24909 strings out of 481239
+ 520505 string characters out of 5920377
+ 752310 words of memory out of 5000000
+ 39530 multiletter control sequences out of 15000+600000
+ 573395 words of font info for 119 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 58i,16n,67p,775b,844s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/share/texlive/texmf-dist/fonts/enc/dvips/opensans/a_iz27ck.enc}{/usr/sh
-are/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}{/usr/share/texlive/texmf-di
+ 58i,15n,67p,775b,836s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}{/usr/share/texliv
+e/texmf-dist/fonts/enc/dvips/opensans/a_iz27ck.enc}{/usr/share/texlive/texmf-di
 st/fonts/enc/dvips/opensans/a_n3lhbv.enc}</usr/share/texlive/texmf-dist/fonts/t
 ype1/ascender/opensans/OpenSans-Italic.pfb></usr/share/texlive/texmf-dist/fonts
 /type1/ascender/opensans/OpenSans-Regular.pfb></usr/share/texlive/texmf-dist/fo
-nts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/ty
-pe1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw
-/helvetic/uhvro8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/palatino/u
-plr8a.pfb>
-Output written on template.pdf (27 pages, 2536029 bytes).
+nts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/ty
+pe1/public/amsfonts/cm/cmmi9.pfb></usr/share/texlive/texmf-dist/fonts/type1/pub
+lic/amsfonts/cm/cmss10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/am
+sfonts/cm/cmss9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/
+cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cms
+y9.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr
+/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvro8a.pfb></usr/share/texl
+ive/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb>
+Output written on template.pdf (18 pages, 2779759 bytes).
 PDF statistics:
- 851 PDF objects out of 1000 (max. 8388607)
- 778 compressed objects within 8 object streams
- 66 named destinations out of 1000 (max. 500000)
- 210 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 628 PDF objects out of 1000 (max. 8388607)
+ 566 compressed objects within 6 object streams
+ 46 named destinations out of 1000 (max. 500000)
+ 134 words of extra memory for PDF output out of 10000 (max. 10000000)
 
