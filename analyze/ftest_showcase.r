@@ -1,0 +1,15 @@
+data(iris)
+
+model1 <- lm(Sepal.Length ~ Sepal.Width, data = iris)
+model2 <- lm(Sepal.Length ~ Sepal.Width + Petal.Length, data = iris)
+model3 <- lm(Sepal.Length ~ Sepal.Width + Petal.Length + Petal.Width, data = iris)
+
+SSE <- sum(model3$residuals^2)
+SSR1 <- sum((predict(model1) - mean(iris$Sepal.Length))^2)
+SSR2 <- sum((predict(model2) - mean(iris$Sepal.Length))^2)
+SSR3 <- sum((predict(model3) - mean(iris$Sepal.Length))^2)
+F1 <- (SSR1 / 1) / (SSE / (nrow(iris) - 4))
+F2 <- ((SSR2 - SSR1) / 1) / (SSE / (nrow(iris) - 4))
+F3 <- ((SSR3 - SSR2) / 1) / (SSE / (nrow(iris) - 4))
+print(c(F1,F2,F3))
+anova(model3)
